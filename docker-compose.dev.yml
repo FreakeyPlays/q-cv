@@ -1,0 +1,31 @@
+version: "3"
+services:
+  react-app:
+    image: react-app
+    build: ./client/
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    networks:
+      - mern-app
+    volumes:
+      - "./client:/usr/src/app"
+      - /usr/src/app/node_modules
+  api-server:
+    image: api-server
+    build: ./server/
+    ports:
+      - "5000:5000"
+    networks:
+      - mern-app
+    volumes:
+      - "./server/:/usr/src/app"
+      - /usr/src/app/node_modules
+networks:
+  mern-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
