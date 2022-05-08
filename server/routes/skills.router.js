@@ -1,8 +1,8 @@
 import express from "express";
 
-const router = express.Router();
+const skillRouter = express.Router();
 const skillRoute = '/';
 
-router.route(skillRoute).get(getSkills);
+skillRouter.route(skillRoute).get(getSkills);
 
-module.exports = router;
+module.exports = skillRouter;
