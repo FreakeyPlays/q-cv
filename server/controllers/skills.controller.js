@@ -17,6 +17,12 @@ const setSkills = asyncHandler( async(req, res) =>{
     res.status(200).json(entry);
 });
 
+const getSkills = asyncHandler( async(req, res) =>{
+    const skills = await Skill.find();
+    res.status(200).json(skills);
+});
+
 export {
-    setSkills
+    setSkills,
+    getSkills
 };
