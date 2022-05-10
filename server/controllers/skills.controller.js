@@ -27,7 +27,7 @@ const getSkills = asyncHandler( async(req, res) =>{
 // @desc delete skills #id
 // @route PUT /api/skills
 // @access Private
-const updateSkills = asyncHandler( async(req, res) =>{
+const updateSkill = asyncHandler( async(req, res) =>{
     const skillSet = await Skill.findById(req.params.id);
     if(!skillSet) {
         res.status(400);
@@ -37,9 +37,22 @@ const updateSkills = asyncHandler( async(req, res) =>{
     res.status(200).json(updatedSkillSet);
 });
 
+// @desc delete skills #id
+// @route DELETE /api/skills
+// @access Private
+const deleteSkill = asyncHandler(async(req, res) => {
+    const skillSet = await Skill.findById(req.params.id);
+    if(!skillSet) {
+        res.status(400);
+        throw new Error('Goal not found')
+    }
+    await skillSet.remove();
+    res.status(200).json({id: req.params.id});
+});
 
 export {
     setSkills,
     getSkills,
-    updateSkills
+    updateSkill,
+    deleteSkill
 };

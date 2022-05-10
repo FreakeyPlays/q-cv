@@ -1,12 +1,10 @@
 import express from "express";
-import { updateSkills, getSkills, setSkills } from "../controllers/skills.controller.js"
+import { updateSkill, getSkills, setSkills, deleteSkill } from "../controllers/skills.controller.js"
 
 const skillRouter = express.Router();
 const skillRoute = '/';
 
 skillRouter.route(skillRoute).get(getSkills).post(setSkills);
-skillRouter.route(skillRoute+":id").put(updateSkills);
+skillRouter.route(skillRoute+":id").put(updateSkill).delete(deleteSkill);
 
 export default skillRouter;
-
-//module.exports = skillRouter;
