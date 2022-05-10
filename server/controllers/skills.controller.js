@@ -1,8 +1,10 @@
 import Skill from '../models/skills.model.js'; 
+import asyncHandler from 'express-async-handler';
 
 // @desc Set goals
 // @route POST /api/goals
 // @access Private
+
 const setSkills = asyncHandler( async(req, res) =>{
     if(!req.body.name){
         res.status(400);
@@ -14,3 +16,7 @@ const setSkills = asyncHandler( async(req, res) =>{
     });
     res.status(200).json(entry);
 });
+
+export {
+    setSkills
+};

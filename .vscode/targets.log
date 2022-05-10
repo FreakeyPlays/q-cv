@@ -1,0 +1,338 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-pc-mingw32
+ 
+
+# �Make�-Datenbank; erstellt am: Tue May 10 15:04:23 2022
+
+# Variablen
+
+# automatisch
+<D = $(patsubst %/,%,$(dir $<))
+# automatisch
+?F = $(notdir $?)
+# Makefile
+MAKEFLAGS = Rrqp
+# Umgebung
+VSCODE_LOG_NATIVE = false
+# automatisch
+?D = $(patsubst %/,%,$(dir $?))
+# automatisch
+@D = $(patsubst %/,%,$(dir $@))
+# Umgebung
+HOMEDRIVE = C:
+# automatisch
+@F = $(notdir $@)
+# automatisch
+^D = $(patsubst %/,%,$(dir $^))
+# Makefile
+CURDIR := g:/STUDIUM/SWB4/Project Quanto/Q-CV
+# Standard
+SHELL := sh.exe
+# Umgebung
+WINDIR = C:\WINDOWS
+# Umgebung
+VSCODE_NLS_CONFIG = {"locale":"de","availableLanguages":{},"_languagePackSupport":true}
+# Umgebung
+FP_NO_HOST_CHECK = NO
+# Umgebung
+VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
+# Umgebung
+ONEDRIVE = D:\OneDrive
+# Umgebung
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+# Makefile (from `makefile', line 1)
+MAKEFILE_LIST :=  makefile
+# Umgebung
+TMP = C:\Users\Leto\AppData\Local\Temp
+# Umgebung
+VSCODE_VERBOSE_LOGGING = true
+# Umgebung
+PROGRAMW6432 = C:\P 
+rogram Files
+# Umgebung
+PROGRAMDATA = C:\ProgramData
+# Umgebung
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-e40b4535-f47d-4c1c-919b-d3c58def1691-sock
+# Umgebung
+VSCODE_CWD = C:\Users\Leto\AppData\Local\Programs\Microsoft VS Code
+# Umgebung
+ESET_OPTIONS = $(subst ,,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               )
+# Umgebung
+PATH = C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Live\Shared;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Android;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files (x86)\dotnet\;C:\Program Files\nodejs\;C:\Program Files (x86)\GnuWin32\bin;;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\Leto\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\Leto\AppData\Local\Programs\Python\Python39\;C:\Users\Leto\AppData\Local\Microsoft\WindowsApps;C:\Users\Leto\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Leto\.dotnet\tools;C:\Users\Leto\AppData\Local\GitHubDesktop\bin;C:\Users\Leto\AppData\Roaming\npm
+# Umgebung
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# Umgebung
+PROCESSOR_ARCHITECTURE = x86
+# Umgebung
+USERPROFILE = C:\Users\Leto
+# Umgebung
+ALLUSERSPROFILE = C:\ProgramData
+# Umgebung
+VSCODE_LOG_STACK = false
+# Umgebung
+NUMBER_OF_PROCESSORS = 8
+# Umgebung
+ELECTRON_RUN_AS_NODE = 1
+# Standard
+.FEATURES := target-specific order-only second-expansion else-if archives
+# automatisch
+%F = $(notdir $%)
+# Umgebung
+ANDROID_SDK_HOME = C:\Android
+# Umgebung
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_4040_FSLHRWZXHTRIXWZJ
+# Umgebung
+VSCODE_PIPE_LOGGING = true
+# Umgebung
+COMPUTERNAME = LETOSHIGHENDPC
+# Umgebung
+PROGRAMFILES = C:\Program Files (x86)
+# Umgebung
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# Umgebung
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# Umgebung
+USERNAME = Leto
+# Umgebung
+PUBLIC = C:\Users\Public
+# Umgebung
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# Umgebung
+VSCODE_CODE_CACHE_PATH = C:\Users\Leto\AppData\Roaming\Code\CachedData\57fd6d0195bb9b9d1b49f6da5db789060795de47
+# Umgebung
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# Umgebung
+COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
+# Umgebung
+LOGONSERVER = \\LETOSHIGHENDPC
+# Umgebung
+ONEDRIVECONSUMER = D:\OneDrive
+# Umgebung
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# Umgebung
+USERDOMAIN = LETOSHIGHENDPC
+# Standard
+MAKE = $(MAKE_COMMAND)
+# Standard
+MAKECMDGOALS := all
+# Standard
+MAKE_VERSION := 3.81
+# Makefile
+.DEFAULT_GOAL := build-dev
+# Umgebung
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# automatisch
+%D = $(patsubst %/,%,$(dir $%))
+# Umgebung
+LOCALAPPDATA = C:\Users\Leto\AppData\Local
+# Umgebung
+PSMODULEPATH = C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules\
+# Standard
+MAKE_COMMAND := make.exe
+# Umgebung
+PROCESSOR_ARCHITEW6432 = AMD64
+# Standard
+.VARIABLES := 
+# automatisch
+*F = $(notdir $*)
+# Umgebung
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 60 Stepping 3, GenuineIntel
+# Umgebung
+OS = Windows_NT
+# Umgebung
+VSCODE_IPC_HOOK = \\.\pipe\5e429a55c0b2ad907f5325293a137e87-1.67.0-main-sock
+# Umgebung
+HOMEPATH = \Users\Leto
+# Umgebung
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# Umgebung
+PROMPT = $P$G
+# Umgebung
+MFLAGS = -Rrqp
+# automatisch
+*D = $(patsubst %/,%,$(dir $*))
+# Umgebung
+SYSTEMROOT = C:\WINDOWS
+# automatisch
++D = $(patsubst %/,%,$(dir $+))
+# automatisch
++F = $(notdir $+)
+# Umgebung
+WINDOWS_TRACING_LOGFILE = C:\BVTBin\Tests\installpackage\csilogfile.log
+# Umgebung
+APPDATA = C:\Users\Leto\AppData\Roaming
+# Umgebung
+TEMP = C:\Users\Leto\AppData\Local\Temp
+# Umgebung
+COMSPEC = C:\WINDOWS\system32\cmd.exe
+# Standard
+MAKEFILES := 
+# automatisch
+<F = $(notdir $<)
+# Umgebung
+WINDOWS_TRACING_FLAGS = 3
+# Umgebung
+LC_ALL = C
+# automatisch
+^F = $(notdir $^)
+# Standard
+SUFFIXES := 
+# Umgebung
+SYSTEMDRIVE = C:
+# Umgebung
+SESSIONNAME = Console
+# Umgebung
+PROCESSOR_REVISION = 3c03
+# Umgebung
+MAKELEVEL := 0
+# Umgebung
+LANG = C
+# Umgebung
+PROCESSOR_LEVEL = 6
+# Umgebung
+VSCODE_PID = 4040
+# Umgebung
+USERDOMAIN_ROAMINGPROFILE = LETOSHIGHENDPC
+# variable set hash-table stats:
+# Load=93/1024=9%, Rehash=0, Collisions=9/113=8%
+
+# Pattern-specific Variable Values
+
+# Keine musterspezifischen Variablenwerte.
+
+# Verzeichnisse
+
+# : Konnte den Status nicht feststellen.
+# C:\Program Files\Intel\iCLS Client\ (Schl�ssel (key) C:/Program Files/Intel/iCLS Client/,  letzte �nderung (mtime) 1437032379): 18 Dateien, keine Unm�glichkeiten.
+# C:\Program Files\Docker\Docker\resources\bin (Schl�ssel (key) C:/Program Files/Docker/Docker/resources/bin,  letzte �nderung (mtime) 1652007989): 13 Dateien, keine Unm�glichkeiten.
+# C:\Android (Schl�ssel (key) C:/Android,  letzte �nderung (mtime) 1569754781): 8 Dateien, keine Unm�glichkeiten.
+# C:\Windows\System32\WindowsPowerShell\v1.0\ (Schl�ssel (key) C:/Windows/System32/WindowsPowerShell/v1.0/,  letzte �nderung (mtime) 1636893503): 32 Dateien, keine Unm�glichkeiten.
+# C:\Users\Leto\AppData\Local\Programs\Python\Python39\ (Schl�ssel (key) C:/Users/Leto/AppData/Local/Programs/Python/Python39/,  letzte �nderung (mtime) 1616684193): 19 Dateien, keine Unm�glichkeiten.
+# C:\Users\Leto\AppData\Local\GitHubDesktop\bin (Schl�ssel (key) C:/Users/Leto/AppData/Local/GitHubDesktop/bin,  letzte �nderung (mtime) 1641988009): 4 Dateien, keine Unm�glichkeiten.
+# C:\Windows\System32\Wbem (Schl�ssel (key) C:/Windows/System32/Wbem,  letzte �nderung (mtime) 1650289439): 180 Dateien, keine Unm�glichkeiten.
+# . (Schl�ssel (key) g:/STUDIUM/SWB4/Project Quanto/Q-CV,  letzte �nderung (mtime) 1652187863): 12 Dateien, keine Unm�glichkeiten.
+# C:\Users\Leto\AppData\Local\Microsoft\WindowsApps (Schl�ssel (key) C:/Users/Leto/AppData/Local/Microsoft/WindowsApps,  letzte �nderung (mtime) 1649880642): 11 Dateien, keine Unm�glichkeiten.
+# C:\Program Files\nodejs\ (Schl�ssel (key) C:/Program Files/nodejs/,  letzte �nderung (mtime) 1652006820): 13 Dateien, keine Unm�glichkeiten.
+# C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common (Schl�ssel (key) C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common,  letzte �nderung (mtime) 1437033025): 10 Dateien, keine Unm�glichkeiten.
+# C:\Users\Leto\AppData\Local\Programs\Python\Python39\Scripts\ (Schl�ssel (key) C:/Users/Leto/AppData/Local/Programs/Python/Python39/Scripts/,  letzte �nderung (mtime) 1623327552): 26 Dateien, keine Unm�glichkeiten.
+# C:\Program Files\TortoiseSVN\bin (Schl�ssel (key) C:/Program Files/TortoiseSVN/bin,  letzte �nderung (mtime) 1582716109): 73 Dateien, keine Unm�glichkeiten.
+# C:\Program Files\dotnet\ (Schl�ssel (key) C:/Program Files/dotnet/,  letzte �nderung (mtime) 1650284409): 13 Dateien, keine Unm�glichkeiten.
+# C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live (Schl�ssel (key) C:/Program Files (x86)/Common Files/Microsoft Shared/Windows Live,  letzte �nderung (mtime) 1437395350): 2 Dateien, keine Unm�glichkeiten.
+# C:\Program Files (x86)\Windows Live\Shared (Schl�ssel (key) C:/Program Files (x86)/Windows Live/Shared,  letzte �nderung (mtime) 1437395374): 23 Dateien, keine Unm�glichkeiten.
+# C:\Program Files\Intel\Intel(R) Management Engine Components\IPT (Schl�ssel (key) C:/Program Files/Intel/Intel(R) Management Engine Components/IPT,  letzte �nderung (mtime) 1437032359): 5 Dateien, keine Unm�glichkeiten.
+# C:\WINDOWS\System32\OpenSSH\: Konnte den Status nicht feststellen.
+# C:\Program Files (x86)\Common Files\Oracle\Java\javapath (Schl�ssel (key) C:/Program Files (x86)/Common Files/Oracle/Java/javapath,  letzte �nderung (mtime) 1546450185): 5 Dateien, keine Unm�glichkeiten.
+# C:\Program Files\Intel\Intel(R) Management Engine Components\DAL (Schl�ssel (key) C:/Program Files/Intel/Intel(R) Management Engine Components/DAL,  letzte �nderung (mtime) 1437032359): 3 Dateien, keine Unm�glichkeiten.
+# C:\Windows (Schl�ssel (key) C:/Windows,  letzte �nderung (mtime) 1479555807): 132 Dateien, keine Unm�glichkeiten.
+# C:\ProgramData\Oracle\Java\javapath (Schl�ssel (key) C:/ProgramData/Oracle/Java/javapath,  letzte �nderung (mtime) 1524676202): 5 Dateien, keine Unm�glichkeiten.
+# C:\Program Files (x86)\dotnet\ (Schl�ssel (key) C:/Program Files (x86)/dotnet/,  letzte �nderung (mtime) 1650284391): 8 Dateien, keine Unm�glichkeiten.
+# C:\ProgramData\DockerDesktop\version-bin: Konnte den Status nicht feststellen.
+# C:\Program Files (x86)\Intel\iCLS Client\ (Schl�ssel (key) C:/Program Files (x86)/Intel/iCLS Client/,  letzte �nderung (mtime) 1437032379): 16 Dateien, keine Unm�glichkeiten.
+# C:\Program Files\Git\cmd (Schl�ssel (key) C:/Program Files/Git/cmd,  letzte �nderung (mtime) 1615976104): 8 Dateien, keine Unm�glichkeiten.
+# C:\Windows\system32 (Schl�ssel (key) C:/Windows/system32,  letzte �nderung (mtime) 1652119530): 3280 Dateien, keine Unm�glichkeiten.
+# C:\Users\Leto\AppData\Local\Programs\Microsoft VS Code\bin (Schl�ssel (key) C:/Users/Leto/AppData/Local/Programs/Microsoft VS Code/bin,  letzte �nderung (mtime) 1651777884): 4 Dateien, keine Unm�glichkeiten.
+# C:\Program Files\Common Files\Microsoft Shared\Windows Live (Schl�ssel (key) C:/Program Files/Common Files/Microsoft Shared/Windows Live,  letzte �nderung (mtime) 1437395350): 2 Dateien, keine Unm�glichkeiten.
+# C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT (Schl�ssel (key) C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT,  letzte �nderung (mtime) 1437032359): 10 Dateien, keine Unm�glichkeiten.
+# C:\Users\Leto\AppData\Roaming\npm (Schl�ssel (key) C:/Users/Leto/AppData/Roaming/npm,  letzte �nderung (mtime) 1652006817): 2 Dateien, keine Unm�glichkeiten.
+# C:\Users\Leto\.dotnet\tools: Konnte den Status nicht feststellen.
+# C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR (Schl�ssel (key) C:/Program Files/NVIDIA Corporation/NVIDIA NvDLISR,  letzte �nderung (mtime) 1549298299): 5 Dateien, keine Unm�glichkeiten.
+# C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL (Schl�ssel (key) C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL,  letzte �nderung (mtime) 1437032359): 8 Dateien, keine Unm�glichkeiten.
+# C:\Program Files (x86)\GnuWin32\bin (Schl�ssel (key) C:/Program Files (x86)/GnuWin32/bin,  letzte �nderung (mtime) 1652007392): 5 Dateien, keine Unm�glichkeiten.
+
+# 3955 Dateien, keine Unm�glichkeiten in 36 Verzeichnissen.
+
+# Implicit Rules
+
+# Keine impliziten Regeln vorhanden.
+
+# Date 
+make.exe: *** Keine Regel, um �all� zu erstellen.  Schluss.
+
+ien
+
+# Dies ist kein Ziel:
+all:
+#  Kommandozeilen-Ziel (target).
+#  Suche nach impliziten Regeln wurde durchgef�hrt.
+#  Die Datei existiert nicht.
+#  Datei wurde nicht aktualisiert.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+build-production:
+#  Suche nach impliziten Regeln wurde nicht durchgef�hrt.
+#  Zeit der letzten �nderung wurde nicht �berpr�ft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuf�hrende Kommandos (aus �makefile�, Zeile 13):
+	cd client && MAKE build-production
+	cd server && MAKE build
+	
+
+# Dies ist kein Ziel:
+.DEFAULT:
+#  Suche nach impliziten Regeln wurde nicht durchgef�hrt.
+#  Zeit der letzten �nderung wurde nicht �berpr�ft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+makefile:
+#  Suche nach impliziten Regeln wurde durchgef�hrt.
+#  Zuletzt ge�ndert 2022-04-26 17:09:24
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+run-production:
+#  Suche nach impliziten Regeln wurde nicht durchgef�hrt.
+#  Zeit der letzten �nderung wurde nicht �berpr�ft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuf�hrende Kommandos (aus �makefile�, Zeile 17):
+	docker-compose -f docker-compose.production.yml up
+	
+
+build-dev:
+#  Suche nach impliziten Regeln wurde nicht durchgef�hrt.
+#  Zeit der letzten �nderung wurde nicht �berpr�ft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuf�hrende Kommandos (aus �makefile�, Zeile 4):
+	cd client && MAKE build-dev
+	cd server && MAKE build
+	
+
+# Dies ist kein Ziel:
+.SUFFIXES:
+#  Suche nach impliziten Regeln wurde nicht durchgef�hrt.
+#  Zeit der letzten �nderung wurde nicht �berpr�ft.
+#  Datei wurde nicht aktualisiert.
+
+run-dev:
+#  Suche nach impliziten Regeln wurde nicht durchgef�hrt.
+#  Zeit der letzten �nderung wurde nicht �berpr�ft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuf�hrende Kommandos (aus �makefile�, Zeile 8):
+	docker-compose -f docker-compose.dev.yml up
+	
+
+# files hash-table stats:
+# Load=8/1024=1%, Rehash=0, Collisions=0/19=0%
+# VPATH-Suchpfade
+
+# Keine �vpath�-Suchpfade.
+
+# Kein allgemeiner Suchpfad (Variable �VPATH�).
+
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+
+# �Make�-Datenbank; beendet am: Tue May 10 15:04:23 2022
+
+ 

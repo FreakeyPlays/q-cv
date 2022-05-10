@@ -1,8 +1,11 @@
 import express from "express";
+import {    getSkills,    setSkills} from "../controllers/skills.controller.js"
 
 const skillRouter = express.Router();
 const skillRoute = '/';
 
-skillRouter.route(skillRoute).get(getSkills);
+skillRouter.route(skillRoute).post(setSkills);
 
-module.exports = skillRouter;
+export default skillRouter;
+
+//module.exports = skillRouter;
