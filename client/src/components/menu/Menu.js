@@ -1,0 +1,81 @@
+import React from "react";
+import "./Menu.css";
+import { MenuItems } from "./Menu.items"
+import { NavLink } from 'react-router-dom'
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+
+const Menu = ({ children }) => {
+    React.useEffect(() => {
+        const menu = document.getElementById("menu");
+
+        const menuToggleOpen = document.getElementById("menuBtn");
+        menuToggleOpen.onclick = () => {
+            menu.classList.toggle("showMenu");
+        }
+
+        const menuToggleClose = document.getElementById("mobileClose");
+        menuToggleClose.onclick = () => {
+            menu.classList.toggle("showMenu");
+        }
+
+        const links = document.querySelectorAll(".navLink");
+        for(let link of links){
+            link.onclick = () => {
+                for(let l of links){
+                    if(l.classList.contains("activeLink")){
+                        l.classList.toggle("activeLink");
+                    }
+                }
+                link.classList.add("activeLink");
+            }
+        }
+    });
+
+    return(
+        <>
+        <nav className="menu" id="menu">
+            <div className="logo_section">
+                <img className="logo" src="/logo.png" alt="logo"></img>
+                <div className="profile_section">
+                    <img className="profile_image" src="/profile.webp" alt="profile"></img>
+                    <span id="userId">
+                        Jhon Doe
+                    </span>
+                    <a href={"/"}>
+                        Log out
+                    </a>
+                </div>
+            </div>
+            <ul className="navigation_list">
+                {MenuItems.map((item, index) => {
+                    return(
+                        <li className={item.className} key={index}>
+                            <NavLink to={item.url}>
+                                <FontAwesomeIcon icon={item.icon} className="menuOptionIcon" />
+                                <span>{item.title}</span>
+                            </NavLink>
+                        </li>
+                    )
+                })}
+            </ul>
+            <div className="mobileClose" id="mobileClose">
+                <div className="menuBtnClose">
+                    <FontAwesomeIcon icon={faXmark} className="menuOpenClose" />
+                </div>
+            </div>
+        </nav>
+        <div className="mobileMenu" id="menuBtn">
+            <div className="menuBtn">
+            <FontAwesomeIcon icon={faAngleRight} className="menuOpenClose" />
+            </div>
+        </div>
+        <div className="content">
+            { children }
+        </div>
+        </>
+    )
+}
+
+export default Menu;
