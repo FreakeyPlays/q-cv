@@ -55,7 +55,7 @@ const setProject = asyncHandler( async (req, res) => {
 // @access Private
 const getAllProjects = asyncHandler( async (req, res) => {
     const projects = await Project.find();
-    
+
     res.status(200).json({
         ok: true,
         status: 200,
@@ -64,7 +64,32 @@ const getAllProjects = asyncHandler( async (req, res) => {
     })
 })
 
+// @desc Get project by ID
+// @route GET /api/project/:id
+// @access Private
+const getProject = asyncHandler( async (req, res) => {
+    const project = await Project.findById(req.params.id);
+
+    if(!project){
+        res.status(400).json({
+            ok: true,
+            status: 400,
+            message: "Could not finy Project by ID"
+        });
+
+        throw new Error("Could not finy Project by ID");
+    }
+
+    res.status(200).json({
+        ok: true,
+        status: 200,
+        message: "Returned Project",
+        project
+    })
+})
+
 export {
     setProject,
-    getAllProjects
+    getAllProjects,
+    getProject
 }
