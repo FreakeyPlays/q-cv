@@ -12,7 +12,7 @@ const projectSchema = mongoose.Schema({
     skills: [{ type: String }],
     location: { type: String, required: [true, "Please provide a Project Location"], trim: true },
     teamSize: { type: String, required: [true, "Please provide a Project Team Size"] },
-    assignedUsers: [{ type: mongoose.Types.ObjectId, ref:"User" }]
+    assignedUsers: [{ type: mongoose.Types.ObjectId, ref:"User", require: [true, "Please provide a assigned User"] }]
 }, {
     timestamps: true
 });
