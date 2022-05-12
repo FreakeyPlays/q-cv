@@ -23,8 +23,12 @@ const setProject = asyncHandler( async (req, res) => {
         !endDate || !description || !location ||
         !teamSize || !assignedUsers ){
         
-        res.status(400);
-        throw new Error("A required parameter is missing");
+        res.status(400).json({
+            ok: false,
+            status: 400,
+            message: "A required parameter is missing or incorrect"
+        });
+        throw new Error("A required parameter is missing or incorrect");
     }
 
     const entry = await Project.create({
@@ -72,7 +76,7 @@ const getProject = asyncHandler( async (req, res) => {
 
     if(!project){
         res.status(400).json({
-            ok: true,
+            ok: false,
             status: 400,
             message: "Could not finy Project by ID"
         });
