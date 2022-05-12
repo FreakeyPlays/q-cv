@@ -50,6 +50,21 @@ const setProject = asyncHandler( async (req, res) => {
     });
 })
 
+// @desc Get all projects
+// @route GET /api/project/
+// @access Private
+const getAllProjects = asyncHandler( async (req, res) => {
+    const projects = await Project.find();
+    
+    res.status(200).json({
+        ok: true,
+        status: 200,
+        message: "Returned all Projects",
+        projects
+    })
+})
+
 export {
-    setProject
+    setProject,
+    getAllProjects
 }
