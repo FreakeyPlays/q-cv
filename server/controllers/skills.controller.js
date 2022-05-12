@@ -17,7 +17,7 @@ const setSkills = asyncHandler( async(req, res) =>{
 });
 
 // @desc Set skills
-// @route POST /api/skills
+// @route GET /api/skills
 // @access Private
 const getSkills = asyncHandler( async(req, res) =>{
     const skillSet = await Skill.find();
