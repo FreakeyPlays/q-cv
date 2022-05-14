@@ -1,0 +1,49 @@
+.projectPost{
+    width: 80%;
+    max-width: 960px;
+    border: solid 1px #333;
+    border-radius: 16px;
+    padding: 16px;
+    display: grid;
+    grid-row-gap: 16px;
+    margin-bottom: 16px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+}
+
+.titleSection{
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    grid-column-gap: 16px;
+    padding-bottom: 8px;
+    border-bottom: solid 1px #333;
+    align-items: center;
+}
+
+.dataContainer{
+    display: grid;
+    grid-gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.projectControls{
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 8px;
+}
+
+.projectControls svg{
+    color: #333;
+}
+
+.projectControls svg:hover{
+    color: #3dc0f1;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .projectControls{
+        grid-auto-flow: row;
+    } 
+}
