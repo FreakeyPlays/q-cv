@@ -1,5 +1,5 @@
 .menu{
-    width: 252px;
+    width: 256px;
     height: 100%;
     background-color: #3dc0f1;
     position: fixed;
@@ -122,7 +122,8 @@
 }
 
 .content{
-    margin-left: 252px;
+    margin-left: 256px;
+    width: calc(100% - 256px);
 }
 
 @media screen and (max-width: 960px) {
@@ -174,6 +175,7 @@
 
     .content{
         margin-left: 64px;
+        width: calc(100% - 64px);
     }
 
 }
