@@ -10,10 +10,6 @@ import "./Projects.css"
 
 const currentUserID = "627d6e4624b23d01f548f867";
 
-function dummyCreate(){
-    console.log("Test")
-}
-
 const Projects = () => {
 
     const [projects, setProjects] = useState([]);
@@ -53,7 +49,7 @@ const Projects = () => {
                             ) : (
                                 <FontAwesomeIcon icon={faUsers} size="2x" onClick={() => setShowAll(true)} />
                         )}
-                        <CreateButton function={() => dummyCreate()} />
+                        <CreateButton link={"/projects/create"} />
                     </div>
                 </div>
             </div>
