@@ -25,7 +25,8 @@ const App = () => {
                     <Route path="/it-skills" element={<ITSkills />} />
                     <Route path="projects" element={<Projects />} />
                     <Route path="projects/create" element={<CreateProject />} />
-                    <Route path="projects/create/:id" element={<CreateProject />} />
+                    <Route path="projects/copy/:id" element={<CreateProject />} />
+                    <Route path="projects/edit/:id" element={<CreateProject />} />
                     <Route path="/create-cv" element={<CreateCV />} />
                 </Routes>
             </Menu>
