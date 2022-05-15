@@ -1,6 +1,6 @@
 .createProjectFormContainer{
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,11 +10,11 @@
 .createProjectFormContainer h1{
     color: #3dc0f1;
     text-align: center;
+    margin: 32px 0;
 }
 
 .createProjectFormContainer form{
     background-color: white;
-    /* padding: 0px 64px; */
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
 }
 
 .createProjectFormContainer button{
-    width: 25%;
+    width: 256px;
     height: 48px;
     padding: 8px;
     border: none;
@@ -73,3 +73,52 @@
     grid-column-end: 7;
 }
 
+@media screen and (max-width: 1280px) {
+    .createProjectItems{
+        grid-template-columns: repeat(4, minmax(150px, 1fr));
+    }
+
+    .formTitle,
+    .formDescription,
+    .formTeamSize{
+        grid-column-start: 1;
+        grid-column-end: 5;
+    }
+
+    .formCustomer,
+    .formCountry,
+    .formStartDate,
+    .formSkills{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .formIndustry,
+    .formPosition,
+    .formEndDate,
+    .formLocation{
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .createProjectItems{
+        grid-template-columns: 256px;
+    }
+
+    .formTitle,
+    .formDescription,
+    .formTeamSize,
+    .formCustomer,
+    .formCountry,
+    .formStartDate,
+    .formSkills,
+    .formIndustry,
+    .formPosition,
+    .formEndDate,
+    .formLocation{
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+}
