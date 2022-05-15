@@ -51,11 +51,9 @@ const ManageProject = (params) => {
         for(let i = 0; i < 11; i++){
             tmp[e.target[i].name] = e.target[i].value;
         }
-
-        if(id){
-            tmp["_id"] = id;
-        }
         
+        id ? tmp["_id"] = id : tmp["_id"] = 1;
+
         params.function(tmp);
     }
 
@@ -66,7 +64,7 @@ const ManageProject = (params) => {
     return(
         <div className="manageProjectFormContainer">
             <form onSubmit={handleSubmit}>
-                <h1>Create Project</h1>
+                <h1>{params.title} Project</h1>
                 <div className="manageProjectItems">
                     {ProjectInputs.map((input) => (
                         <FormInput
