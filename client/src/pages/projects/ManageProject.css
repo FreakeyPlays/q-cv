@@ -1,4 +1,4 @@
-.createProjectFormContainer{
+.manageProjectFormContainer{
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -7,13 +7,13 @@
     justify-content: center;
 }
 
-.createProjectFormContainer h1{
+.manageProjectFormContainer h1{
     color: #3dc0f1;
     text-align: center;
     margin: 32px 0;
 }
 
-.createProjectFormContainer form{
+.manageProjectFormContainer form{
     background-color: white;
     border-radius: 8px;
     display: flex;
@@ -21,7 +21,7 @@
     align-items: center;
 }
 
-.createProjectFormContainer button{
+.manageProjectFormContainer button{
     width: 256px;
     height: 48px;
     padding: 8px;
@@ -36,7 +36,7 @@
     margin-bottom: 32px;
 }
 
-.createProjectItems{
+.manageProjectItems{
     display: grid;
     grid-template-columns: repeat(6, minmax(150px, 1fr));
     grid-gap: 16px;
@@ -74,7 +74,7 @@
 }
 
 @media screen and (max-width: 1280px) {
-    .createProjectItems{
+    .manageProjectItems{
         grid-template-columns: repeat(4, minmax(150px, 1fr));
     }
 
@@ -103,7 +103,7 @@
 }
 
 @media screen and (max-width: 750px) {
-    .createProjectItems{
+    .manageProjectItems{
         grid-template-columns: 256px;
     }
 

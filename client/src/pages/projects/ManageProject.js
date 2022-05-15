@@ -4,11 +4,10 @@ import FormInput from "../../components/formInput/FormInput";
 import { projectDataService } from "../../services/project.service";
 import { ProjectInputs } from "./project.input";
 
-import "./CreateProject.css";
+import "./ManageProject.css";
 
-const CreateProject = () => {
+const ManageProject = (params) => {
     const { id } = useParams();
-    // const [project, setProject] = useState();
     const [refresh, setRefresh] = useState(true);
     const [values, setValues] = useState({
         title: "",
@@ -47,19 +46,28 @@ const CreateProject = () => {
 
     function handleSubmit(e){
         e.preventDefault();
+        let tmp = {};
+
+        for(let i = 0; i < 11; i++){
+            tmp[e.target[i].name] = e.target[i].value;
+        }
+
+        if(id){
+            tmp["_id"] = id;
+        }
+        
+        params.function(tmp);
     }
 
     function handleOnChange(e){
         setValues({ ...values, [e.target.name]: e.target.value });
     }
 
-    console.log(values)
-
     return(
-        <div className="createProjectFormContainer">
+        <div className="manageProjectFormContainer">
             <form onSubmit={handleSubmit}>
                 <h1>Create Project</h1>
-                <div className="createProjectItems">
+                <div className="manageProjectItems">
                     {ProjectInputs.map((input) => (
                         <FormInput
                             key={input.id}
@@ -75,4 +83,4 @@ const CreateProject = () => {
     )
 }
 
-export default CreateProject;
+export default ManageProject;
