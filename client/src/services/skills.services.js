@@ -12,10 +12,10 @@ export const skillDataService = {
     },
 
     updateSkill(id, data){
-        return axios.put(basePath + `${id}`, data);
+        return axios.put(basePath + `/${id}`, data);
     },
 
     deleteSkill(id){
-        return axios.delete(basePath + `${id}`);
+        return axios.delete(basePath + `/${id}`);
     }
 }
