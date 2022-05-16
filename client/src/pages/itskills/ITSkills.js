@@ -36,12 +36,10 @@ const ITSkills = () => {
                                 </div>
                                 <div data={index} onClick={ (e) =>  {
                                             let id = skill[e.currentTarget.getAttribute("data")]._id;
-                                            
-                                                skillDataService.deleteSkill(id).then(res => {
-                                                    window.location.reload(false);
-                                                    receivedData.current = false;
-                                                })
-                                            
+                                            skillDataService.deleteSkill(id).then(res => {
+                                                window.location.reload(false);
+                                                receivedData.current = false;
+                                            })
                                         }
                                     }>
                                     <FontAwesomeIcon className='skillIcon' icon={faTrash} />
