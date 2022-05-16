@@ -29,9 +29,14 @@ const ITSkills = () => {
                         <div key={index} className="skillItem">
                             {item.name} 
                             <div className='interaction'>
-                                <div onClick={()=>{
-                                    console.log("TODO: EDIT THIS SKILL");
-                                }}>
+                            <div data={index} onClick={ (e) =>  {
+                                        let id = skill[e.currentTarget.getAttribute("data")]._id;
+                                        skillDataService.updateSkill(id).then(res => {
+                                            window.location.reload(false);
+                                            receivedData.current = false;
+                                        })
+                                    }
+                                }>
                                     <FontAwesomeIcon className='skillIcon' icon={faPen} />
                                 </div>
                                 <div onClick={()=>{
