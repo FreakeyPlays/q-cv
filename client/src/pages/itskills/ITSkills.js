@@ -29,8 +29,16 @@ const ITSkills = () => {
                         <div key={index} className="skillItem">
                             {item.name} 
                             <div className='interaction'>
-                                <FontAwesomeIcon className='skillIcon' icon={faPen} />
-                                <FontAwesomeIcon className='skillIcon' icon={faTrash} />
+                                <div onClick={()=>{
+                                    console.log("TODO: EDIT THIS SKILL");
+                                }}>
+                                    <FontAwesomeIcon className='skillIcon' icon={faPen} />
+                                </div>
+                                <div onClick={()=>{
+                                    console.log("TODO: DELETE THIS SKILL");
+                                }}>
+                                    <FontAwesomeIcon className='skillIcon' icon={faTrash} />
+                                </div>
                             </div>
                         </div>
                     );
