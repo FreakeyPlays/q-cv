@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { skillDataService } from '../../services/skills.services.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faPen, faPlus, faPlusCircle, faTrash} from '@fortawesome/free-solid-svg-icons'
 import "./ITSkills.css";
 
 const ITSkills = () => {
@@ -21,18 +21,23 @@ const ITSkills = () => {
     return(
         <>
             <h1>IT-Skills</h1>
+            
             <div className='allItems'>
                 {
                 skill.map( (item, index) =>{
                     return (
                         <div key={index} className="skillItem">
                             {item.name} 
-                            <div className='interaction'><FontAwesomeIcon className='skillTrashIcon' icon={faPen} /><FontAwesomeIcon className='skillTrashIcon' icon={faTrash} /></div>
+                            <div className='interaction'>
+                                <FontAwesomeIcon className='skillIcon' icon={faPen} />
+                                <FontAwesomeIcon className='skillIcon' icon={faTrash} />
+                            </div>
                         </div>
                     );
                 })
             }
             </div>
+            <div className='addSkillIcon'><FontAwesomeIcon className='skillPlusIcon' icon={faPlus} /></div>
         </>
     )
 }

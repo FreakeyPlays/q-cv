@@ -1,3 +1,20 @@
+.addSkillIcon{
+    background-color: #3dc0f1;
+    width: 1.4em;
+    height: 1.4em;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.skillPlusIcon{
+    margin: auto;
+    color: white;
+}
+
 .skillItem{
     display: inline-block;
     
@@ -28,11 +45,9 @@
     margin-top: 0;
 }
 
-.skillEditIcons{
+.skillIcon{
     color: #333;
     display: flex;
-    padding-left: 5px;
-    padding-right: 5px;
 }
 
 .interaction{
