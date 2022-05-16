@@ -54,8 +54,6 @@ const ManageProject = (params) => {
         
         tmp["assignedUsers"] = ["627d6e4624b23d01f548f867"];
 
-        // TODO : id ? tmp["_id"] = id : tmp["_id"] = "627d6e4624b23d01f548f867";
-
         let promise = params.function(tmp);
 
         promise

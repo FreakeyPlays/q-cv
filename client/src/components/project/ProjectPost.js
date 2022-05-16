@@ -3,6 +3,7 @@ import { faClone, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import "./ProjectPost.css";
 import { Link } from "react-router-dom";
+import { projectDataService } from "../../services/project.service";
 
 const isAdmin = false;
 const currentUserID = "627d6e4624b23d01f548f867";
@@ -16,14 +17,21 @@ function dummyCheckOwner(uidArr){
     return false;
 }
 
-function dummyDelete(id, title){
-    let ok = window.confirm("Do you really want to delete\n"+title);
+function deleteProject(id, title){
+    let wasOkPressed = window.confirm("Do you really want to delete\n"+title);
 
-    if(!ok){
+    if(!wasOkPressed){
         return;
     }
 
-    console.log("Delete: ",id);
+    let promise = projectDataService.delete(id);
+
+    promise
+        .then(() => window.location.href = "/projects")
+        .catch(e => {
+            alert("Error: Something went Wrong!");
+            console.warn(e.message);
+        })
 }
 
 const ProjectPost = ({ item }) => {
@@ -40,8 +48,8 @@ const ProjectPost = ({ item }) => {
                         <Link to={"/projects/edit/" + item._id}>
                             <FontAwesomeIcon icon={faPen} />
                         </Link>
-                        <a href="/">
-                            <FontAwesomeIcon icon={faTrash} onClick={() => dummyDelete(item._id, item.title)} />
+                        <a href="/projects">
+                            <FontAwesomeIcon icon={faTrash} onClick={() => deleteProject(item._id, item.title)} />
                         </a>
                     </>
                 ) : (
