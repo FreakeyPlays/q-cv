@@ -9,13 +9,13 @@
     padding: 8px;
     border: 1px solid transparent;
     transition: all .7s ease;
+    border: 1px solid #cfd1d4;
 }
 
 .searchbar:focus-within{
     transition: box-shadow .7s ease;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
-    border: 1px solid #dadce0;
 }
 
 .searchIconContainer{
