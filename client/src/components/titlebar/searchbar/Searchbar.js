@@ -4,13 +4,13 @@ import InputBase from "@material-ui/core/InputBase";
 
 import "./Searchbar.css";
 
-const Searchbar = () => {
+const Searchbar = (props) => {
     return(
         <div className="searchbar">
             <div className="searchIconContainer">
                 <FontAwesomeIcon icon={faSearch} className="searchIcon" />
             </div>
-            <InputBase placeholder="Search..." className="searchbarInput">
+            <InputBase placeholder="Search..." className="searchbarInput" onChange={e => props.setSearchFunction(e.target.value)}>
 
             </InputBase>
         </div>

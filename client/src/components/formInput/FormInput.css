@@ -1,0 +1,52 @@
+.formInput{
+    display: flex;
+    flex-direction: column;
+}
+
+.formInput label{
+    font-size: 12px;
+    color: gray;
+}
+
+.formInput input{
+    padding: 16px;
+    margin: 8px 0px;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+.formInput textarea{
+    padding: 16px;
+    margin: 8px 0px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    height: 48px;
+    min-height: 48px;
+    max-height: 256px;
+    resize: vertical;
+}
+
+.formInput input:invalid[focused="true"]{
+    border: 1px solid red;
+}
+
+.formInput input:invalid[focused="true"] ~ span{
+    display: block;
+}
+
+.formInput textarea:invalid[focused="true"]{
+    border: 1px solid red;
+}
+
+.formInput textarea:invalid[focused="true"] ~ span{
+    display: block;
+}
+
+.formInput span{
+    font-size: 12px;
+    padding: 4px;
+    color: red;
+    display: none;
+    margin-bottom: 8px;
+    max-width: 256px;
+}
