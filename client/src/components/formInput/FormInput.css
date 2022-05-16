@@ -20,8 +20,8 @@
     margin: 8px 0px;
     border-radius: 8px;
     border: 1px solid gray;
-    height: 17px;
-    min-height: 17px;
+    height: 48px;
+    min-height: 48px;
     max-height: 256px;
     resize: vertical;
 }
