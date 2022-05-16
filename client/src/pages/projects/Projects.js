@@ -40,6 +40,7 @@ const Projects = () => {
                 setStateFunction={(newVal) => setShowAll(newVal)}
                 setSearchFunction={(newVal) => setSearchFilter(newVal)}
                 searchbar={true} 
+                showAll={true}
                 path="/projects/create" 
             />
             <div className="projectsContainer">

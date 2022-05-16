@@ -14,24 +14,28 @@ const Titlebar = (props) => {
         <div className="titlebar">
             <div className="buttonContainer">
                 <div className="buttonWrapper">
-                    {showAll ? (
-                            <FontAwesomeIcon 
-                                icon={faUser} 
-                                size="2x" 
-                                onClick={() => {
-                                    props.setStateFunction(false)
-                                    setShowAll(false);
-                                }}
-                            />
-                        ) : (
-                            <FontAwesomeIcon 
-                                icon={faUsers} 
-                                size="2x" 
-                                onClick={() => {
-                                    props.setStateFunction(true);
-                                    setShowAll(true);
-                                }}
-                            />
+                    {props.showAll ? (
+                        showAll ? (
+                                <FontAwesomeIcon 
+                                    icon={faUser} 
+                                    size="2x" 
+                                    onClick={() => {
+                                        props.setStateFunction(false)
+                                        setShowAll(false);
+                                    }}
+                                />
+                            ) : (
+                                <FontAwesomeIcon 
+                                    icon={faUsers} 
+                                    size="2x" 
+                                    onClick={() => {
+                                        props.setStateFunction(true);
+                                        setShowAll(true);
+                                    }}
+                                />
+                        )
+                    ): (
+                        <></>
                     )}
                     <CreateButton link={props.path} />
                 </div>
