@@ -52,9 +52,15 @@ const ManageProject = (params) => {
             tmp[e.target[i].name] = e.target[i].value;
         }
         
-        id ? tmp["_id"] = id : tmp["_id"] = 1;
+        tmp["assignedUsers"] = ["627d6e4624b23d01f548f867"];
 
-        params.function(tmp);
+        // TODO : id ? tmp["_id"] = id : tmp["_id"] = "627d6e4624b23d01f548f867";
+
+        let promise = params.function(tmp);
+
+        promise
+            .then(() => window.location.href = "/projects")
+            .catch((e) => console.log(e));
     }
 
     function handleOnChange(e){

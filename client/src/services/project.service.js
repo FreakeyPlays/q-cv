@@ -11,12 +11,8 @@ export const projectDataService = {
         return axios.get(basePath + `/${id}`);
     },
 
-    createProject(data){
-        return axios.post(basePath, data);
-    },
-
     create(data){
-        console.log(data);
+        return axios.post(basePath + "/", data);
     },
 
     edit(data){
@@ -24,6 +20,6 @@ export const projectDataService = {
     },
 
     copy(data){
-        console.log(data);
+        return axios.post(basePath + "/", data);
     }
 }
