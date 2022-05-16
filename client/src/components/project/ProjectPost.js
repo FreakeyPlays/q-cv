@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClone, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import "./ProjectPost.css";
+import { Link } from "react-router-dom";
 
 const isAdmin = false;
 const currentUserID = "627d6e4624b23d01f548f867";
@@ -25,25 +26,23 @@ function dummyDelete(id, title){
     console.log("Delete: ",id);
 }
 
-function dummyEdit(id){
-    console.log("Edit: ",id);
-}
-
-function dummyCopy(id){
-    console.log("Copy: ",id);
-}
-
 const ProjectPost = ({ item }) => {
     return(
         <div className="projectPost">
             <div className="titleSection">
                 <h2 className="projectTitle">{item.title}</h2>
                 <div className="projectControls">
-                <FontAwesomeIcon icon={faClone} onClick={() => dummyCopy(item._id)} />
+                <Link to={"/projects/copy/" + item._id}>
+                    <FontAwesomeIcon icon={faClone} />
+                </Link>
                 {(isAdmin || dummyCheckOwner(item.assignedUsers)) ? (
                     <>
-                        <FontAwesomeIcon icon={faPen} onClick={() => dummyEdit(item._id)} />
-                        <FontAwesomeIcon icon={faTrash} onClick={() => dummyDelete(item._id, item.title)} />
+                        <Link to={"/projects/edit/" + item._id}>
+                            <FontAwesomeIcon icon={faPen} />
+                        </Link>
+                        <a href="/">
+                            <FontAwesomeIcon icon={faTrash} onClick={() => dummyDelete(item._id, item.title)} />
+                        </a>
                     </>
                 ) : (
                     <>
