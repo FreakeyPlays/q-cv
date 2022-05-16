@@ -1,36 +1,38 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { skillDataService } from '../../services/skills.services.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen, faTrash} from '@fortawesome/free-solid-svg-icons'
+import "./ITSkills.css";
 
 const ITSkills = () => {
-
+    
     const [skill, setSkill] = useState([]);
+    const receivedData = useRef(false);
 
     useEffect( ()=>{
-        skillDataService.getAll()
-            .then(response => setSkill(response.data))
-            .catch( e => console.error(e.message));
-    })
+        if(receivedData.current === false){
+            skillDataService.getAll()
+                .then(response => setSkill(response.data))
+                .catch( e => console.error(e.message));
+            receivedData.current = true;
+        }
+    });
 
     return(
         <>
             <h1>IT-Skills</h1>
-            <table>
-            <tr>
-                <th>Skill</th>
-                <th>_id</th>
-            </tr>
-            
+            <div className='allItems'>
                 {
                 skill.map( (item, index) =>{
                     return (
-                        <tr>
-                            <td key={index}> {item.name}</td>
-                            <td key={index}> {item._id}</td>
-                        </tr>
+                        <div key={index} className="skillItem">
+                            {item.name} 
+                            <div className='interaction'><FontAwesomeIcon className='skillTrashIcon' icon={faPen} /><FontAwesomeIcon className='skillTrashIcon' icon={faTrash} /></div>
+                        </div>
                     );
                 })
             }
-            </table>
+            </div>
         </>
     )
 }

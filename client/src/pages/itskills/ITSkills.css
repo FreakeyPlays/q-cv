@@ -1,0 +1,42 @@
+.skillItem{
+    display: inline-block;
+    
+    border-bottom-right-radius: .6em;
+    border-bottom-left-radius: .6em;
+    height: 1.2em;
+    width: 95%;
+    border-bottom: 1px solid #E8E8E8;
+    padding: .6em;
+    display: flex;
+    margin-top: .5em;
+    justify-content: space-between ;
+}
+
+.allItems{
+    padding: 25px;
+    border: 1px solid #E8E8E8;
+    width: 55%;
+    margin:auto;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-top-left-radius: .6em;
+    border-top-right-radius: .6em;
+    border-bottom-right-radius: .6em;
+    border-bottom-left-radius: .6em;
+}
+
+.skillItem:first-child{
+    margin-top: 0;
+}
+
+.skillEditIcons{
+    color: #333;
+    display: flex;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.interaction{
+    width: 10%;
+    display: flex;
+    justify-content: space-between ;
+}
