@@ -13,5 +13,17 @@ export const projectDataService = {
 
     createProject(data){
         return axios.post(basePath, data);
+    },
+
+    create(data){
+        console.log(data);
+    },
+
+    edit(data){
+        console.log(data);
+    },
+
+    copy(data){
+        console.log(data);
     }
 }
