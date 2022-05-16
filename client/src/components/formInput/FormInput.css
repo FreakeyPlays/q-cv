@@ -48,4 +48,5 @@
     color: red;
     display: none;
     margin-bottom: 8px;
+    max-width: 256px;
 }
