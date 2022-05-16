@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { skillDataService } from '../../services/skills.services.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faPlus, faPlusCircle, faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faPen, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons'
 import "./ITSkills.css";
 
 const ITSkills = () => {

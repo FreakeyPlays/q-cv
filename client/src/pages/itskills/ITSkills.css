@@ -31,14 +31,17 @@
 
 .allItems{
     padding: 25px;
+    height: 25em;
     border: 1px solid #E8E8E8;
     width: 55%;
     margin:auto;
+    margin-top: 25%;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
     border-top-left-radius: .6em;
     border-top-right-radius: .6em;
     border-bottom-right-radius: .6em;
     border-bottom-left-radius: .6em;
+    overflow-y: scroll;
 }
 
 .skillItem:first-child{
