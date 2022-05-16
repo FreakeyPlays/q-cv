@@ -21,5 +21,9 @@ export const projectDataService = {
 
     copy(data){
         return axios.post(basePath + "/", data);
+    },
+
+    delete(id){
+        return axios.delete(basePath + `/${id}`);
     }
 }
