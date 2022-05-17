@@ -49,7 +49,7 @@ const ITSkills = () => {
             skillDataService.newSkill({
                 "name":newSkillName
             })
-            //setNewSkillAddedToDB(true);
+            window.location.reload(false);
             receivedData.current = false;
         }
     }
