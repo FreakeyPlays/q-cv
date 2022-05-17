@@ -9,10 +9,10 @@ const projectSchema = mongoose.Schema({
     startDate: { type: Date, required: [true, "Please provide a Project Starting Date"] },
     endDate: { type: Date, required: [true, "Please provide a Project Starting Date"] },
     description: { type: String, required: [true, "Please provide a Project Description"] },
-    skills: [{ type: String }],
+    activities: [{ type: String }],
     location: { type: String, required: [true, "Please provide a Project Location"], trim: true },
     teamSize: { type: String, required: [true, "Please provide a Project Team Size"] },
-    assignedUsers: [{ type: mongoose.Types.ObjectId, ref:"User", require: [true, "Please provide a assigned User"] }]
+    assignedUser: [{ type: mongoose.Types.ObjectId, ref:"User", require: [true, "Please provide a assigned User"] }]
 }, {
     timestamps: true
 });

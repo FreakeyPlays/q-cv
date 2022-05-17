@@ -13,15 +13,15 @@ const setProject = asyncHandler( async (req, res) => {
     const startDate = Date.parse(req.body.startDate);
     const endDate = Date.parse(req.body.endDate);
     const description = req.body.description;
-    const skills = req.body.skills;
+    const activities = req.body.activities;
     const location = req.body.location;
     const teamSize = req.body.teamSize;
-    const assignedUsers = req.body.assignedUsers;
+    const assignedUser = req.body.assignedUser;
 
     if( !title || !customer || !industry || 
         !country || !position || !startDate || 
         !endDate || !description || !location ||
-        !teamSize || !assignedUsers ){
+        !teamSize || !assignedUser ){
         
         res.status(400).json({
             ok: false,
@@ -42,8 +42,8 @@ const setProject = asyncHandler( async (req, res) => {
         description,
         location,
         teamSize,
-        assignedUsers,
-        skills: skills ? skills : []
+        assignedUser,
+        activities: activities ? activities : []
     })
 
     res.json({

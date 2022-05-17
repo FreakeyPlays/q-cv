@@ -18,7 +18,7 @@ const ManageProject = (params) => {
         startDate: "",
         endDate: "",
         description: "",
-        skills: "",
+        activities: "",
         location: "",
         teamSize: ""
       });
@@ -52,7 +52,7 @@ const ManageProject = (params) => {
             tmp[e.target[i].name] = e.target[i].value;
         }
         
-        tmp["assignedUsers"] = ["627d6e4624b23d01f548f867"];
+        tmp["assignedUser"] = ["627d6e4624b23d01f548f867"];
 
         let promise = params.function(tmp);
 

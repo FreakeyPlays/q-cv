@@ -21,11 +21,9 @@ const Projects = () => {
         }else{
             projectDataService.getAll()
             .then(({data}) => {
-                setProjects(data.projects.filter( ({assignedUsers}) => {
-                    for(let uid of assignedUsers){
-                        if(uid === currentUserID){
-                            return true;
-                        }
+                setProjects(data.projects.filter( ({assignedUser}) => {
+                    if(assignedUser === currentUserID){
+                        return true;
                     }
                     return false;
                 }))

@@ -89,14 +89,14 @@ export const ProjectInputs = [
     },
     {
         id: 9,
-        name: "skills",
+        name: "activities",
         type: "text",
-        placeholder: "Skills",
-        label: "Skills*",
-        errorMessage: "Please provide valid Skills!",
+        placeholder: "Activities",
+        label: "Activities*",
+        errorMessage: "Please provide valid Activities!",
         pattern: "^(?:[a-zA-Z0-9 ]+,)*[a-zA-Z0-9 ]+$",
         required: false,
-        customClass: "formSkills"
+        customClass: "formActivities"
     },
     {
         id: 10,

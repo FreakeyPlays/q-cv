@@ -8,11 +8,9 @@ import { projectDataService } from "../../services/project.service";
 const isAdmin = false;
 const currentUserID = "627d6e4624b23d01f548f867";
 
-function dummyCheckOwner(uidArr){
-    for(let uid of uidArr){
-        if(uid === currentUserID){
-            return true;
-        }
+function dummyCheckOwner(uid){
+    if(uid === currentUserID){
+        return true;
     }
     return false;
 }
@@ -43,14 +41,14 @@ const ProjectPost = ({ item }) => {
                 <Link to={"/projects/copy/" + item._id}>
                     <FontAwesomeIcon icon={faClone} />
                 </Link>
-                {(isAdmin || dummyCheckOwner(item.assignedUsers)) ? (
+                {(isAdmin || dummyCheckOwner(item.assignedUser)) ? (
                     <>
                         <Link to={"/projects/edit/" + item._id}>
                             <FontAwesomeIcon icon={faPen} />
                         </Link>
-                        <a href="/projects">
+                        <Link to={"/projects"}>
                             <FontAwesomeIcon icon={faTrash} onClick={() => deleteProject(item._id, item.title)} />
-                        </a>
+                        </Link>
                     </>
                 ) : (
                     <>
@@ -84,11 +82,11 @@ const ProjectPost = ({ item }) => {
                 <h3>Description: </h3>
                 <p>{item.description}</p>
             </div>
-                {item.skills.length > 0 ? (
+                {item.activities.length > 0 ? (
                     <div>
-                        <h3>Skills: </h3>
-                        <div className="projectSkills dataContainer">
-                            {item.skills.map((name, index) => {
+                        <h3>Activities: </h3>
+                        <div className="projectActivities dataContainer">
+                            {item.activities.map((name, index) => {
                                 return (
                                     <div key={index} className="skill">{name}</div>
                                 )
