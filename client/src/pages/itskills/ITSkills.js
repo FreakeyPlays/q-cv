@@ -83,26 +83,26 @@ const ITSkills = () => {
             </div>
             <div className='addSkillIcon'><FontAwesomeIcon className='skillPlusIcon' icon={faPlus} /></div>
             <Popup trigger={updatePopup} setTrigger={setUpdatePopup}>
-                                        <h3>Rename Skill</h3>
-                                        <form noValidate autoComplete='off' onSubmit={handleUpdateSubmit}>
-                                            <MuiThemeProvider theme={theme}>
-                                                <TextField 
-                                                label='required' 
-                                                required
-                                                color='secondary'
-                                                defaultValue={oldUneditedName}
-                                                variant="filled"
-                                                onChange={ (e) => setNewUpdateSkillName(e.target.value)}
-                                                ></TextField>
-                                                <Button 
-                                                type='submit'
-                                                color='secondary'
-                                                variant='contained'
-                                                >change</Button>
-                                            </MuiThemeProvider>
-                                        </form>
-                                    </Popup>
-                                    
+                <h3>Rename Skill</h3>
+                <form noValidate autoComplete='off' onSubmit={handleUpdateSubmit}>
+                    <MuiThemeProvider theme={theme}>
+                        <TextField 
+                        label='required' 
+                        required
+                        color='secondary'
+                        defaultValue={oldUneditedName}
+                        variant="filled"
+                        onChange={ (e) => setNewUpdateSkillName(e.target.value)}
+                        ></TextField>
+                        <Button 
+                        type='submit'
+                        color='secondary'
+                        variant='contained'>
+                            change
+                        </Button>
+                    </MuiThemeProvider>
+                </form>
+            </Popup>            
         </>
     )
 }
