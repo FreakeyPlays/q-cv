@@ -6,7 +6,6 @@ import Popup from '../../components/popup/Popup.js';
 import TextField from '@material-ui/core/TextField'
 import "./ITSkills.css";
 import { Button } from '@material-ui/core';
-
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 
 
@@ -17,6 +16,24 @@ const ITSkills = () => {
 
     const [skill, setSkill] = useState([]);
     const receivedData = useRef(false);
+    
+    const[updatePopup, setUpdatePopup] = useState(false);
+    const[updateTargetId, setUpdateTargetId] = useState('');
+    const[newUpdateSkillName, setNewUpdateSkillName] = useState('');
+    const[oldUneditedName, setOldUneditedName] = useState('');
+    
+    const handleUpdateSubmit = (e) =>{
+        e.preventDefault();
+        if(updateTargetId){
+            skillDataService.updateSkill(updateTargetId,{
+                "name":newUpdateSkillName
+            }).then((res)=>{
+                console.log(res.params);
+                window.location.reload(false);
+                receivedData.current = false;
+            })
+        }
+    }
 
     const theme = createTheme({
         palette: {
@@ -25,7 +42,6 @@ const ITSkills = () => {
             }
           },
     });
-
 
     const handleSubmit = (e) =>{
         e.preventDefault();
@@ -57,8 +73,25 @@ const ITSkills = () => {
                         <div key={index} className="skillItem">
                             {item.name} 
                             <div className='interaction'>
-                                <FontAwesomeIcon className='skillIcon' icon={faPen} />
-                                <FontAwesomeIcon className='skillIcon' icon={faTrash} />
+                            <div data={index} onClick={ (e) =>  {
+                                        setUpdateTargetId(skill[e.currentTarget.getAttribute("data")]._id);
+                                        console.log("Item with id has been clicked: " + updateTargetId);
+                                        setUpdatePopup(true);
+                                        setOldUneditedName(skill[e.currentTarget.getAttribute("data")].name);
+                                    }
+                                }>
+                                    <FontAwesomeIcon className='skillIcon' icon={faPen} />
+                                </div>
+                                <div data={index} onClick={ (e) =>  {
+                                            let id = skill[e.currentTarget.getAttribute("data")]._id;
+                                            skillDataService.deleteSkill(id).then(res => {
+                                                window.location.reload(false);
+                                                receivedData.current = false;
+                                            })
+                                        }
+                                    }>
+                                    <FontAwesomeIcon className='skillIcon' icon={faTrash} />
+                                </div>
                             </div>
                         </div>
                     );
@@ -87,6 +120,29 @@ const ITSkills = () => {
                         </MuiThemeProvider>
                     </form>
             </Popup>
+
+            <div className='addSkillIcon'><FontAwesomeIcon className='skillPlusIcon' icon={faPlus} /></div>
+            <Popup trigger={updatePopup} setTrigger={setUpdatePopup}>
+                <h3>Rename Skill</h3>
+                <form noValidate autoComplete='off' onSubmit={handleUpdateSubmit}>
+                    <MuiThemeProvider theme={theme}>
+                        <TextField 
+                        label='required' 
+                        required
+                        color='secondary'
+                        defaultValue={oldUneditedName}
+                        variant="filled"
+                        onChange={ (e) => setNewUpdateSkillName(e.target.value)}
+                        ></TextField>
+                        <Button 
+                        type='submit'
+                        color='secondary'
+                        variant='contained'>
+                            change
+                        </Button>
+                    </MuiThemeProvider>
+                </form>
+            </Popup>    
         </>
     )
 }

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const skillSchema = mongoose.Schema({
-    name: { type: String, required: [true, 'Please provide a skill "name"']},
+    name: { type: String, required: [true, 'Please provide a skill "name"'], unique: true},
 }, {
     timestamps: true
 });
