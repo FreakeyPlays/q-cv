@@ -121,7 +121,6 @@ const ITSkills = () => {
                     </form>
             </Popup>
 
-            <div className='addSkillIcon'><FontAwesomeIcon className='skillPlusIcon' icon={faPlus} /></div>
             <Popup trigger={updatePopup} setTrigger={setUpdatePopup}>
                 <h3>Rename Skill</h3>
                 <form noValidate autoComplete='off' onSubmit={handleUpdateSubmit}>

@@ -39,13 +39,26 @@
     border: 1px solid #E8E8E8;
     width: 55%;
     margin:auto;
-    margin-top: 25%;
+    margin-top: 20em;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
     border-top-left-radius: .6em;
     border-top-right-radius: .6em;
     border-bottom-right-radius: .6em;
     border-bottom-left-radius: .6em;
     overflow-y: scroll;
+}
+
+.allItems::-webkit-scrollbar{
+    width: 12px;
+}
+
+.allItems::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.allItems::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 3px #333; 
 }
 
 .skillItem:first-child{
