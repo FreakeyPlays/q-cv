@@ -82,21 +82,23 @@ const ProjectPost = ({ item }) => {
                 <h3>Description: </h3>
                 <p>{item.description}</p>
             </div>
+            <div className="dataContainer">
                 {item.activities.length > 0 ? (
-                    <div>
+                    <div className="projectActivities">
                         <h3>Activities: </h3>
-                        <div className="projectActivities dataContainer">
-                            {item.activities.map((name, index) => {
-                                return (
-                                    <div key={index} className="skill">{name}</div>
-                                )
-                            })}
-                        </div>
+                        <p className="skill">{item.activities.join(", ")}</p>
                     </div>
                 ) : (
                     <></>
                 )}
-            <div className="dataContainer">
+                {item.enviroment ? (
+                    <div className="projectEnviroment">
+                        <h3>Enviroment: </h3>
+                        <p>{item.enviroment}</p>
+                    </div>
+                ) : (
+                    <></>
+                )}
                 <div className="projectLocation">
                     <h3>Location: </h3>
                     <p>{item.location}</p>

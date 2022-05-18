@@ -20,7 +20,8 @@ const ManageProject = (params) => {
         description: "",
         activities: "",
         location: "",
-        teamSize: ""
+        teamSize: "",
+        enviroment: ""
       });
     
     useEffect(() => {
@@ -29,11 +30,19 @@ const ManageProject = (params) => {
                 .then(response => {
                     let projectToCopy = response.data.project;
                     let tmpValues = {}
-
+                    
                     for(let key of Object.keys(values)){
                         tmpValues[key] = projectToCopy[key];
                     }
 
+                    let tmpActivities =  tmpValues["activities"];
+                    tmpValues["activities"] = "";
+                    for(let i = 0; i < tmpActivities.length; i++){
+                        tmpValues["activities"] += tmpActivities[i];
+                        if(i < tmpActivities.length-1){
+                            tmpValues["activities"] += ", ";
+                        }    
+                    }
                     tmpValues["startDate"] = new Date(tmpValues["startDate"]).toISOString().split("T")[0];
                     tmpValues["endDate"] = new Date(tmpValues["endDate"]).toISOString().split("T")[0];
 
@@ -48,11 +57,17 @@ const ManageProject = (params) => {
         e.preventDefault();
         let tmp = {};
 
-        for(let i = 0; i < 11; i++){
+        for(let i = 0; i < 12; i++){
             tmp[e.target[i].name] = e.target[i].value;
         }
-        
-        tmp["assignedUser"] = ["627d6e4624b23d01f548f867"];
+        //TODO set user
+        tmp["assignedUser"] = "627d6e4624b23d01f548f867";
+
+        let tmpActivities = tmp["activities"].split(",");
+        tmp["activities"] = [];
+        for(let activity of tmpActivities){
+            tmp["activities"].push(activity.trim());
+        }
 
         let promise = params.function(tmp);
 

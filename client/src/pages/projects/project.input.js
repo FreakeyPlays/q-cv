@@ -6,7 +6,7 @@ export const ProjectInputs = [
         placeholder: "Title",
         label: "Title",
         errorMessage: "Please provide a valid Title!",
-        pattern: "^.{8-256}$",
+        pattern: "^.{8,256}$",
         required: true,
         customClass: "formTitle"
     },
@@ -17,7 +17,7 @@ export const ProjectInputs = [
         placeholder: "Customer",
         label: "Customer",
         errorMessage: "Please provide a valid Customer!",
-        pattern: "^.{1-64}$",
+        pattern: "^.{1,64}$",
         required: true,
         customClass: "formCustomer"
     },
@@ -28,7 +28,7 @@ export const ProjectInputs = [
         placeholder: "Industry",
         label: "Industry",
         errorMessage: "Please provide a valid Industry!",
-        pattern: "^[A-Za-z]{1-256}$",
+        pattern: "^[A-Za-z]{1,256}$",
         required: true,
         customClass: "formIndustry"
     },
@@ -50,7 +50,7 @@ export const ProjectInputs = [
         placeholder: "Position",
         label: "Position",
         errorMessage: "Please provide a valid Position!",
-        pattern: "^[A-Za-z]{3-16}$",
+        pattern: "^[A-Za-z]{3,16}$",
         required: true,
         customClass: "formPosition"
     },
@@ -100,17 +100,28 @@ export const ProjectInputs = [
     },
     {
         id: 10,
+        name: "enviroment",
+        type: "text",
+        placeholder: "Enviroment",
+        label: "Enviroment*",
+        errorMessage: "Please provide a valid Enviroment!",
+        pattern: "^.{1,}$",
+        required: false,
+        customClass: "formEnviroment"
+    },
+    {
+        id: 11,
         name: "location",
         type: "text",
         placeholder: "Location",
         label: "Location",
         errorMessage: "Please provide a valid Location!",
-        pattern: "^[A-Za-z0-9]{3-16}$",
+        pattern: "^[A-Za-z0-9]{3,16}$",
         required: true,
         customClass: "formLocation"
     },
     {
-        id: 11,
+        id: 12,
         name: "teamSize",
         type: "text",
         placeholder: "Team Size",

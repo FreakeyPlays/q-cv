@@ -48,23 +48,32 @@
 }
 
 .formCustomer,
-.formPosition,
-.formActivities{
+.formPosition{
     grid-column-start: 1;
     grid-column-end: 3;
 }
 
 .formIndustry,
-.formStartDate,
-.formLocation{
+.formStartDate{
     grid-column-start: 3;
     grid-column-end: 5;
 }
 
 .formCountry,
-.formEndDate,
-.formTeamSize{
+.formEndDate{
     grid-column-start: 5;
+    grid-column-end: 7;
+}
+
+.formActivities,
+.formLocation{
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.formEnviroment,
+.formTeamSize{
+    grid-column-start: 4;
     grid-column-end: 7;
 }
 
@@ -79,24 +88,33 @@
     }
 
     .formTitle,
-    .formDescription,
-    .formTeamSize{
+    .formDescription{
         grid-column-start: 1;
         grid-column-end: 5;
     }
 
     .formCustomer,
     .formCountry,
-    .formStartDate,
-    .formActivities{
+    .formStartDate{
         grid-column-start: 1;
         grid-column-end: 3;
     }
 
     .formIndustry,
     .formPosition,
-    .formEndDate,
+    .formEndDate{
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+
+    .formActivities,
     .formLocation{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .formEnviroment,
+    .formTeamSize{
         grid-column-start: 3;
         grid-column-end: 5;
     }
@@ -117,7 +135,8 @@
     .formIndustry,
     .formPosition,
     .formEndDate,
-    .formLocation{
+    .formLocation,
+    .formEnviroment{
         grid-column-start: 1;
         grid-column-end: 2;
     }
