@@ -1,9 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClone, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
-
-import "./ProjectPost.css";
 import { Link } from "react-router-dom";
 import { projectDataService } from "../../services/project.service";
+import ProjectPostItems from "./projectPost.items";
+
+import "./ProjectPost.css";
+import React from "react";
 
 const isAdmin = false;
 const currentUserID = "627d6e4624b23d01f548f867";
@@ -57,56 +59,20 @@ const ProjectPost = ({ item }) => {
                 </div>
             </div>
             <div className="dataContainer">
-                <div className="projectCustomer">
-                    <h3>Customer: </h3>
-                    <p>{item.customer}</p>
-                </div>
-                <div className="projectIndustry">
-                    <h3>Industry: </h3>
-                    <p>{item.industry}</p>
-                </div>
-                <div className="projectCountry">
-                    <h3>Country: </h3>
-                    <p>{item.country}</p>
-                </div>
-                <div className="projectPosition">
-                    <h3>Position: </h3>
-                    <p>{item.position}</p>
-                </div>
-                <div className="projectDuration">
-                    <h3>Duration: </h3>
-                    <p>{new Date(item.startDate).toLocaleDateString()} - {new Date(item.endDate).toLocaleDateString()}</p>
-                </div>
-            </div>
-            <div className="projectDescription">
-                <h3>Description: </h3>
-                <p>{item.description}</p>
-            </div>
-            <div className="dataContainer">
-                {item.activities.length > 0 ? (
-                    <div className="projectActivities">
-                        <h3>Activities: </h3>
-                        <p className="skill">{item.activities.join(", ")}</p>
-                    </div>
-                ) : (
-                    <></>
-                )}
-                {item.enviroment ? (
-                    <div className="projectEnviroment">
-                        <h3>Enviroment: </h3>
-                        <p>{item.enviroment}</p>
-                    </div>
-                ) : (
-                    <></>
-                )}
-                <div className="projectLocation">
-                    <h3>Location: </h3>
-                    <p>{item.location}</p>
-                </div>
-                <div className="projectTeamSize">
-                    <h3>Team Size: </h3>
-                    <p>{item.teamSize}</p>
-                </div>
+                
+                {ProjectPostItems.map(element => {
+                    return (
+                        element.optional || element.isStored(item) ? (
+                            <div key={element.id} className={element.classNames}>
+                                <h3>{element.title}</h3>
+                                <p>{element.parse(item)}</p>
+                            </div>
+                        ) : (
+                            <React.Fragment key={element.id} />
+                        )
+                    )
+                })}
+
             </div>
         </div>
     )

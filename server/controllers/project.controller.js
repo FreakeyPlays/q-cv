@@ -22,7 +22,7 @@ const setProject = asyncHandler( async (req, res) => {
     if( !title || !customer || !industry || 
         !country || !position || !startDate || 
         !endDate || !description || !location ||
-        !teamSize || !assignedUser || !enviroment){
+        !teamSize || !assignedUser){
         
         res.status(400).json({
             ok: false,
@@ -44,7 +44,7 @@ const setProject = asyncHandler( async (req, res) => {
         location,
         teamSize,
         assignedUser,
-        enviroment,
+        enviroment: enviroment ? enviroment : "",
         activities: activities ? activities : []
     })
 

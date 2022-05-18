@@ -66,7 +66,9 @@ const ManageProject = (params) => {
         let tmpActivities = tmp["activities"].split(",");
         tmp["activities"] = [];
         for(let activity of tmpActivities){
-            tmp["activities"].push(activity.trim());
+            if(activity.length > 0){
+                tmp["activities"].push(activity.trim());
+            }
         }
 
         let promise = params.function(tmp);
