@@ -1,3 +1,5 @@
+import { faAslInterpreting } from "@fortawesome/free-solid-svg-icons";
+
 const ProjectPostItems = [
     {
         id: 1,
@@ -74,7 +76,10 @@ const ProjectPostItems = [
             return item[this.key];
         },
         isStored(item){
-            return item[this.key].length > 0 ? true : false;
+            if(item[this.key]){
+                return item[this.key].length > 0 ? true : false;
+            }
+            return false;
         }
     },
     {

@@ -26,7 +26,7 @@ const App = () => {
                     <Route path="projects" element={<Projects />} />
                     <Route path="projects/create" element={<ManageProject function={projectDataService.create} title="Create" />} />
                     <Route path="projects/copy/:id" element={<ManageProject function={projectDataService.copy} title="Copy" />} />
-                    <Route path="projects/edit/:id" element={<ManageProject function={projectDataService.edit} title="Edit" />} />
+                    <Route path="projects/edit/:id" element={<ManageProject function={projectDataService.update} title="Edit" />} />
                     <Route path="/create-cv" element={<CreateCV />} />
                 </Routes>
             </Menu>
