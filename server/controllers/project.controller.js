@@ -17,7 +17,7 @@ const setProject = asyncHandler( async (req, res) => {
     const location = req.body.location;
     const teamSize = req.body.teamSize;
     const assignedUser = req.body.assignedUser;
-    const enviroment = req.body.enviroment;
+    const environment = req.body.environment;
 
     if( !title || !customer || !industry || 
         !country || !position || !startDate || 
@@ -44,7 +44,7 @@ const setProject = asyncHandler( async (req, res) => {
         location,
         teamSize,
         assignedUser,
-        enviroment: enviroment ? enviroment : "",
+        environment: environment ? environment : "",
         activities: activities ? activities : []
     })
 

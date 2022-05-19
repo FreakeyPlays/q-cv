@@ -21,7 +21,7 @@ const ManageProject = (params) => {
         activities: "",
         location: "",
         teamSize: "",
-        enviroment: ""
+        environment: ""
       });
     
     useEffect(() => {

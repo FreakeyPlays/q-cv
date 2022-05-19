@@ -100,14 +100,14 @@ export const ProjectInputs = [
     },
     {
         id: 10,
-        name: "enviroment",
+        name: "environment",
         type: "text",
-        placeholder: "Enviroment",
-        label: "Enviroment*",
-        errorMessage: "Please provide a valid Enviroment!",
+        placeholder: "Environment",
+        label: "Environment*",
+        errorMessage: "Please provide a valid Environment!",
         pattern: "^.{1,}$",
         required: false,
-        customClass: "formEnviroment"
+        customClass: "formEnvironment"
     },
     {
         id: 11,

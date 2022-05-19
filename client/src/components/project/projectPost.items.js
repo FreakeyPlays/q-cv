@@ -66,9 +66,9 @@ const ProjectPostItems = [
     },
     {
         id: 7,
-        title: "Enviroment",
-        key: "enviroment",
-        classNames: "projectEnviroment column",
+        title: "Environment",
+        key: "environment",
+        classNames: "projectEnvironment column",
         optional: false,
         parse(item){
             return item[this.key];
