@@ -10,7 +10,8 @@ const userSchema = mongoose.Schema({
     skills:[{type:mongoose.Types.ObjectId}],
     career:[{type:mongoose.Types.ObjectId}],
     education:[{type:mongoose.Types.ObjectId}],
-    shortProfile:{type:String, trim:true}
+    shortProfile:{type:String, trim:true},
+    isAdmin:{type:Boolean}
 }, {
     timestamps: true
 })
