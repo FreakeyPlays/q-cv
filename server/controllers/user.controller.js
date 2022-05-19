@@ -31,6 +31,18 @@ const createUser = asyncHandler( async(req,res) =>{
     })
 });
 
+const getUsers = asyncHandler( async(req,res) =>{
+    const user = await User.find();
+
+    res.status(200).json({
+        ok:true,
+        status: 200,
+        message:"Returned all Users",
+        user
+    })
+})
+
 export{
-    createUser
+    createUser,
+    getUsers
 };
