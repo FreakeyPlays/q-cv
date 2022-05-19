@@ -30,3 +30,7 @@ const createUser = asyncHandler( async(req,res) =>{
 
     })
 });
+
+export{
+    createUser
+};
