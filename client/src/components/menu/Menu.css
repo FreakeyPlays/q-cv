@@ -1,5 +1,5 @@
 .menu{
-    width: 252px;
+    width: 256px;
     height: 100%;
     background-color: #3dc0f1;
     position: fixed;
@@ -25,12 +25,12 @@
     align-items: center;
 }
 
-.menu .logo_section .profile_section span{
+.menu .logo_section .profile_section .profile span{
     font-size: 24px;
     color: #FFF;
 }
 
-.menu .logo_section .profile_section a{
+.menu .logo_section .profile_section .profile a{
     color: #FFF;
     text-decoration: none;
 }
@@ -82,7 +82,7 @@
     line-height: 48px;
 }
 
-.activeLink{
+.navLink > .activeLink{
     background-color: #2D8FB3;
     color: #e6e6e6;
     font-weight: 700;
@@ -122,7 +122,15 @@
 }
 
 .content{
-    margin-left: 252px;
+    margin-left: 256px;
+    width: calc(100% - 256px);
+}
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 @media screen and (max-width: 960px) {
@@ -139,6 +147,11 @@
 
     .menu ul li a span{
         width: 128px;
+    }
+
+    .menu .logo_section .profile_section{
+        flex-direction: row;
+        gap: 16px;
     }
 
     .mobileMenu{
@@ -174,6 +187,14 @@
 
     .content{
         margin-left: 64px;
+        width: calc(100% - 64px);
     }
 
+    .menu .logo{
+        width: 150px;
+    }
+
+    .menu .logo_section{
+        margin-bottom: 16px;
+    }
 }
