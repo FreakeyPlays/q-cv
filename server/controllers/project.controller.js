@@ -94,8 +94,36 @@ const getProject = asyncHandler( async (req, res) => {
     })
 })
 
+// @desc Update project by ID
+// @route PUT /api/project/:id
+// @access Private
+const updateProject = asyncHandler( async (req, res) => {
+    const project = await Project.findByIdAndUpdate(req.params.id, req.body, {new: true});
+
+    if(!project) {
+        res
+            .status(400)
+            .json({
+                ok: false,
+                status: 400,
+                message: "No Project found with ID: " + req.params.id
+            });
+        
+        throw new Error("No Project found with ID: " + req.params.id );
+    }
+
+    res
+        .status(200)
+        .json({
+            ok: true,
+            status: 200,
+            message: "Updated Project",
+            project
+        });
+})
+
 // @desc Delete project by ID
-// @route /api/project/:id
+// @route DELETE /api/project/:id
 // @access Private
 const deleteProject = asyncHandler( async (req, res) => {
     const project = await Project.findById(req.params.id);
@@ -127,5 +155,6 @@ export {
     setProject,
     getAllProjects,
     getProject,
+    updateProject,
     deleteProject
 }
