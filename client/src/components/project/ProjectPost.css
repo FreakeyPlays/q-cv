@@ -11,6 +11,10 @@
     box-shadow: rgb(0 0 0 / 15%) 0px 5px 15px 0px;
 }
 
+.projectTitle{
+    color: #333;
+}
+
 .titleSection{
     width: 100%;
     display: grid;
@@ -25,7 +29,7 @@
 .dataContainer{
     display: grid;
     grid-gap: 8px;
-    grid-template-columns: repeat(4, minmax(100px, 1fr));
+    grid-template-columns: repeat(6, minmax(100px, 1fr));
 }
 
 .dataContainer h3{
