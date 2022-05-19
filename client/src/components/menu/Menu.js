@@ -19,18 +19,6 @@ const Menu = ({ children }) => {
         menuToggleClose.onclick = () => {
             menu.classList.toggle("showMenu");
         }
-
-        const links = document.querySelectorAll(".navLink");
-        for(let link of links){
-            link.onclick = () => {
-                for(let l of links){
-                    if(l.classList.contains("activeLink")){
-                        l.classList.toggle("activeLink");
-                    }
-                }
-                link.classList.add("activeLink");
-            }
-        }
     });
 
     return(
@@ -52,7 +40,7 @@ const Menu = ({ children }) => {
                 {MenuItems.map((item, index) => {
                     return(
                         <li className={item.className} key={index}>
-                            <NavLink to={item.url}>
+                            <NavLink to={item.url} className={(navData) => (navData.isActive ? "activeLink" : "")}>
                                 <FontAwesomeIcon icon={item.icon} className="menuOptionIcon" />
                                 <span>{item.title}</span>
                             </NavLink>

@@ -82,7 +82,7 @@
     line-height: 48px;
 }
 
-.activeLink{
+.navLink > .activeLink{
     background-color: #2D8FB3;
     color: #e6e6e6;
     font-weight: 700;

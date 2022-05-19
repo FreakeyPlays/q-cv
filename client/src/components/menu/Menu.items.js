@@ -4,7 +4,7 @@ export const MenuItems = [
     {
         title: "Dashboard",
         url: "/",
-        className: "navLink activeLink",
+        className: "navLink",
         icon: faGrip
     },
     {
