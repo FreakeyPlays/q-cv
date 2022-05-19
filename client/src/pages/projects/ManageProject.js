@@ -70,6 +70,9 @@ const ManageProject = (params) => {
                 tmp["activities"].push(activity.trim());
             }
         }
+        if(id){
+            tmp["_id"] = id;
+        }
 
         let promise = params.function(tmp);
 

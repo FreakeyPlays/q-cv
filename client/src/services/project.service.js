@@ -15,15 +15,15 @@ export const projectDataService = {
         return axios.post(basePath + "/", data);
     },
 
-    edit(data){
-        console.log(data);
-    },
-
     copy(data){
         return axios.post(basePath + "/", data);
     },
 
     delete(id){
         return axios.delete(basePath + `/${id}`);
+    },
+
+    update(data){
+        return axios.put(basePath + `/${data._id}`, data);
     }
 }
