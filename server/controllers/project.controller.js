@@ -80,10 +80,10 @@ const getProject = asyncHandler( async (req, res) => {
         res.status(400).json({
             ok: false,
             status: 400,
-            message: "Could not finy Project by ID"
+            message: "Could not find Project by ID"
         });
 
-        throw new Error("Could not finy Project by ID");
+        throw new Error("Could not find Project by ID");
     }
 
     res.status(200).json({
