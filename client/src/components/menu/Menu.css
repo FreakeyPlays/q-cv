@@ -25,12 +25,12 @@
     align-items: center;
 }
 
-.menu .logo_section .profile_section span{
+.menu .logo_section .profile_section .profile span{
     font-size: 24px;
     color: #FFF;
 }
 
-.menu .logo_section .profile_section a{
+.menu .logo_section .profile_section .profile a{
     color: #FFF;
     text-decoration: none;
 }
@@ -126,6 +126,13 @@
     width: calc(100% - 256px);
 }
 
+.profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 960px) {
     .menu{
         width: 100%;
@@ -140,6 +147,11 @@
 
     .menu ul li a span{
         width: 128px;
+    }
+
+    .menu .logo_section .profile_section{
+        flex-direction: row;
+        gap: 16px;
     }
 
     .mobileMenu{
@@ -178,4 +190,11 @@
         width: calc(100% - 64px);
     }
 
+    .menu .logo{
+        width: 150px;
+    }
+
+    .menu .logo_section{
+        margin-bottom: 16px;
+    }
 }

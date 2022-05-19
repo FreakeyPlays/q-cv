@@ -1,7 +1,7 @@
 import React from "react";
 import "./Menu.css";
 import { MenuItems } from "./Menu.items"
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -28,12 +28,14 @@ const Menu = ({ children }) => {
                 <img className="logo" src="/logo.png" alt="logo"></img>
                 <div className="profile_section">
                     <img className="profile_image" src="/profile.webp" alt="profile"></img>
-                    <span id="userId">
-                        Jhon Doe
-                    </span>
-                    <a href={"/"}>
-                        Log out
-                    </a>
+                    <div className="profile">
+                        <span id="userId">
+                            John Doe
+                        </span>
+                        <Link to={"/"}>
+                            Log out
+                        </Link>
+                    </div>
                 </div>
             </div>
             <ul className="navigation_list">
