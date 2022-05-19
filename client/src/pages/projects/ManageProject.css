@@ -1,0 +1,143 @@
+.manageProjectFormContainer{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.manageProjectFormContainer h1{
+    color: #3dc0f1;
+    text-align: center;
+    margin: 32px 0;
+}
+
+.manageProjectFormContainer form{
+    background-color: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.manageProjectFormContainer button{
+    width: 256px;
+    height: 48px;
+    padding: 8px;
+    border: none;
+    background-color: #3dc0f1;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
+
+.manageProjectItems{
+    display: grid;
+    grid-template-columns: repeat(6, minmax(150px, 1fr));
+    grid-gap: 16px;
+}
+
+.formTitle{
+    grid-column-start: 1;
+    grid-column-end: 7;
+}
+
+.formCustomer,
+.formPosition{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.formIndustry,
+.formStartDate{
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+
+.formCountry,
+.formEndDate{
+    grid-column-start: 5;
+    grid-column-end: 7;
+}
+
+.formActivities,
+.formLocation{
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.formEnvironment,
+.formTeamSize{
+    grid-column-start: 4;
+    grid-column-end: 7;
+}
+
+.formDescription{
+    grid-column-start: 1;
+    grid-column-end: 7;
+}
+
+@media screen and (max-width: 1280px) {
+    .manageProjectItems{
+        grid-template-columns: repeat(4, minmax(150px, 1fr));
+    }
+
+    .formTitle,
+    .formDescription{
+        grid-column-start: 1;
+        grid-column-end: 5;
+    }
+
+    .formCustomer,
+    .formCountry,
+    .formStartDate{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .formIndustry,
+    .formPosition,
+    .formEndDate{
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+
+    .formActivities,
+    .formLocation{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .formEnvironment,
+    .formTeamSize{
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .manageProjectItems{
+        grid-template-columns: 256px;
+    }
+
+    .formTitle,
+    .formDescription,
+    .formTeamSize,
+    .formCustomer,
+    .formCountry,
+    .formStartDate,
+    .formActivities,
+    .formIndustry,
+    .formPosition,
+    .formEndDate,
+    .formLocation,
+    .formEnvironment{
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+}
