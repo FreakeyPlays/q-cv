@@ -1,0 +1,6 @@
+make.exe: Entering directory `g:/STUDIUM/SWB4/Project Quanto/Q-CV'
+cd client && MAKE build-dev
+cd server && MAKE build
+ 
+make.exe: Leaving directory `g:/STUDIUM/SWB4/Project Quanto/Q-CV'
+ 
