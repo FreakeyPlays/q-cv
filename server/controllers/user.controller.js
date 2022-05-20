@@ -31,6 +31,41 @@ const createUser = asyncHandler( async(req,res) =>{
     })
 });
 
+const getUsers = asyncHandler( async(req,res) =>{
+    const user = await User.find();
+
+    res.status(200).json({
+        ok:true,
+        status: 200,
+        message:"Returned all Users",
+        user
+    })
+});
+
+const deleteUser = asyncHandler( async(req,res) =>{
+    const delUser = await User.findById(req.params.id); // Hier stimmt was nicht :(
+
+    if(!delUser){
+        res.status(400).json({
+            ok:false,
+            status:400,
+            message:"No User found with ID: " + req.params.id
+        });
+        throw new Error("No User found with ID: " + req.params.id);
+    }
+
+    await delUser.remove();
+    res.status(200).json({
+        ok:true,
+        status: 200,
+        message: "Succesfull deleted User",
+        delUser
+    });
+});
+
+
 export{
-    createUser
+    createUser,
+    getUsers,
+    deleteUser
 };
