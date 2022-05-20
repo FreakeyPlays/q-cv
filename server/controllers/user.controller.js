@@ -63,9 +63,29 @@ const deleteUser = asyncHandler( async(req,res) =>{
     });
 });
 
+const updateUser = asyncHandler( async(req,res) =>{
+    const updUser = await User.findByIdAndUpdate(req.params.id, req.body, {new:true});
+
+    if(!updUser){
+        res.status(400).json({
+            ok: false,
+            status: 400,
+            message: "No User found for update with ID: " +req.params.id
+        });
+        throw new Error("No User found for update with ID: " +req.params.id);
+    }
+
+    res.status(200).json({
+        ok:true,
+        status: 200,
+        message: "Updated User",
+        updUser
+    });
+})
 
 export{
     createUser,
     getUsers,
-    deleteUser
+    deleteUser,
+    updateUser
 };
