@@ -83,9 +83,30 @@ const updateUser = asyncHandler( async(req,res) =>{
     });
 })
 
+const getUser = asyncHandler( async(req,res) =>{
+    const user = await User.findById(req.params.id);
+
+    if(!user){
+        res.status(400).json({
+            ok:false,
+            status: 400,
+            message:"Could not find User with ID:" +req.params.id
+        });
+        throw new Error("Could not find User with ID:" +req.params.id);
+    }
+
+    res.status(200).json({
+        ok: true,
+        status: 200,
+        message: "Returned User",
+        user
+    });
+})
+
 export{
     createUser,
     getUsers,
     deleteUser,
-    updateUser
+    updateUser,
+    getUser
 };
