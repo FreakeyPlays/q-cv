@@ -43,7 +43,7 @@ const getUsers = asyncHandler( async(req,res) =>{
 });
 
 const deleteUser = asyncHandler( async(req,res) =>{
-    const delUser = await User.findById(req.params.id);
+    const delUser = await User.findById(req.params.id); // Hier stimmt was nicht :(
 
     if(!delUser){
         res.status(400).json({
@@ -54,7 +54,7 @@ const deleteUser = asyncHandler( async(req,res) =>{
         throw new Error("No User found with ID: " + req.params.id);
     }
 
-    await User.remove();
+    await delUser.remove();
     res.status(200).json({
         ok:true,
         status: 200,
