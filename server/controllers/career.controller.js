@@ -35,7 +35,7 @@ const setCareer = asyncHandler( async(req, res) =>{
         status: 200,
         message: "Career entry created",
         _id: entry._id,
-        project: entry
+        career: entry
     });
 });
 
@@ -55,6 +55,31 @@ const getCareerById = asyncHandler( async(req, res) =>{
     res.status(200).json(career);
 });
 
+const updateCareer = asyncHandler( async (req, res) => {
+    const career = await Career.findByIdAndUpdate(req.params.id, req.body, {new: true});
+
+    if(!career) {
+        res
+            .status(400)
+            .json({
+                ok: false,
+                status: 400,
+                message: "No Career found with ID: " + req.params.id
+            });
+        
+        throw new Error("No Project found with ID: " + req.params.id );
+    }
+
+    res
+        .status(200)
+        .json({
+            ok: true,
+            status: 200,
+            message: "Updated Career",
+            career: career
+        });
+})
+
 // @desc delete skills #id
 // @route DELETE /api/skills
 // @access Private
@@ -72,5 +97,6 @@ export {
     setCareer,
     getCareers,
     getCareerById,
+    updateCareer,
     deleteCareer
 };
