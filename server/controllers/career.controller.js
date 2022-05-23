@@ -1,12 +1,49 @@
-import Skill from '../models/career.model.js'; 
+import Career from '../models/career.model.js'; 
 import asyncHandler from 'express-async-handler';
 
+
+const setCareer = asyncHandler( async(req, res) =>{
+    const title = req.body.title;
+    const company = req.body.company;
+    const location = req.body.location;
+    const position = req.body.position;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    const jobDescription = req.body.jobDescription;
+
+    if(!title || !company || !startDate) {
+        res.status(400).json({
+            ok: false,
+            status: 400,
+            message: "A required parameter is missing or incorrect"
+        });
+        throw new Error("A required parameter is missing or incorrect");
+    }
+
+    const entry = await Career.create({
+        title,
+        company,
+        location,
+        position,
+        startDate,
+        endDate,
+        jobDescription
+    })
+
+    res.json({
+        ok: true,
+        status: 200,
+        message: "Career entry created",
+        _id: entry._id,
+        project: entry
+    });
+});
 
 // @desc Set skills
 // @route GET /api/skills
 // @access Private
 const getCareers = asyncHandler( async(req, res) =>{
-    const careerSet = await Skill.find();
+    const careerSet = await Career.find();
     res.status(200).json(careerSet);
 });
 
@@ -14,7 +51,7 @@ const getCareers = asyncHandler( async(req, res) =>{
 // @route GET /api/skills
 // @access Private
 const getCareerById = asyncHandler( async(req, res) =>{
-    const career = await findById(req.params.id);
+    const career = await Career.findById(req.params.id);
     res.status(200).json(career);
 });
 
@@ -22,7 +59,7 @@ const getCareerById = asyncHandler( async(req, res) =>{
 // @route DELETE /api/skills
 // @access Private
 const deleteCareer = asyncHandler(async(req, res) => {
-    const career = await Skill.findById(req.params.id);
+    const career = await Career.findById(req.params.id);
     if(!career) {
         res.status(400);
         throw new Error('Career not found')
@@ -32,6 +69,7 @@ const deleteCareer = asyncHandler(async(req, res) => {
 });
 
 export {
+    setCareer,
     getCareers,
     getCareerById,
     deleteCareer
