@@ -6,6 +6,7 @@ import cors from "cors";
 
 import skillRouter from "./routes/skills.router.js";
 import projectRouter from "./routes/project.router.js";
+import careerRouter from "./routes/career.router.js";
 
 dotenv.config({ path: "./config/dev.env" });
 
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/skills', skillRouter);
 app.use('/api/projects', projectRouter);
+app.use('/api/careers', careerRouter);
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
