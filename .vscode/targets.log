@@ -8,7 +8,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This program built for i386-pc-mingw32
  
 
-# �Make�-Datenbank; erstellt am: Mon May 23 20:44:32 2022
+# �Make�-Datenbank; erstellt am: Tue May 24 16:20:31 2022
 
 # Variablen
 
@@ -35,7 +35,10 @@ CURDIR := c:/Users/Marc/Documents/GitHub/Q-CV
 # Standard
 SHELL := sh.exe
 # Umgebung
-WINDIR = C:\WINDOWS
+WINDI 
+make.exe: *** Keine Regel, um �all� zu erstellen.  Schluss.
+
+R = C:\WINDOWS
 # Umgebung
 VSCODE_NLS_CONFIG = {"locale":"de","availableLanguages":{},"_languagePackSupport":true}
 # Umgebung
@@ -57,11 +60,11 @@ PROGRAMW6432 = C:\Program Files
 # Umgebung
 PROGRAMDATA = C:\ProgramData
 # Umgebung
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-df9c49b8-9764-4c56-a015-16ad7d697d28-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-225805ab-ccd6-4800-9c4d-1d02a49e4b5a-sock
 # Umgebung
 VSCODE_CWD = C:\Users\Marc\AppData\Local\Programs\Microsoft VS Code
 # Umgebung
-PATH = C:\Python310\Scripts\;C:\Python310\;C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Gradle\gradle-7.4.2\bin;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\GnuWin32\bin;C:\Program Files\PuTTY\;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Marc\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\Marc\AppData\Local\Programs\Python\Python39\;C:\Users\Marc\AppData\Local\Microsoft\WindowsApps;C:\MinGW\bin;C:\Users\Marc\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Marc\AppData\Local\GitHubDesktop\bin;C:\Program Files\Azure Data Studio\bin;C:\Users\Marc\AppData\Roaming\npm
+PATH = C:\Python310\Scripts\;C:\Python310\;C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Gradle\gradle-7.4.2\bin;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\GnuWin32\bin;C:\Program Files\PuTTY\;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Marc\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\Marc\AppData\Local\Programs\Python\Python39\;C:\Users\Marc\AppData\Local\Microsoft\WindowsApps;C:\MinGW\bin;C:\Users\Marc\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Marc\AppData\Local\GitHubDesktop\bin;C:\Program Files\Azure Data Studio\bin;C:\Users\Marc\AppData\Roaming\npm
 # Umgebung
 COMMONPROGRAMW6432 = C:\Program Files\Common Files
 # Umgebung
@@ -87,7 +90,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatisch
 %F = $(notdir $%)
 # Umgebung
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_22284_YBOGENGSLXEVZJKA
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6232_SDIVPCJPGYPLLTSX
 # Umgebung
 VSCODE_PIPE_LOGGING = true
 # Umgebung
@@ -197,7 +200,7 @@ PROCESSOR_LEVEL = 6
 # Umgebung
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # Umgebung
-VSCODE_PID = 22284
+VSCODE_PID = 6232
 # Umgebung
 USERDOMAIN_ROAMINGPROFILE = LAPTOP-RQMA3MV8
 # variable set hash-table stats:
@@ -232,20 +235,20 @@ USERDOMAIN_ROAMINGPROFILE = LAPTOP-RQMA3MV8
 # C:\Windows\System32\OpenSSH\: Konnte den Status nicht feststellen.
 # C:\Program Files\PuTTY\ (Schl�ssel (key) C:/Program Files/PuTTY/,  letzte �nderung (mtime) 1652437674): 12 Dateien, keine Unm�glichkeiten.
 # C:\Program Files (x86)\Common Files\Oracle\Java\javapath (Schl�ssel (key) C:/Program Files (x86)/Common Files/Oracle/Java/javapath,  letzte �nderung (mtime) 1632987911): 5 Dateien, keine Unm�glichkeiten.
-# C:\Windows (Schl�ssel (key) C:/Windows,  letzte �nderung (mtime) 1648643713): 129 Dateien, keine Unm�glichkeiten.
-# C:\Users\Marc\AppData\Local\Microsoft\WindowsApps (Schl�ssel (key) C:/Users/Marc/AppData/Local/Microsoft/WindowsApps,  letzte �nderung (mtime) 1652549424): 17 Dateien, keine Unm�glichkeiten.
+# C:\Windows (Schl�ssel (key) C:/Windows,  letzte �nderung (mtime) 1648643713): 130 Dateien, keine Unm�glichkeiten.
+# C:\Users\Marc\AppData\Local\Microsoft\WindowsApps (Schl�ssel (key) C:/Users/Marc/AppData/Local/Microsoft/WindowsApps,  letzte �nderung (mtime) 1653391032): 17 Dateien, keine Unm�glichkeiten.
 # C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\ (Schl�ssel (key) C:/Program Files (x86)/Microsoft SQL Server/150/Tools/Binn/,  letzte �nderung (mtime) 1651154184): 12 Dateien, keine Unm�glichkeiten.
 # C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\ (Schl�ssel (key) C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/,  letzte �nderung (mtime) 1651154184): 6 Dateien, keine Unm�glichkeiten.
-# C:\Program Files\Azure Data Studio\bin (Schl�ssel (key) C:/Program Files/Azure Data Studio/bin,  letzte �nderung (mtime) 1648728989): 4 Dateien, keine Unm�glichkeiten.
+# C:\Program Files\Azure Data Studio\bin: Konnte den Status nicht feststellen.
 # C:\Program Files\Microsoft SQL Server\150\DTS\Binn\ (Schl�ssel (key) C:/Program Files/Microsoft SQL Server/150/DTS/Binn/,  letzte �nderung (mtime) 1651154184): 47 Dateien, keine Unm�glichkeiten.
 # C:\ProgramData\DockerDesktop\version-bin: Konnte den Status nicht feststellen.
 # C:\Program Files\Git\cmd (Schl�ssel (key) C:/Program Files/Git/cmd,  letzte �nderung (mtime) 1652546282): 8 Dateien, keine Unm�glichkeiten.
-# C:\Windows\system32 (Schl�ssel (key) C:/Windows/system32,  letzte �nderung (mtime) 1653290027): 3031 Dateien, keine Unm�glichkeiten.
+# C:\Windows\system32 (Schl�ssel (key) C:/Windows/system32,  letzte �nderung (mtime) 1653396478): 3031 Dateien, keine Unm�glichkeiten.
 # C:\Users\Marc\AppData\Local\Programs\Microsoft VS Code\bin (Schl�ssel (key) C:/Users/Marc/AppData/Local/Programs/Microsoft VS Code/bin,  letzte �nderung (mtime) 1652957772): 4 Dateien, keine Unm�glichkeiten.
 # C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR (Schl�ssel (key) C:/Program Files/NVIDIA Corporation/NVIDIA NvDLISR,  letzte �nderung (mtime) 1595382322): 5 Dateien, keine Unm�glichkeiten.
 # C:\Program Files (x86)\GnuWin32\bin (Schl�ssel (key) C:/Program Files (x86)/GnuWin32/bin,  letzte �nderung (mtime) 1652204886): 5 Dateien, keine Unm�glichkeiten.
 
-# 3881 Dateien, keine Unm�glichkeiten in 35 Verzeichnissen.
+# 3878 Dateien, keine Unm�glichkeiten in 35 Verzeichnissen.
 
 # Implicit Rules
 
@@ -318,10 +321,7 @@ run-dev:
 	
 
 # files hash-table stats:
-# Load=8/1024=1%, Rehash=0, C 
-make.exe: *** Keine Regel, um �all� zu erstellen.  Schluss.
-
-ollisions=0/19=0%
+# Load=8/1024=1%, Rehash=0, Collisions=0/19=0%
 # VPATH-Suchpfade
 
 # Keine �vpath�-Suchpfade.
@@ -333,6 +333,6 @@ ollisions=0/19=0%
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# �Make�-Datenbank; beendet am: Mon May 23 20:44:32 2022
+# �Make�-Datenbank; beendet am: Tue May 24 16:20:31 2022
 
  
