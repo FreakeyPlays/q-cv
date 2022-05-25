@@ -16,7 +16,19 @@ const setSkills = asyncHandler( async(req, res) =>{
     res.status(200).json(entry);
 });
 
-// @desc Set skills
+// @desc Get skills by ID
+// @route GET /api/skills/_id
+// @access Private
+const getSkillById = asyncHandler( async(req, res) =>{
+    const skillSet = await Skill.findById(req.params.id);
+    if(!skillSet) {
+        res.status(400);
+        throw new Error('Skillset not found, check the used id');
+    }
+    res.status(200).json(skillSet);
+});
+
+// @desc Get skills
 // @route GET /api/skills
 // @access Private
 const getSkills = asyncHandler( async(req, res) =>{
@@ -31,7 +43,7 @@ const updateSkill = asyncHandler( async(req, res) =>{
     const skillSet = await Skill.findById(req.params.id);
     if(!skillSet) {
         res.status(400);
-        throw new Error('Skillset not found, check the used id')
+        throw new Error('Skillset not found, check the used id');
     }
     const updatedSkillSet = await Skill.findByIdAndUpdate(req.params.id, req.body, {new: true,});
     res.status(200).json(updatedSkillSet);
@@ -54,5 +66,6 @@ export {
     setSkills,
     getSkills,
     updateSkill,
-    deleteSkill
+    deleteSkill,
+    getSkillById
 };

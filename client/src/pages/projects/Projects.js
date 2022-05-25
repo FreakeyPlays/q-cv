@@ -13,6 +13,8 @@ const Projects = () => {
     const [showAll, setShowAll] = useState(false)
     const [searchFilter, setSearchFilter] = useState("");
 
+    console.log(searchFilter);
+
     useEffect(() => {
         if(showAll){
             projectDataService.getAll()
