@@ -2,6 +2,7 @@ version: "3"
 services:
   react-app:
     image: react-app
+    env_file: ./client/config/dev.env
     build: ./client/
     environment:
       CHOKIDAR_USEPOLLING: "true"
@@ -15,6 +16,7 @@ services:
       - /usr/src/app/node_modules
   api-server:
     image: api-server
+    env_file: ./server/config/dev.env
     build: ./server/
     ports:
       - "5000:5000"
