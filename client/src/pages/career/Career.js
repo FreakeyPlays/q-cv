@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { careerDataService } from '../../services/career.service.js';
 import Titlebar from "../../components/titlebar/Titlebar";
 import './Career.css'
+import { faPen, faTrash} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Career = () => {
 
@@ -42,6 +44,23 @@ const receivedData = useRef(false);
                             -
                             {new Date(item.endDate).toDateString()}
                         </div>
+                        
+
+                        <div className='interaction'>
+                            <div data={index} onClick={ (e) =>  {
+
+                                    }
+                                }>
+                                    <FontAwesomeIcon className='skillIcon' icon={faPen} />
+                                </div>
+                                <div data={index} onClick={ (e) =>  {
+
+                                    }
+                                }>
+                                    <FontAwesomeIcon className='skillIcon' icon={faTrash} />
+                                </div>
+                            </div>
+
 
                     </div>
                     </>
