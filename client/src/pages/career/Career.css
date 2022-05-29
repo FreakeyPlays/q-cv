@@ -1,0 +1,18 @@
+.careerItem{
+    display: flex;
+    padding: 25px;
+    border: 1px solid #E8E8E8;
+    width: 70%;
+    margin: auto;
+    margin-top: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-top-left-radius: .6em;
+    border-top-right-radius: .6em;
+    border-bottom-right-radius: .6em;
+    border-bottom-left-radius: .6em;
+    flex-direction: column;
+}
+
+.itemWrapper{
+    padding-top: 110px;
+}
