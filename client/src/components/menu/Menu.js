@@ -2,6 +2,7 @@ import React from "react";
 import "./Menu.css";
 import { MenuItems } from "./Menu.items"
 import { NavLink, Link } from 'react-router-dom'
+import UserService from "../../services/user.service";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -32,9 +33,9 @@ const Menu = ({ children }) => {
                         <span id="userId">
                             John Doe
                         </span>
-                        <Link to={"/"}>
+                        <button onClick={UserService.doLogout}>
                             Log out
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </div>
