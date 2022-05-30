@@ -23,3 +23,11 @@
     display: flex;
     padding: 5px;
 }
+
+.headWrapper{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #E8E8E8;
+    border-bottom-right-radius: .6em;
+    border-bottom-left-radius: .6em;
+}

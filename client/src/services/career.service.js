@@ -7,15 +7,15 @@ export const careerDataService = {
         return axios.get(basePath);
     },
 
-    newSkill(data){
+    newCareerItem(data){
         return axios.post(basePath, data);
     },
 
-    updateSkill(id, data){
+    updateCareerItem(id, data){
         return axios.put(basePath + `/${id}`, data);
     },
 
-    deleteSkill(id){
+    deleteCareerItem(id){
         return axios.delete(basePath + `/${id}`);
     }
 }
