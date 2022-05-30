@@ -1,22 +1,21 @@
 import axios from "axios";
-import { deleteUser } from "../../../server/controllers/user.controller";
 
-const basePath = "hhtp://localhost:5000/api/user"
+const basePath = "http://localhost:5000/api/user"
 
 export const userDataService = {
-    createUser(){
-        return axios.post(basePath + "/" + data);
+    createUser(data){
+        return axios.post(basePath, data);
     },
     getUsers(){
         return axios.get(basePath);
     },
-    deleteUser(){
+    deleteUser(id){
         return axios.delete(basePath + `/${id}`);
     },
-    updateUser(){
+    updateUser(data){
         return axios.put(basePath + `/${data._id}`, data);
     },
-    getUser(){
+    getUser(id){
         return axios.get(basePath + `/${id}`);
     }
 

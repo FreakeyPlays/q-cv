@@ -1,0 +1,56 @@
+.content{
+    height: 100%;
+}
+
+.main{
+    height: 100%;
+}
+
+.userList{
+    width: 90%;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding-top: 100px;
+}
+
+.userBox{
+    display:flex;
+    flex-direction: row;
+    margin: auto;
+    margin-top: 10px;
+    height: 150px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-top-left-radius: .6em;
+    border-top-right-radius: .6em;
+    border-bottom-right-radius: .6em;
+    border-bottom-left-radius: .6em;
+}
+
+.cardFooter{
+    display: flex;
+    align-self:flex-end;
+    flex-direction:row;
+    margin-bottom: 5px;
+    padding-top: 4px;
+}
+
+.userButton{
+    display: flex;
+    background-color: #3dc0f1;
+    padding: 3px;
+}
+
+.icon{
+    display: flex;
+    margin: 5px;
+    color: #333;
+}
+
+.creatContent{
+    display: flex;
+    margin: auto;
+    margin-left: 300px;
+}

@@ -8,7 +8,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This program built for i386-pc-mingw32
  
 
-# �Make�-Datenbank; erstellt am: Tue May 24 16:20:31 2022
+# �Make�-Datenbank; erstellt am: Mon May 30 20:29:31 2022
 
 # Variablen
 
@@ -60,7 +60,7 @@ PROGRAMW6432 = C:\Program Files
 # Umgebung
 PROGRAMDATA = C:\ProgramData
 # Umgebung
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-225805ab-ccd6-4800-9c4d-1d02a49e4b5a-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-55ceb2df-82ee-4482-8493-aa9ac864cc38-sock
 # Umgebung
 VSCODE_CWD = C:\Users\Marc\AppData\Local\Programs\Microsoft VS Code
 # Umgebung
@@ -90,7 +90,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatisch
 %F = $(notdir $%)
 # Umgebung
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6232_SDIVPCJPGYPLLTSX
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_20852_OCKSQTRRTQHQMDFZ
 # Umgebung
 VSCODE_PIPE_LOGGING = true
 # Umgebung
@@ -200,7 +200,7 @@ PROCESSOR_LEVEL = 6
 # Umgebung
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # Umgebung
-VSCODE_PID = 6232
+VSCODE_PID = 20852
 # Umgebung
 USERDOMAIN_ROAMINGPROFILE = LAPTOP-RQMA3MV8
 # variable set hash-table stats:
@@ -236,14 +236,14 @@ USERDOMAIN_ROAMINGPROFILE = LAPTOP-RQMA3MV8
 # C:\Program Files\PuTTY\ (Schl�ssel (key) C:/Program Files/PuTTY/,  letzte �nderung (mtime) 1652437674): 12 Dateien, keine Unm�glichkeiten.
 # C:\Program Files (x86)\Common Files\Oracle\Java\javapath (Schl�ssel (key) C:/Program Files (x86)/Common Files/Oracle/Java/javapath,  letzte �nderung (mtime) 1632987911): 5 Dateien, keine Unm�glichkeiten.
 # C:\Windows (Schl�ssel (key) C:/Windows,  letzte �nderung (mtime) 1648643713): 130 Dateien, keine Unm�glichkeiten.
-# C:\Users\Marc\AppData\Local\Microsoft\WindowsApps (Schl�ssel (key) C:/Users/Marc/AppData/Local/Microsoft/WindowsApps,  letzte �nderung (mtime) 1653391032): 17 Dateien, keine Unm�glichkeiten.
+# C:\Users\Marc\AppData\Local\Microsoft\WindowsApps (Schl�ssel (key) C:/Users/Marc/AppData/Local/Microsoft/WindowsApps,  letzte �nderung (mtime) 1653727042): 17 Dateien, keine Unm�glichkeiten.
 # C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\ (Schl�ssel (key) C:/Program Files (x86)/Microsoft SQL Server/150/Tools/Binn/,  letzte �nderung (mtime) 1651154184): 12 Dateien, keine Unm�glichkeiten.
 # C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\ (Schl�ssel (key) C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/,  letzte �nderung (mtime) 1651154184): 6 Dateien, keine Unm�glichkeiten.
 # C:\Program Files\Azure Data Studio\bin: Konnte den Status nicht feststellen.
 # C:\Program Files\Microsoft SQL Server\150\DTS\Binn\ (Schl�ssel (key) C:/Program Files/Microsoft SQL Server/150/DTS/Binn/,  letzte �nderung (mtime) 1651154184): 47 Dateien, keine Unm�glichkeiten.
 # C:\ProgramData\DockerDesktop\version-bin: Konnte den Status nicht feststellen.
 # C:\Program Files\Git\cmd (Schl�ssel (key) C:/Program Files/Git/cmd,  letzte �nderung (mtime) 1652546282): 8 Dateien, keine Unm�glichkeiten.
-# C:\Windows\system32 (Schl�ssel (key) C:/Windows/system32,  letzte �nderung (mtime) 1653396478): 3031 Dateien, keine Unm�glichkeiten.
+# C:\Windows\system32 (Schl�ssel (key) C:/Windows/system32,  letzte �nderung (mtime) 1653912324): 3031 Dateien, keine Unm�glichkeiten.
 # C:\Users\Marc\AppData\Local\Programs\Microsoft VS Code\bin (Schl�ssel (key) C:/Users/Marc/AppData/Local/Programs/Microsoft VS Code/bin,  letzte �nderung (mtime) 1652957772): 4 Dateien, keine Unm�glichkeiten.
 # C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR (Schl�ssel (key) C:/Program Files/NVIDIA Corporation/NVIDIA NvDLISR,  letzte �nderung (mtime) 1595382322): 5 Dateien, keine Unm�glichkeiten.
 # C:\Program Files (x86)\GnuWin32\bin (Schl�ssel (key) C:/Program Files (x86)/GnuWin32/bin,  letzte �nderung (mtime) 1652204886): 5 Dateien, keine Unm�glichkeiten.
@@ -333,6 +333,6 @@ run-dev:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# �Make�-Datenbank; beendet am: Tue May 24 16:20:31 2022
+# �Make�-Datenbank; beendet am: Mon May 30 20:29:31 2022
 
  
