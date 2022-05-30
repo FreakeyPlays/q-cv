@@ -14,6 +14,7 @@ const Career = () => {
 const [careerSet, setCareerSet] = useState([]);
 const receivedData = useRef(false);
 const [updatePopup, setUpdatePopup] = useState(false);
+const [newItemPopup, setNewItemPopup] = useState(false);
 const [selectForUpdate, setSelectForUpdate] = useState('');
 const [deleteItemPopup, setDeleteItemPopup] = useState(false)
 const itemToDelete = useRef(-1);
@@ -69,6 +70,21 @@ const [updatedCareerItem, setUpdateItem] = useState({
         .catch(e => console.error(e.message));
     }
 
+/**
+ * Makes the POST API-call
+ * @param {*} e 
+ */
+    const postItem = (e)=>{
+        e.preventDefault();
+        let data = {};
+        for(let i of e.target){
+            data[i.name] = i.value;
+        }
+        careerDataService.newCareerItem(data)
+        .then(window.location.reload(false))
+        .catch(e => console.error(e.message));
+    };
+
     const onClickUpdate = (e) => {
         let index = e.currentTarget.getAttribute("data");
         let uData ={
@@ -105,7 +121,8 @@ const [updatedCareerItem, setUpdateItem] = useState({
         <Titlebar
         searchbar={false} 
         showAll={false}
-        path="/career/create" 
+        path="" 
+        function={setNewItemPopup}
         />
 
         <div className='itemWrapper'>
@@ -157,11 +174,32 @@ const [updatedCareerItem, setUpdateItem] = useState({
                         type='submit'
                         color='secondary'
                         variant='contained'>
-                            change
+                            Change
                     </Button>
                 </MuiThemeProvider>
             </form>
             
+        </Popup>
+
+        <Popup trigger={newItemPopup} setTrigger={setNewItemPopup}>
+            <h3>Create new entry</h3>
+            <form className='updateContent' noValidate onSubmit={postItem}>
+                {careerInput.map((input) => (
+                    <FormInput
+                        key={input.id}
+                        {...input}
+                        value={updatedCareerItem[input.name]}
+                        onChange={ (e) => setUpdateItem({...updatedCareerItem, [e.target.name]: e.target.value})} />
+                ))}
+                <MuiThemeProvider theme={theme}>
+                    <Button 
+                        type='submit'
+                        color='secondary'
+                        variant='contained'>
+                            Submit
+                    </Button>
+                </MuiThemeProvider>
+            </form>
         </Popup>
 
         <Popup trigger={deleteItemPopup} setTrigger={setDeleteItemPopup}>
