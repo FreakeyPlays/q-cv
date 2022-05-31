@@ -12,59 +12,59 @@ import FormInput from '../../components/formInput/FormInput';
 
 const Career = () => {
 
-const [careerSet, setCareerSet] = useState([]);
-const receivedData = useRef(false);
+    const [careerSet, setCareerSet] = useState([]);
+    const receivedData = useRef(false);
 
-const [updatePopup, setUpdatePopup] = useState(false);
-const [newItemPopup, setNewItemPopup] = useState(false);
-const [deleteItemPopup, setDeleteItemPopup] = useState(false);
+    const [updatePopup, setUpdatePopup] = useState(false);
+    const [newItemPopup, setNewItemPopup] = useState(false);
+    const [deleteItemPopup, setDeleteItemPopup] = useState(false);
 
-//Holds the object-id
-const [_idOfItemToDelete, set_idOfItemToDelete] = useState('');
-const [selectForUpdate, setSelectForUpdate] = useState('');
+    //Holds the object-id
+    const [_idOfItemToDelete, set_idOfItemToDelete] = useState('');
+    const [selectForUpdate, setSelectForUpdate] = useState('');
 
-//Holds the index of the Item in the careerSetArray
-const itemToDelete = useRef(-1);
+    //Holds the index of the Item in the careerSetArray
+    const itemToDelete = useRef(-1);
 
-const [updatedCareerItem, setUpdateItem] = useState({
-    title:"",
-    company: "",
-    location: "",
-    position: "",
-    startDate: "",
-    endDate: "",
-    jobDescription: ""
-});
+    const [updatedCareerItem, setUpdateItem] = useState({
+        title:"",
+        company: "",
+        location: "",
+        position: "",
+        startDate: "",
+        endDate: "",
+        jobDescription: ""
+    });
 
-useEffect( ()=>{
-    if(receivedData.current === false){
-        careerDataService.getAll()
-            .then(response => setCareerSet(response.data))
-            .catch( e => console.error(e.message));
-        receivedData.current = true;
+    useEffect( ()=>{
+        if(receivedData.current === false){
+            careerDataService.getAll()
+                .then(response => setCareerSet(response.data))
+                .catch( e => console.error(e.message));
+            receivedData.current = true;
         }
-});
+    });
 
-const theme = createTheme({
-    palette: {
-        secondary: {
-            main: '#333'
+    const theme = createTheme({
+        palette: {
+            secondary: {
+                main: '#333'
+            }
         }
-    }
-});
+    });
 
-const themeErrorBtn = createTheme({
-    palette: {
-        secondary: {
-            main: '#FF0000'
+    const themeErrorBtn = createTheme({
+        palette: {
+            secondary: {
+                main: '#FF0000'
+            }
         }
-    }
-});
+    });
 
-/**
- * Makes the update API-call
- * @param {*} e 
- */
+    /**
+    * Makes the update API-call
+    * @param {*} e 
+    */
     const updateItem = (e)=>{
         e.preventDefault();
         let data = {};
@@ -76,10 +76,10 @@ const themeErrorBtn = createTheme({
         .catch(e => console.error(e.message));
     }
 
-/**
- * Makes the POST API-call
- * @param {*} e 
- */
+    /**
+    * Makes the POST API-call
+    * @param {*} e 
+    */
     const postItem = (e)=>{
         e.preventDefault();
         let data = {};
