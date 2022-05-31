@@ -9,16 +9,23 @@ import { Button } from '@material-ui/core';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import { careerInput } from './career.input.js';
 import FormInput from '../../components/formInput/FormInput';
+
 const Career = () => {
 
 const [careerSet, setCareerSet] = useState([]);
 const receivedData = useRef(false);
+
 const [updatePopup, setUpdatePopup] = useState(false);
 const [newItemPopup, setNewItemPopup] = useState(false);
-const [selectForUpdate, setSelectForUpdate] = useState('');
-const [deleteItemPopup, setDeleteItemPopup] = useState(false)
-const itemToDelete = useRef(-1);
+const [deleteItemPopup, setDeleteItemPopup] = useState(false);
+
+//Holds the object-id
 const [_idOfItemToDelete, set_idOfItemToDelete] = useState('');
+const [selectForUpdate, setSelectForUpdate] = useState('');
+
+//Holds the index of the Item in the careerSetArray
+const itemToDelete = useRef(-1);
+
 const [updatedCareerItem, setUpdateItem] = useState({
     title:"",
     company: "",
@@ -29,31 +36,30 @@ const [updatedCareerItem, setUpdateItem] = useState({
     jobDescription: ""
 });
 
+useEffect( ()=>{
+    if(receivedData.current === false){
+        careerDataService.getAll()
+            .then(response => setCareerSet(response.data))
+            .catch( e => console.error(e.message));
+        receivedData.current = true;
+        }
+});
 
-    useEffect( ()=>{
-        if(receivedData.current === false){
-            careerDataService.getAll()
-                .then(response => setCareerSet(response.data))
-                .catch( e => console.error(e.message));
-            receivedData.current = true;
-            }
-    });
+const theme = createTheme({
+    palette: {
+        secondary: {
+            main: '#333'
+        }
+    }
+});
 
-    const theme = createTheme({
-        palette: {
-            secondary: {
-                main: '#333'
-            }
-          },
-    });
-
-    const themeErr = createTheme({
-        palette: {
-            secondary: {
-                main: '#FF0000'
-            }
-          },
-    });
+const themeErrorBtn = createTheme({
+    palette: {
+        secondary: {
+            main: '#FF0000'
+        }
+    }
+});
 
 /**
  * Makes the update API-call
@@ -85,7 +91,7 @@ const [updatedCareerItem, setUpdateItem] = useState({
         .catch(e => console.error(e.message));
     };
 
-    const onClickUpdate = (e) => {
+    const openUpdatePopup = (e) => {
         let index = e.currentTarget.getAttribute("data");
         let uData ={
             title: careerSet[index].title,
@@ -133,7 +139,7 @@ const [updatedCareerItem, setUpdateItem] = useState({
                         <div className='headWrapper'>
                             <h3>{item.title}</h3>
                             <div className='interaction'>
-                            <div data={index} onClick={ onClickUpdate }>
+                            <div data={index} onClick={ openUpdatePopup }>
                                     <FontAwesomeIcon className='skillIcon' icon={faPen} />
                                 </div>
                                 <div data={index} onClick={ openDeletePopup }>
@@ -204,7 +210,7 @@ const [updatedCareerItem, setUpdateItem] = useState({
 
         <Popup trigger={deleteItemPopup} setTrigger={setDeleteItemPopup}>
             <h3>{"Delete this Item?"}</h3>
-                <MuiThemeProvider theme={themeErr}>
+                <MuiThemeProvider theme={themeErrorBtn}>
                         <Button 
                         onClick={deleteCareerItem}
                         variant="outlined" 
