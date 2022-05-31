@@ -65,7 +65,7 @@ const updateCareer = asyncHandler( async (req, res) => {
 
     if(!career) {
         res
-            .status(400)
+            .status(400)//404
             .json({
                 ok: false,
                 status: 400,
@@ -91,7 +91,7 @@ const updateCareer = asyncHandler( async (req, res) => {
 const deleteCareer = asyncHandler(async(req, res) => {
     const career = await Career.findById(req.params.id);
     if(!career) {
-        res.status(400);
+        res.status(400);//404
         throw new Error('Career not found')
     }
     await career.remove();
