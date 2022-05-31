@@ -1,7 +1,9 @@
 import Career from '../models/career.model.js'; 
 import asyncHandler from 'express-async-handler';
 
-
+// @desc set careerItem
+// @route SET /api/careers
+// @access Private
 const setCareer = asyncHandler( async(req, res) =>{
     const title = req.body.title;
     const company = req.body.company;
@@ -39,22 +41,25 @@ const setCareer = asyncHandler( async(req, res) =>{
     });
 });
 
-// @desc Set skills
-// @route GET /api/skills
+// @desc get careerItem
+// @route GET /api/careers
 // @access Private
 const getCareers = asyncHandler( async(req, res) =>{
     const careerSet = await Career.find();
     res.status(200).json(careerSet);
 });
 
-// @desc Set skills
-// @route GET /api/skills
+// @desc get careerItem
+// @route GET /api/careers/:id
 // @access Private
 const getCareerById = asyncHandler( async(req, res) =>{
     const career = await Career.findById(req.params.id);
     res.status(200).json(career);
 });
 
+// @desc update careerItem
+// @route PUT /api/careers/:id
+// @access Private
 const updateCareer = asyncHandler( async (req, res) => {
     const career = await Career.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
@@ -80,8 +85,8 @@ const updateCareer = asyncHandler( async (req, res) => {
         });
 })
 
-// @desc delete skills #id
-// @route DELETE /api/skills
+// @desc delete careerItem
+// @route DELETE /api/careers/:id
 // @access Private
 const deleteCareer = asyncHandler(async(req, res) => {
     const career = await Career.findById(req.params.id);

@@ -21,7 +21,7 @@ export const careerInput = [
         type: "text",
         placeholder: "Location",
         label: "Location",
-        required: true
+        required: false
     },
     {
         id: 4,
@@ -29,7 +29,7 @@ export const careerInput = [
         type: "text",
         placeholder: "Position",
         label: "Position",
-        required: true
+        required: false
     },
     {
         id: 6,
@@ -50,7 +50,7 @@ export const careerInput = [
         label: "End Date",
         errorMessage: "Please provide a valid Date! (DD-MM-YYY)",
         pattern: "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$",
-        required: true,
+        required: false,
         customClass: "formEndDate"
     },
     {
@@ -61,7 +61,7 @@ export const careerInput = [
         label: "Description",
         errorMessage: "Please provide a valid Description!",
         pattern: "^.{1,}$",
-        required: true,
+        required: false,
         customClass: "formDescription"
     }
 
