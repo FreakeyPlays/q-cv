@@ -57,7 +57,7 @@ const ITSkills = () => {
     useEffect( ()=>{
         if(receivedData.current === false){
             skillDataService.getAll()
-                .then(response => setSkill(response.data))
+                .then(response => setSkill(response.data.response))
                 .catch( e => console.error(e.message));
             receivedData.current = true;
         }

@@ -16,12 +16,12 @@ const Projects = () => {
     useEffect(() => {
         if(showAll){
             projectDataService.getAll()
-            .then(response => setProjects(response.data.projects) )
+            .then(response => setProjects(response.data.response) )
             .catch(e => console.error(e.message));
         }else{
             projectDataService.getAll()
             .then(({data}) => {
-                setProjects(data.projects.filter( ({assignedUser}) => {
+                setProjects(data.response.filter( ({assignedUser}) => {
                     if(assignedUser === currentUserID){
                         return true;
                     }
