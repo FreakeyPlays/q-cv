@@ -5,7 +5,8 @@ const educationSchema = mongoose.Schema({
     degree: { type: String, required: [true, "Please provide a Degree"], trim: true },
     fieldOfStudy: { type: String, required: [true, "Please provide a Field of Study"], trim: true },
     startDate: { type: Date, required: [true, "Please provide a Start Date"] },
-    endDate: { type: Date, required: [true, "Please provide a End Date"] }
+    endDate: { type: Date, required: [true, "Please provide a End Date"] },
+    assignedUser: { type: mongoose.Types.ObjectId, ref:"User", require: [true, "Please provide a assigned User"] }
 }, {
     timestamps: true
 });
