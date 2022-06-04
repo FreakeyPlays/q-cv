@@ -1,4 +1,4 @@
-export const userInput = [
+const userInput = [
     {
         id: 1,
         name: "firstName",
@@ -23,12 +23,18 @@ export const userInput = [
         label: "E-Mail",
         required: true
     },
-    {
-        id: 4,
-        name: "password",
-        type: "text",
-        placeholder: "Passwort",
-        label: "Passwort",
-        required: true
-    }
+    
 ];
+
+const pwdInput = {
+    id: 4,
+    name: "password",
+    type: "text",
+    placeholder: "neues Passwort",
+    required: true
+}
+
+export{
+    userInput,
+    pwdInput
+}

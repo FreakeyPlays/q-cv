@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 //userId = ObjectID!
 const userSchema = mongoose.Schema({
-    firstName:{type:String, trim:true},
-    lastName:{type:String, trim:true},
-    eMail:{type:String, trim:true},
-    password:{type:String},
+    firstName:{type:String, required:[true, "Please provide a Firstname"], trim:true},
+    lastName:{type:String, required:[true, "Please provide a Lastname"], trim:true},
+    eMail:{type:String,required:[true, "Please provide a E-Mail"], trim:true},
+    password:{type:String, required:[true, "Please provide a Password"]},
     sprachen:[{type:String}],
     kurzprofil:{type:String},
     beratungsschwerpunkte:[{type:String}],
