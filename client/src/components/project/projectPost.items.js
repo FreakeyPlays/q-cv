@@ -1,4 +1,4 @@
-import { faAslInterpreting } from "@fortawesome/free-solid-svg-icons";
+//import { faAslInterpreting } from "@fortawesome/free-solid-svg-icons";
 
 const ProjectPostItems = [
     {
