@@ -1,6 +1,0 @@
-make.exe --dry-run --always-make --keep-going --print-directory
-make.exe: Entering directory `c:/Users/Marc/Documents/GitHub/Q-CV'
-cd client && MAKE build-dev
-cd server && MAKE build
-make.exe: Leaving directory `c:/Users/Marc/Documents/GitHub/Q-CV'
- 

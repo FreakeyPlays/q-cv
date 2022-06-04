@@ -8,7 +8,7 @@ import skillRouter from "./routes/skills.router.js";
 import projectRouter from "./routes/project.router.js";
 import userRouter from "./routes/user.router.js";
 
-dotenv.config({ path: "./config/dev.env" });
+dotenv.config();
 
 const app = express();
 
