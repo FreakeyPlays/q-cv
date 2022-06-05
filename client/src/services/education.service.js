@@ -6,7 +6,7 @@ const basePath = "http://" + ADDRESS + ":" + PORT + "/api/education"
 
 export const educationDataService = {
     getAll(data){
-        return axios.get(basePath, data);
+        return axios.get(basePath, { params: data });
     },
 
     get(id){
