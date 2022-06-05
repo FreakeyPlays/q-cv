@@ -1,0 +1,10 @@
+.educationContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 128px;
+    padding-bottom: 32px;
+}
