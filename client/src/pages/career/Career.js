@@ -122,7 +122,11 @@ const Career = () => {
     }
 
     const formatDate = (date) =>{
-        return (date.getDay() + "." + date.getMonth() + "." + date.getFullYear() + " ");
+        let day = date.getDate();
+        let month = date.getMonth();
+        let year = date.getFullYear();
+
+        return ((day > 9? day : ("0"+day))+ "." + (month > 9? month : ("0"+month)) + "." + year + " ");
     }
 
     return(
