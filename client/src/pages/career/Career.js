@@ -121,6 +121,10 @@ const Career = () => {
         set_idOfItemToDelete(careerSet[e.currentTarget.getAttribute("data")]._id)
     }
 
+    const formatDate = (date) =>{
+        return (date.getDay() + "." + date.getMonth() + "." + date.getFullYear() + " ");
+    }
+
     return(
         <>
 
@@ -155,9 +159,9 @@ const Career = () => {
                         <div>As: {item.position}</div>
                         <div>What: {item.jobDescription}</div>
                         <div>
-                            When: {new Date(item.startDate).toDateString()}
-                            -
-                            {new Date(item.endDate).toDateString()}
+                            When: {formatDate(new Date(item.startDate))}
+                            {" - "}
+                            {formatDate(new Date(item.endDate))}
                         </div>
                     </div>
                     )
