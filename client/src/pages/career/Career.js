@@ -98,8 +98,8 @@ const Career = () => {
             company: careerSet[index].company,
             location: careerSet[index].location,
             position: careerSet[index].position,
-            startDate: careerSet[index].startDate,
-            endDate: careerSet[index].endDate,
+            startDate: formatDate(new Date(careerSet[index].startDate), "-"),
+            endDate: formatDate(new Date(careerSet[index].endDate), "-"),
             jobDescription: careerSet[index].jobDescription
         }
         setUpdatePopup(true);
@@ -121,12 +121,18 @@ const Career = () => {
         set_idOfItemToDelete(careerSet[e.currentTarget.getAttribute("data")]._id)
     }
 
-    const formatDate = (date) =>{
+    /**
+     * 
+     * @param {Date-Object} date 
+     * @param {Divider-String} style 
+     * @returns a formated date string
+     */
+    const formatDate = (date, div) =>{
         let day = date.getDate();
         let month = date.getMonth();
         let year = date.getFullYear();
-
-        return ((day > 9? day : ("0"+day))+ "." + (month > 9? month : ("0"+month)) + "." + year + " ");
+        let divider = div===undefined?"." : div;
+        return ((day > 9? day : ("0"+day))+ divider + (month > 9? month : ("0"+month)) + divider + year + " ");
     }
 
     return(
