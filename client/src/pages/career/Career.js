@@ -98,8 +98,8 @@ const Career = () => {
             company: careerSet[index].company,
             location: careerSet[index].location,
             position: careerSet[index].position,
-            startDate: formatDate(new Date(careerSet[index].startDate), "-"),
-            endDate: formatDate(new Date(careerSet[index].endDate), "-"),
+            startDate: new Date(careerSet[index].startDate).toISOString().split('T')[0],
+            endDate: new Date(careerSet[index].endDate).toISOString().split('T')[0],
             jobDescription: careerSet[index].jobDescription
         }
         setUpdatePopup(true);
@@ -122,7 +122,6 @@ const Career = () => {
     }
 
     /**
-     * 
      * @param {Date-Object} date 
      * @param {Divider-String} style 
      * @returns a formated date string
@@ -131,13 +130,12 @@ const Career = () => {
         let day = date.getDate();
         let month = date.getMonth();
         let year = date.getFullYear();
-        let divider = div===undefined?"." : div;
+        let divider = div === undefined ? "." : div;
         return ((day > 9? day : ("0"+day))+ divider + (month > 9? month : ("0"+month)) + divider + year + " ");
     }
 
     return(
         <>
-
         <Titlebar
         searchbar={false} 
         showAll={false}
