@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import FormInput from "../../components/formInput/FormInput";
 import { userDataService } from "../../services/user.services";
 import { userInput } from "./UserInput.js";
@@ -8,7 +8,7 @@ import "./UserData.css";
 const UserData = () => {
     //Use State Variables
     const [currentID, setCurID] = useState("");
-    //const [activeUser, activateUser] = useState(false); //State variabel for if an user is loaded
+    const activeUser = useRef(false);
     const [user, setUser] = useState({
         firstName:"",
         lasName: "",
@@ -21,8 +21,12 @@ const UserData = () => {
     });
 
     useEffect(() =>{
+        if(!activeUser.current){
             retrieveUser();
+            activeUser.current = true;
+        } 
     })
+
 
     const retrieveUser = () =>{
         setCurID("6293a91218be7b568841d1dd"); //Test ID
