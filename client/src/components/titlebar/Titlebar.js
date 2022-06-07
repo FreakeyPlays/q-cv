@@ -37,7 +37,7 @@ const Titlebar = (props) => {
                     ): (
                         <></>
                     )}
-                    <CreateButton link={props.path} function={props.function?props.function:undefined}/>
+                    <CreateButton link={props.path} function={props.function ? props.function : undefined} />
                 </div>
             </div>
             {props.searchbar ? (

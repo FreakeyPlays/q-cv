@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const basePath = 'http://localhost:5000/api/skills';
+const ADDRESS = process.env.REACT_APP_URL;
+const PORT = process.env.REACT_APP_API_PORT;
+const basePath = "http://" + ADDRESS + ":" + PORT + "/api/skills";
 
 export const skillDataService = {
     getAll(){
