@@ -1,13 +1,13 @@
 import Popup from "../Popup";
 import { MuiThemeProvider, Button } from "@material-ui/core";
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from "@material-ui/core/styles";
 
 const theme = createTheme({
     palette: {
         secondary: {
-            main: '#333'
+            main: "#FF0000"
         }
-      },
+    }
 });
 
 const DeletePopup = (props) => {
