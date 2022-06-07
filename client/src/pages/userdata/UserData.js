@@ -21,7 +21,7 @@ const UserData = () => {
     });
 
     useEffect(() =>{
-        if(!activeUser.current){
+        if(activeUser.current === false){
             retrieveUser();
             activeUser.current = true;
         } 
