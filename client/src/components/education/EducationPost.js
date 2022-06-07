@@ -4,14 +4,26 @@ import EducationPostItems from "./educationPost.items";
 
 import "./EducationPost.css";
 
-const EducationPost = ({ item }) => {
+const EducationPost = ({ item, setIdFunc, setDeleteFunc, setUpdateFunc }) => {
     return(
         <div className="educationPost">
             <div className="titleSection">
                 <h2 className="educationTitle">{item.title}</h2>
                 <div className="educationControls">
-                    <FontAwesomeIcon icon={faPen} />
-                    <FontAwesomeIcon icon={faTrash} onClick={() => {}} />
+                    <FontAwesomeIcon 
+                        icon={faPen} 
+                        onClick={() => {
+                            setIdFunc(item._id);
+                            setUpdateFunc(true);
+                        }}
+                    />
+                    <FontAwesomeIcon 
+                        icon={faTrash} 
+                        onClick={() => {
+                            setIdFunc(item._id);
+                            setDeleteFunc(true);
+                        }} 
+                    />
                 </div>
             </div>
             <div className="dataContainer">
