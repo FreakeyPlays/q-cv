@@ -50,7 +50,7 @@ export const careerInput = [
         label: "End Date",
         errorMessage: "Please provide a valid Date! (DD-MM-YYY)",
         pattern: "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$",
-        required: false,
+        required: true,
         customClass: "formEndDate"
     },
     {
