@@ -1,4 +1,4 @@
-const userInput = [
+const  userInput = [
     {
         id: 1,
         name: "firstName",
@@ -23,18 +23,50 @@ const userInput = [
         label: "E-Mail",
         required: true
     },
-    
+    {
+        id: 4,
+        name: "password",
+        type: "text",
+        placeholder:"Passwort",
+        label: "Passwort",
+        required: true
+    },
+    {
+        id: 5,
+        name: "sprachen",
+        type: "text",
+        placeholder: "Deutsch,Englisch,...",
+        label: "Sprachen",
+        errorMessage: "Please use the right Formatation! (..,..)",
+        required: false
+    },
+    {
+        id: 6,
+        name: "kurzprofil",
+        type: "text",
+        label: "Kurzprofil",
+        required: false,
+    },
+    {
+        id: 7,
+        name: "beratungsschwerpunkte",
+        type: "text",
+        placeholder: "Managment,Leiter,...",
+        label: "Beratungsschwerpunkte",
+        errorMessage: "Please use the right Formatation! (..,..)", 
+        required: false
+    },
+    {
+        id: 8,
+        name: "projektrollen",
+        type: "text",
+        placeholder: "Scrum Master,Product Owner,...",
+        label: "Projektrollen",
+        errorMessage: "Please use the right Formatation! (..,..)",
+        required: false,
+    },
 ];
 
-const pwdInput = {
-    id: 4,
-    name: "password",
-    type: "text",
-    placeholder: "neues Passwort",
-    required: true
-}
-
 export{
-    userInput,
-    pwdInput
+    userInput
 }
