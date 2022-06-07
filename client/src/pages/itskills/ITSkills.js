@@ -87,7 +87,7 @@ const ITSkills = () => {
                                             skillDataService.deleteSkill(id).then(res => {
                                                 window.location.reload(false);
                                                 receivedData.current = false;
-                                            })
+                                            }).catch( e => console.error(e.message) )
                                         }
                                     }>
                                     <FontAwesomeIcon className='skillIcon' icon={faTrash} />
