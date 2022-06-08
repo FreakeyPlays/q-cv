@@ -1,5 +1,14 @@
 version: "3"
 services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:18.0.0
+    env_file: ./config/dev.env
+    ports:
+      - "8080:8080"
+    command: 
+      - start-dev
+    networks:
+      - mern-app
   react-app:
     image: react-app
     build: ./client/
