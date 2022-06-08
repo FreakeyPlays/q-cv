@@ -4,7 +4,17 @@ import EducationPostItems from "./educationPost.items";
 
 import "./EducationPost.css";
 
-const EducationPost = ({ item, setIdFunc, setDeleteFunc, setUpdateFunc }) => {
+const EducationPost = ({ item, setIdFunc, setDeleteFunc, setUpdateFunc, setItemFunc }) => {
+    
+    function parseAndSetItem(item){
+        let itemCopy = item;
+
+        itemCopy["startDate"] = itemCopy["startDate"].split("T")[0];
+        itemCopy["endDate"] = itemCopy["endDate"].split("T")[0];
+
+        setItemFunc(itemCopy);
+    }
+    
     return(
         <div className="educationPost">
             <div className="titleSection">
@@ -14,6 +24,7 @@ const EducationPost = ({ item, setIdFunc, setDeleteFunc, setUpdateFunc }) => {
                         icon={faPen} 
                         onClick={() => {
                             setIdFunc(item._id);
+                            parseAndSetItem(item);
                             setUpdateFunc(true);
                         }}
                     />
