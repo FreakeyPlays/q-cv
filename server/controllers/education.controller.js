@@ -36,7 +36,7 @@ const setEducation = asyncHandler( async (req, res) => {
 // @route GET /api/education/
 // @access Private
 const getAllEducations = asyncHandler( async (req, res) => {
-    const owner = req.body.owner;
+    const owner = req.query.owner;
 
     if(!owner){
         apiResponse(res, false, 400, "Missing owner ID");

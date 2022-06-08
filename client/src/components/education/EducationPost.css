@@ -1,0 +1,99 @@
+.educationPost{
+    width: 80%;
+    max-width: 960px;
+    border: solid 1px rgba(51, 51, 51, 30%);
+    background-color: #f1f3f4;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 5px 15px 0px;
+}
+
+.educationTitle{
+    color: #333;
+}
+
+.titleSection{
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    grid-column-gap: 16px;
+    padding-bottom: 8px;
+    border-bottom: solid 1px #333;
+    align-items: center;
+}
+
+.dataContainer{
+    display: grid;
+    grid-gap: 8px;
+    grid-template-columns: repeat(6, minmax(100px, 1fr));
+}
+
+.dataContainer h3{
+    color: #3dc0f1;
+    border-bottom: solid 1px rgba(51, 51, 51, 30%);
+}
+
+.column{
+    grid-column: span 2;
+}
+
+.fullColumn{
+    grid-column: span 6;
+}
+
+.educationControls{
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 8px;
+}
+
+.educationControls svg{
+    color: #333;
+}
+
+.educationControls svg:hover{
+    color: #3dc0f1;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1280px) {
+    .dataContainer{
+        grid-template-columns: repeat(4, minmax(100px, 1fr));
+    }
+
+    .fullColumn{
+        grid-column: span 4;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .educationControls{
+        grid-auto-flow: row;
+    } 
+
+    .dataContainer{
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+
+    .fullColumn{
+        grid-column: span 2;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .dataContainer{
+        grid-template-columns: repeat(1, minmax(100px, 1fr));
+    }
+
+    .column{
+        grid-column: span 1;
+    }
+
+    .fullColumn{
+        grid-column: span 1;
+    }
+}
