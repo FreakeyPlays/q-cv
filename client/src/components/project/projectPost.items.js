@@ -1,5 +1,3 @@
-import { faAslInterpreting } from "@fortawesome/free-solid-svg-icons";
-
 const ProjectPostItems = [
     {
         id: 1,

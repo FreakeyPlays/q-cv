@@ -1,7 +1,7 @@
 import React from "react";
 import "./Menu.css";
 import { MenuItems } from "./Menu.items"
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import UserService from "../../services/user.service";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
