@@ -2,6 +2,43 @@ import cvSchema from "../models/cv.model.js";
 import asyncHandler from "express-async-handler";
 import { apiResponse } from "./response.js";
 
+function CheckForError(CV, res){
+    if(!CV){
+        apiResponse(res, false, 404, "CV not found, check the used id");
+        throw new Error('CV not found, check the used id');
+    }
+}
+
+// @desc get CVs
+// @route GET /api/Cvs
+// @access Private
+const getCVs = asyncHandler( async(req, res) =>{
+    const CV = await cvSchema.find();
+    apiResponse(res, true, 200, "Returned all CVs", CV);
+});
+
+// @desc get CV by id
+// @route GET /api/Cvs/:id
+// @access Private
+const getCVById = asyncHandler( async(req, res) =>{
+    const CV = await cvSchema.findById(req.params.id);
+    CheckForError(CV, res);
+    apiResponse(res, true, 200, "Returned requested CV", CV);
+});
+
+// @desc update CV #id
+// @route PUT /api/Cvs/:id
+// @access Private
+const updateCV = asyncHandler( async(req, res) =>{
+    const CV = await cvSchema.findById(req.params.id);
+    CheckForError(CV, res);
+    const updatedCV = await cvSchema.findByIdAndUpdate(req.params.id, req.body, {new: true,});
+    apiResponse(res, true, 200, "Updated Skill", updatedCV);
+});
+
+// @desc Set CV
+// @route POST /api/Cvs
+// @access Private
 const setCv = asyncHandler( async(req, res) =>{
 
     //A CV-Name is required for it to be created in the DB
@@ -23,19 +60,20 @@ const setCv = asyncHandler( async(req, res) =>{
     apiResponse(res, true, 201, "Added CV", entry);
 });
 
+// @desc delete CV #id
+// @route delete /api/Cvs/:id
+// @access Private
 const deleteCV = asyncHandler(async(req, res) => {
     const CV = await cvSchema.findById(req.params.id);
-
-    if(!CV) {
-        apiResponse(res, false, 404, "CV not found");
-        throw new Error('CV not found')
-    }
-
+    CheckForError(CV, res);
     await skillSet.remove();
     apiResponse(res, true, 200, "Deleted CV", CV);
 });
 
 export {
+    getCVs,
+    getCVById,
+    updateCV,
     setCv,
     deleteCV
 }

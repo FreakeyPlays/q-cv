@@ -29,7 +29,7 @@ const cvSchema = mongoose.Schema({
 		endDate: { type: Date, required: [true, "Please provide an ending date"], trim: true }
     }],
 	skills: [{
-		name: { type: String, required: [true, "Please provide a skill name"], unique: true}
+		name: { type: String, required: [true, "Please provide a skill name"], trim: true}
     }],
 	projects: [{
 		title: { type: String, required: [true, "Please provide a Project Title"], trim: true },
