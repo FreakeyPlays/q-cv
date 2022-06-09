@@ -12,7 +12,7 @@ const setCv = asyncHandler( async(req, res) =>{
 
     const entry = await cvSchema.create({
         cvName: req.body.cvName,
-        date: new Date().now().toISOString.split("T")[0],
+        date: req.body.date,
         userData: req.body.userData,
         education: req.body.education,
         career: req.body.career,
