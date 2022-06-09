@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import React, {useState, useEffect, useRef} from "react";
 import FormInput from "../../components/formInput/FormInput";
 import { userDataService } from "../../services/user.services";
-import { userInput } from "./UserInput.js";
+import { userInput } from "./userInput.js";
 import "./UserData.css";
 
 const UserData = () => {
