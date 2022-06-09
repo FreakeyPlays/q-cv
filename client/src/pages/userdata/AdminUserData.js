@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { userDataService } from '../../services/user.services';
 import { faPen, faTrash} from '@fortawesome/free-solid-svg-icons'
 import './AdminUSerData.css';
-import {pwdInput, userInput} from './userInput.js';
+import {pwdInput, AdminUserInput} from './AdminUserInput.js';
 import Popup from '../../components/popup/Popup.js';
 import Titlebar from '../../components/titlebar/Titlebar';
 
@@ -175,7 +175,7 @@ const AdminUserData = () =>{
         <Popup trigger={updatePopup} setTrigger={setUpdatePopup}>
             <h3>Userdaten ändern</h3>
             <form className='updateContent' noValidate onSubmit={updateUser}>
-                {userInput.map((input) => (
+                {AdminUserInput.map((input) => (
                     <FormInput
                         key={input.id}
                         {...input}
@@ -192,7 +192,7 @@ const AdminUserData = () =>{
         <Popup trigger={createPopup} setTrigger={setCreatePopup}>
             <h3>Neuen User erstellen</h3>
             <form className='createContent' autoComplete='off' onSubmit={createUser}>
-                {userInput.map((input) =>(
+                {AdminUserInput.map((input) =>(
                     <FormInput
                         key={input.id}
                         {...input}
