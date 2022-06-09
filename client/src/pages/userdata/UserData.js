@@ -91,7 +91,7 @@ const UserData = () => {
             <form className="contentContainer" onSubmit={updateUser}>
                 {userInput.map((item) =>{
                     return(
-                        <div key={item.id} className="content">
+                        <div key={item.id} className="inputContent">
                             <FormInput key={item.id} {...item} value={user[item.name]} onChange={handleChange} />
                         </div>    
                     )
