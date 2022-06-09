@@ -8,7 +8,7 @@ import Education from "./pages/education/Education";
 import Career from "./pages/career/Career";
 import ITSkills from "./pages/itskills/ITSkills";
 import Projects from "./pages/projects/Projects";
-import CreateCV from "./pages/createcv/CreateCV";
+import AdminUserData from "./pages/userdata/AdminUserData";
 
 
 import "./App.css"
@@ -28,7 +28,7 @@ const App = () => {
                     <Route path="projects/create" element={<ManageProject function={projectDataService.create} title="Create" />} />
                     <Route path="projects/copy/:id" element={<ManageProject function={projectDataService.copy} title="Copy" />} />
                     <Route path="projects/edit/:id" element={<ManageProject function={projectDataService.update} title="Edit" />} />
-                    <Route path="/create-cv" element={<CreateCV />} />
+                    <Route path="/AdminUserData" element={<AdminUserData />} />
                 </Routes>
             </Menu>
         </Router>
