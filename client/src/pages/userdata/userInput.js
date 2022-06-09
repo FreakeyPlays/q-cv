@@ -58,7 +58,7 @@ const  userInput = [
     },
     {
         id: 8,
-        name: "projektrollen",
+        name: "projektRollen",
         type: "text",
         placeholder: "Scrum Master,Product Owner,...",
         label: "Projektrollen",

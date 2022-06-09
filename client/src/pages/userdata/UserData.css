@@ -13,3 +13,12 @@
 .content{
     margin: auto;
 }
+
+.subButton{
+    margin:auto;
+    padding-top: 10px;
+}
+
+.subButton Button{
+    background-color: #3dc0f1;
+}
