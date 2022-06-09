@@ -27,8 +27,8 @@ const ManageProject = (params) => {
     useEffect(() => {
         if(id && refresh){
             projectDataService.get(id)
-                .then(response => {
-                    let projectToCopy = response.data.project;
+                .then(res => {
+                    let projectToCopy = res.data.response;
                     let tmpValues = {}
                     
                     for(let key of Object.keys(values)){
@@ -49,7 +49,10 @@ const ManageProject = (params) => {
                     setValues(tmpValues);
                     setRefresh(false)
                 })
-                .catch(() => {setRefresh(false)});
+                .catch((e) => {
+                    setRefresh(true)
+                    console.warn(e.message);
+                });
         }
     },[refresh, id, values]);
 
