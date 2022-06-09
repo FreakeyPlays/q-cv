@@ -16,21 +16,25 @@ const Projects = () => {
     useEffect(() => {
         if(showAll){
             projectDataService.getAll()
-            .then(response => setProjects(response.data.response) )
+            .then(({data}) => {
+                setProjects(data.response.filter( ({description, title}) => {
+                    return description.includes(searchFilter) || title.includes(searchFilter);
+                }))
+            })
             .catch(e => console.error(e.message));
         }else{
             projectDataService.getAll()
             .then(({data}) => {
-                setProjects(data.response.filter( ({assignedUser}) => {
+                setProjects(data.response.filter( ({assignedUser, description, title}) => {
                     if(assignedUser === currentUserID){
-                        return true;
+                        return description.includes(searchFilter) || title.includes(searchFilter);
                     }
                     return false;
                 }))
             })
             .catch(e => console.error(e.message));
         }
-    }, [showAll]);
+    }, [showAll, searchFilter]);
 
     console.log(searchFilter);
     return(
