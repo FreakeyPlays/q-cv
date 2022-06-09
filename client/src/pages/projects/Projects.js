@@ -36,7 +36,6 @@ const Projects = () => {
         }
     }, [showAll, searchFilter]);
 
-    console.log(searchFilter);
     return(
         <>
             <Titlebar 
