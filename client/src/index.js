@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import UserService from "./services/user.service";
-import HttpService from "./services/http.service";
+import UserService from "./services/keycloakUser.service.js";
+import HttpService from "./services/http.service.js";
 
 import App from "./App";
 

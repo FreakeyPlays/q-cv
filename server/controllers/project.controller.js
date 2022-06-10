@@ -1,5 +1,6 @@
 import Project from "../models/project.model.js";
 import asyncHandler from "express-async-handler";
+import { apiResponse } from "./response.js";
 
 // @desc Set project
 // @route POST /api/project/
@@ -24,11 +25,7 @@ const setProject = asyncHandler( async (req, res) => {
         !endDate || !description || !location ||
         !teamSize || !assignedUser){
         
-        res.status(400).json({
-            ok: false,
-            status: 400,
-            message: "A required parameter is missing or incorrect"
-        });
+        apiResponse(res, false, 400, "A required parameter is missing or incorrect");
         throw new Error("A required parameter is missing or incorrect");
     }
 
@@ -48,12 +45,7 @@ const setProject = asyncHandler( async (req, res) => {
         activities: activities ? activities : []
     })
 
-    res.json({
-        ok: true,
-        status: 200,
-        message: "Project created",
-        project: entry
-    });
+    apiResponse(res, true, 201, "Project created", entry);
 })
 
 // @desc Get all projects
@@ -62,12 +54,12 @@ const setProject = asyncHandler( async (req, res) => {
 const getAllProjects = asyncHandler( async (req, res) => {
     const projects = await Project.find();
 
-    res.status(200).json({
-        ok: true,
-        status: 200,
-        message: "Returned all Projects",
-        projects
-    })
+    if(projects === undefined){
+        apiResponse(res, false, 404, "No Projects found");
+        throw new Error("No Projects found");
+    }
+
+    apiResponse(res, true, 200, "Returned all Projects", projects);
 })
 
 // @desc Get project by ID
@@ -77,21 +69,11 @@ const getProject = asyncHandler( async (req, res) => {
     const project = await Project.findById(req.params.id);
 
     if(!project){
-        res.status(400).json({
-            ok: false,
-            status: 400,
-            message: "Could not find Project by ID"
-        });
-
+        apiResponse(res, false, 404, "Could not find Project by ID");
         throw new Error("Could not find Project by ID");
     }
 
-    res.status(200).json({
-        ok: true,
-        status: 200,
-        message: "Returned Project",
-        project
-    })
+    apiResponse(res, true, 200, "Returned Project", project);
 })
 
 // @desc Update project by ID
@@ -101,25 +83,11 @@ const updateProject = asyncHandler( async (req, res) => {
     const project = await Project.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
     if(!project) {
-        res
-            .status(400)
-            .json({
-                ok: false,
-                status: 400,
-                message: "No Project found with ID: " + req.params.id
-            });
-        
+        apiResponse(res, false, 404, "No Project found with ID: " + req.params.id);
         throw new Error("No Project found with ID: " + req.params.id );
     }
 
-    res
-        .status(200)
-        .json({
-            ok: true,
-            status: 200,
-            message: "Updated Project",
-            project
-        });
+    apiResponse(res, true, 200, "Updated Project", project);
 })
 
 // @desc Delete project by ID
@@ -129,26 +97,12 @@ const deleteProject = asyncHandler( async (req, res) => {
     const project = await Project.findById(req.params.id);
 
     if(!project) {
-        res
-            .status(400)
-            .json({
-                ok: false,
-                status: 400,
-                message: "No Project found with ID: " + req.params.id
-            });
-        
+        apiResponse(res, false, 404, "No Project found with ID: " + req.params.id);        
         throw new Error("No Project found with ID: " + req.params.id );
     }
 
     await project.remove();
-    res
-        .status(200)
-        .json({
-            ok: true,
-            status: 200,
-            message: "Deleted Project",
-            project
-        });
+    apiResponse(res, true, 200, "Deleted Project", project);
 })
 
 export {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import UserService from "./user.service";
+import UserService from "./keycloakUser.service.js";
 
 const HttpMethods = {
     GET: 'GET',

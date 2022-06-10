@@ -2,22 +2,22 @@ import axios from "axios";
 
 const ADDRESS = process.env.REACT_APP_URL;
 const PORT = process.env.REACT_APP_API_PORT;
-const basePath = "http://" + ADDRESS + ":" + PORT + "/api/skills";
+const basePath = "http://" + ADDRESS + ":" + PORT + "/api/careers";
 
-export const skillDataService = {
+export const careerDataService = {
     getAll(){
         return axios.get(basePath);
     },
 
-    newSkill(data){
+    newCareerItem(data){
         return axios.post(basePath, data);
     },
 
-    updateSkill(id, data){
+    updateCareerItem(id, data){
         return axios.put(basePath + `/${id}`, data);
     },
 
-    deleteSkill(id){
+    deleteCareerItem(id){
         return axios.delete(basePath + `/${id}`);
     }
 }

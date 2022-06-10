@@ -1,8 +1,8 @@
 import React from "react";
 import "./Menu.css";
-import { MenuItems } from "./Menu.items"
+import { MenuItems } from "./Menu.items.js"
 import { NavLink } from 'react-router-dom'
-import UserService from "../../services/user.service";
+import UserService from "../../services/keycloakUser.service.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -33,9 +33,9 @@ const Menu = ({ children }) => {
                         <span id="userId">
                             John Doe
                         </span>
-                        <a className="logoutBtn" onClick={UserService.doLogout}>
+                        <p className="logoutBtn" onClick={UserService.doLogout}>
                             Log out
-                        </a>
+                        </p>
                     </div>
                 </div>
             </div>
