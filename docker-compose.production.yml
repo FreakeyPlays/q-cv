@@ -2,7 +2,7 @@ version: "3"
 services:
   keycloak:
     image: quay.io/keycloak/keycloak:18.0.0
-    env_file: ./config/dev.env
+    env_file: ./config/production.env
     ports:
       - "8080:8080"
     networks:
