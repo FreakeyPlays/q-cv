@@ -6,6 +6,10 @@
     z-index: 10;
 }
 
+.logoutBtn{
+    cursor: pointer;
+}
+
 .menu .logo_section{
     display: flex;
     flex-direction: column;

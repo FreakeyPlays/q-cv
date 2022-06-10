@@ -33,9 +33,9 @@ const Menu = ({ children }) => {
                         <span id="userId">
                             John Doe
                         </span>
-                        <button onClick={UserService.doLogout}>
+                        <a className="logoutBtn" onClick={UserService.doLogout}>
                             Log out
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
