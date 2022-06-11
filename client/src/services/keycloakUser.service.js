@@ -6,9 +6,11 @@ import Keycloak from "keycloak-js";
 //     clientId: "nodejs-microservice",
 // });
 
+const ADDRESS = process.env.REACT_APP_URL;
+console.log(ADDRESS);
 const _kc = new Keycloak({
     "realm": "Q-CV",
-    "url": "http://localhost:8080/",
+    "url": "http://" + ADDRESS + ":8080",
     "clientId": "nodejs-microservice"
 });
 

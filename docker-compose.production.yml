@@ -5,6 +5,8 @@ services:
     env_file: ./config/production.env
     ports:
       - "8080:8080"
+    command:
+      - start
     networks:
       - mern-app
   react-app:
