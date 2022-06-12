@@ -8,7 +8,7 @@ const request_POST = () => {
         grant_type: "client_credentials"
     };
 
-    request.post({url: 'http://localhost:8080/realms/master/protocol/openid-connect/token', formData: data}, function callback(err, httpResponse, body) {
+    request.post({url: 'http://localhost:8080/realms/master/protocol/openid-connect/token', form: data}, function callback(err, httpResponse, body) {
         if (err) {
             return console.error('upload failed: ', err);
         }

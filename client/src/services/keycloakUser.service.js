@@ -24,32 +24,32 @@ const initKeycloak = (onAuthenticatedCallback) => {
 };
 
 const getAdminToken = () => {
-    const body = {
-        "client_id": "admin-cli",
-        "client_secret": "9bLBSNMFu8DWp30OOLCmurisCrUugJwz",
-        "grant_type": "client_credentials"
-    };
+    // const body = {
+    //     "client_id": "admin-cli",
+    //     "client_secret": "9bLBSNMFu8DWp30OOLCmurisCrUugJwz",
+    //     "grant_type": "client_credentials"
+    // };
 
-    const config = {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        }
-    };
+    // const config = {
+    //     headers: {
+    //         'Content-Type': 'application/x-www-form-urlencoded',
+    //     }
+    // };
 
-    axios.post('http://localhost:8080/realms/master/protocol/openid-connect/token', body, config)
-    .then(response => {
-        console.log(response)
-    })
-    .catch(error => {
-        console.log(error)
-    });
-
-    // axios.get('http://localhost:5000/getMasterToken')
+    // axios.post('http://localhost:8080/realms/master/protocol/openid-connect/token', body, config)
     // .then(response => {
-    //     console.log(response);
-    // }).catch(error => {
-    //     console.log(error);
+    //     console.log(response)
+    // })
+    // .catch(error => {
+    //     console.log(error)
     // });
+
+    axios.get('http://localhost:5000/getMasterToken')
+    .then(response => {
+        console.log(response);
+    }).catch(error => {
+        console.log(error);
+    });
 };
 
 const doLogin = _kc.login;
