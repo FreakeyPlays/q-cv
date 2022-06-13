@@ -66,7 +66,7 @@ const setCv = asyncHandler( async(req, res) =>{
 const deleteCV = asyncHandler(async(req, res) => {
     const CV = await cvSchema.findById(req.params.id);
     CheckForError(CV, res);
-    await skillSet.remove();
+    await CV.remove();
     apiResponse(res, true, 200, "Deleted CV", CV);
 });
 
