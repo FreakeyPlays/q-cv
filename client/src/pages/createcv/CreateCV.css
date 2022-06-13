@@ -11,3 +11,13 @@ h2 {
 #submit-button {
     width: 30%;
 }
+
+.education-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.education-icons {
+    position: relative;
+    top: 30px;
+}
