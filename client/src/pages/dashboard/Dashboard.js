@@ -25,24 +25,6 @@ const Dashboard = () => {
         }
     });
 
-/*
-    useEffect( ()=>{
-        if(receivedData.current === false){
-            ['62a6f37507b0e590de6f1b04', '62a21e2c7e355fcfbece6dd1'].forEach( item => {
-                
-                cvDataService.get(item)                    
-                        .then(response => {
-                            setCvDataObjectList([...cvDataObjectList, response.data.response])
-                        })
-                        .catch( e => console.error(e.message));
-                
-            });
-            receivedData.current = true;
-        }
-    }, [cvDataObjectList]);
-*/
-    console.log(cvDataObjectList)
-
     const formatDate = (date, div) =>{
         let day = date.getDate();
         let month = date.getMonth();
@@ -95,6 +77,20 @@ const Dashboard = () => {
         });
     }
 
+    const deleteCv = (e) => {
+        let id = cvDataObjectList[e.currentTarget.getAttribute("data")]._id;
+        cvDataService.delete(id)
+        .then(res => {
+            window.location.reload(false);
+            receivedData.current = false;
+        })
+        .catch( e => console.error(e.message));;
+    }
+
+    const updateCv = (e) => {
+
+    }
+
     return(
         <>
             <Titlebar 
@@ -110,18 +106,18 @@ const Dashboard = () => {
                         <div className='headWrapper'>
                             <h3>{item.cvName}</h3>
                             <div className='interaction'>
-                                <div data={index} onClick={ console.log("") }>
+                                <div data={index} onClick={updateCv}>
                                     <FontAwesomeIcon className='skillIcon' icon={faPen} />
                                 </div>
-                                <div data={index} onClick={ console.log("") }>
+                                <div data={index} onClick={ deleteCv }>
                                     <FontAwesomeIcon className='skillIcon' icon={faTrash} />
                                 </div>
                             </div>
                         </div>
                         
                         <div className='companyWrapper'>
-                        <div>Education: {extractEducation(item)}</div><br/>
-                        <div>Career: {extractCareer(item)}</div><br/>
+                        <div >Education: {extractEducation(item)}</div><br/>
+                        <div >Career: {extractCareer(item)}</div><br/>
                         <div>Skills: {extractSkills(item)}</div><br/>
                         <div>Projects: {extractProjects(item)}</div><br/>
                             <div>updated: { formatDate(new Date(item.date))}</div><br/>
