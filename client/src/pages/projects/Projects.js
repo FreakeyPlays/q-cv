@@ -10,7 +10,7 @@ const currentUserID = "627d6e4624b23d01f548f867";
 const Projects = () => {
 
     const [projects, setProjects] = useState([]);
-    const [showAll, setShowAll] = useState(false)
+    const [showAll, setShowAll] = useState(false);
     const [searchFilter, setSearchFilter] = useState("");
 
     useEffect(() => {

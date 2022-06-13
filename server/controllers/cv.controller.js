@@ -31,7 +31,6 @@ const getCVById = asyncHandler( async(req, res) =>{
 // @access Private
 const updateCV = asyncHandler( async(req, res) =>{
     const updatedCV = await cvSchema.findByIdAndUpdate(req.params.id, req.body, {new: true});
-    console.log(updateCV);
     CheckForError(updatedCV, res);
     apiResponse(res, true, 200, "Updated Skill", updatedCV);
 });

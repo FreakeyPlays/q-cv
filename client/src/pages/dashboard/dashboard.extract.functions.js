@@ -45,7 +45,7 @@ const extractProjects = (cv) => {
 
 export{
     extractCareer,
-    extractProjects,
-    extractCareer,
+    extractEducation,
+    extractSkills,
     extractProjects
 }
