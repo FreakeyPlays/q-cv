@@ -79,10 +79,10 @@ const Dashboard = () => {
                             <h3>{item.cvName}</h3>
                             <div className='interaction'>
                                 <div data={index} onClick={updateCv}>
-                                    <FontAwesomeIcon className='skillIcon' icon={faPen} />
+                                    <FontAwesomeIcon className='editIcon' icon={faPen} />
                                 </div>
                                 <div data={index} onClick={ deleteCv }>
-                                    <FontAwesomeIcon className='skillIcon' icon={faTrash} />
+                                    <FontAwesomeIcon className='editIcon' icon={faTrash} />
                                 </div>
                             </div>
                         </div>
