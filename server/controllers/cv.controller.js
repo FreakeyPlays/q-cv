@@ -30,9 +30,9 @@ const getCVById = asyncHandler( async(req, res) =>{
 // @route PUT /api/Cvs/:id
 // @access Private
 const updateCV = asyncHandler( async(req, res) =>{
-    const CV = await cvSchema.findById(req.params.id);
-    CheckForError(CV, res);
-    const updatedCV = await cvSchema.findByIdAndUpdate(req.params.id, req.body, {new: true,});
+    const updatedCV = await cvSchema.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    console.log(updateCV);
+    CheckForError(updatedCV, res);
     apiResponse(res, true, 200, "Updated Skill", updatedCV);
 });
 

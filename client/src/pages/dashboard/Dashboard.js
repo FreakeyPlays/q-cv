@@ -28,7 +28,7 @@ const Dashboard = () => {
     const formatDate = (date, div) =>{
         console.log(date)
         let day = date.getDate();
-        let month = date.getMonth();
+        let month = date.getMonth() +1;
         let year = date.getFullYear();
         let divider = div === undefined ? "." : div;
         return ((day > 9? day : ("0"+day))+ divider + (month > 9? month : ("0"+month)) + divider + year + " ");
@@ -117,10 +117,10 @@ const Dashboard = () => {
                         </div>
                         
                         <div className='companyWrapper'>
-                        <div >Education: {extractEducation(item)}</div><br/>
-                        <div >Career: {extractCareer(item)}</div><br/>
-                        <div>Skills: {extractSkills(item)}</div><br/>
-                        <div>Projects: {extractProjects(item)}</div><br/>
+                        <div > <h4>Education:</h4> {extractEducation(item)}</div><br/>
+                        <div ><h4>Career:</h4> {extractCareer(item)}</div><br/>
+                        <div><h4>Skills:</h4> {extractSkills(item)}</div><br/>
+                        <div><h4>Projects:</h4> {extractProjects(item)}</div><br/>
                             <div>updated: { formatDate(new Date(item.date))}</div><br/>
                             <div></div>
                         </div>
