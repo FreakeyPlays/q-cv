@@ -26,6 +26,7 @@ const Dashboard = () => {
     });
 
     const formatDate = (date, div) =>{
+        console.log(date)
         let day = date.getDate();
         let month = date.getMonth();
         let year = date.getFullYear();
