@@ -17,12 +17,12 @@ const Dashboard = () => {
     //for testing
     const getUserCvIds = ()=>{
         //later: get id-list from user
-        
+        fillUserCvIdList(['62a21e2c7e355fcfbece6dd1', '62a750e4a6cd7afb70959423']);
     }
 
     useEffect( ()=>{
         if(receivedData.current === false){
-            fillUserCvIdList(['62a21e2c7e355fcfbece6dd1', '62a750e4a6cd7afb70959423']);
+            getUserCvIds();
             cvDataService.getAll()
                 .then(response => setCvDataObjectList(response.data.response))
                 .catch( e => console.error(e.message));
