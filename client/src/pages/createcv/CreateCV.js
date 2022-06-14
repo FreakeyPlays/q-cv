@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Popup from '../../components/popup/Popup.js';
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import './CreateCV.css';
 import { userDataService } from '../../services/user.services.js';
 import { projectDataService } from '../../services/project.service.js';
@@ -14,23 +15,41 @@ import { faPlus, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
+const theme = createTheme({
+    typography: {
+        fontFamily: [
+            "Segoe UI"
+        ]
+    }
+});
+
 const useStyles = makeStyles((theme) => ({
     container: {
         padding: 100
     },
     btn: {
-        backgroundColor: 'black',
+        backgroundColor: '#333',
         color: 'white',
         '&:hover': {
             backgroundColor: 'grey'
-        }
+        },
+    },
+    submitBtn: {
+        float: "right",
+        backgroundColor: '#333',
+        color: 'white',
+        '&:hover': {
+            backgroundColor: 'grey'
+        },
+        marginTop: 30
     },
     title: {
-        marginBottom: 40
+        marginBottom: 40,
+        fontWeight: 'bold'
     },
     subtitle: {
         marginTop: 30,
-        marginBottom: 20,
+        marginBottom: 20
     },
     itemtitle: {
         marginTop: 30,
@@ -92,7 +111,6 @@ const CreateCV = () => {
 
     useEffect(() => {
         if (receivedData.current === false) {
-            console.log("FETCHING DATA");
             userDataService.getUser("6293a91218be7b568841d1dd")
                 .then(response => {
                     dataMap(response);
@@ -106,7 +124,6 @@ const CreateCV = () => {
                 .catch(error => console.log(error));
             receivedData.current = true;
         };
-        // console.log(projects);
     });
 
     const dataMap = (response) => {
@@ -163,6 +180,8 @@ const CreateCV = () => {
             let userData = userInfo[0];
             let result = {cvName, education, career, userData, projects};
             
+            console.log(result);
+
             downloadCV(result);
             //saveCV(result);
         };
@@ -181,7 +200,6 @@ const CreateCV = () => {
     const downloadCV = (result) => {
         axios.post("https://prod-115.westus.logic.azure.com:443/workflows/f595e6ffa2d7449fb93eb92b11a4468e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=d2PEMA_gwcLyPdh7meXdRiUVtouL6qyNSGXKMIPDHxc", result)
         .then(response => {
-            console.log("Generating CV...");
             alert("Generating CV...");
 
         })
@@ -193,22 +211,17 @@ const CreateCV = () => {
             const values = [...education];
             values[index][event.target.name] = event.target.value;
             setEducation(values);
-            console.log(education);
         } else if (category === "userInfo") {
             let values = [...userInfo];
             values[0][event.target.name] = event.target.value;
-            //console.log(values);
             setuserInfo(values);
-            console.log(userInfo);
         } else if (category === "career") {
             const values = [...career];
             values[index][event.target.name] = event.target.value;
             setCareer(values);
-            console.log(career);
         } else if (category === "projects") {
             const values = [...shownProjects];
             values[index][event.target.name] = event.target.value;
-            console.log(shownProjects);
         }
     };
 
@@ -273,393 +286,397 @@ const CreateCV = () => {
     }
 
     return(
-        <Container className={classes.container}>
-            <Typography
-                className={classes.title}
-                variant="h3"
-                component="h1"
-                gutterBottom
-            >
-                Create CV
-            </Typography>
-
-            <form noValidate autoComplete='off' onSubmit={handleSubmit}>
-                <TextField
-                    className={classes.field}
-                    onChange={(e) => setCvName(e.target.value)}
-                    label="CV Name"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    error={cvNameError}
-                />
+        <ThemeProvider theme={theme}>
+            <Container className={classes.container}>
                 <Typography
-                    className={classes.subtitle}
-                    variant="h5"
-                    component="h2"
+                    className={classes.title}
+                    variant="h3"
+                    component="h1"
+                    gutterBottom
                 >
-                    User Info
-                </Typography>
-                {
-                    true ? (
-                        <TextField
-                            className={classes.field}
-                            name="name"
-                            onChange={(e) => handleInputChange(e, -1, "userInfo")}
-                            label="Name"
-                            variant="outlined"
-                            value={userInfo[0].name}
-                            fullWidth
-                            required
-                            error={nameError}
-                        />
-                    ) : (
-                        <></>
-                    )
-                }
-
-                <TextField
-                    className={classes.field}
-                    name="languages"
-                    onChange={(e) => handleInputChange(e, -1, "userInfo")}
-                    label="Languages"
-                    variant="outlined"
-                    value={userInfo[0].languages}
-                    fullWidth
-                    required
-                    error={languageError}
-                />
-                <Grid container>
-                    <Grid item md={6}>
-                        <TextField
-                            className={classes.field}
-                            name="email"
-                            onChange={(e) => handleInputChange(e, -1, "userInfo")}
-                            label="Email"
-                            variant="outlined"
-                            value={userInfo[0].email}
-                            fullWidth
-                            required
-                            error={emailError}
-                        />
-                    </Grid>
-                    <Grid item md={6}>
-                        <TextField
-                            className={classes.field}
-                            name="telephone"
-                            onChange={(e) => handleInputChange(e, -1, "userInfo")}
-                            label="Telephone"
-                            variant="outlined"
-                            value={userInfo[0].telephone}
-                            fullWidth
-                            required
-                            error={telephoneError}
-                        />
-                    </Grid>
-                    <Grid item md={4}>
-                        <TextField
-                            className={classes.field}
-                            name="beraterQualifikation"
-                            onChange={(e) => handleInputChange(e, -1, "userInfo")}
-                            label="Advisor Qualifications"
-                            variant="outlined"
-                            value={userInfo[0].beraterQualifikation}
-                            fullWidth
-                            required
-                            multiline
-                            minRows={8}
-                            error={qualiError}
-                        />
-                    </Grid>
-                    <Grid item md={8}>
-                        <TextField
-                            className={classes.field}
-                            name="kurzprofil"
-                            onChange={(e) => handleInputChange(e, -1, "userInfo")}
-                            label="Short Profile"
-                            variant="outlined"
-                            value={userInfo[0].kurzprofil}
-                            fullWidth
-                            required
-                            multiline
-                            minRows={8}
-                            error={profileError}
-                        />
-                    </Grid>
-                </Grid>
-
-                <Typography
-                    className={classes.subtitle}
-                    variant="h5"
-                    component="h2"
-                >
-                    Education
-                </Typography>
-                {
-                    (education.length === 0) &&
-                    <Button onClick={event => handleAddField(event, 0, "education")} className={classes.btn}>
-                        <FontAwesomeIcon className={classes.icon} icon={faPlus} />
-                        Add new Education card
-                    </Button>
-                }
-                {
-                    education.map((item, index) => {
-                        return (
-                            <div key={index}>
-                                <div className="education-header">
-                                    <Typography
-                                        className={classes.itemtitle}
-                                        variant="h6"
-                                        component="h3"
-                                    >
-                                        Education {index + 1}
-                                    </Typography>
-                                    <div className="education-icons">
-                                        <FontAwesomeIcon className={classes.icon} onClick={event => handleAddField(event, index, "education")} icon={faPlus} />
-                                        <FontAwesomeIcon className={classes.icon} onClick={event => handleRemoveField(event, index, "education")} icon={faTrash} />
-                                    </div>
-                                </div>
-                                <Grid container>
-                                    <Grid item md={6}>
-                                        <TextField
-                                            className={classes.field}
-                                            name="institution"
-                                            value={item.institution}
-                                            label="Institution"
-                                            variant="outlined"
-                                            fullWidth
-                                            onChange={event => handleInputChange(event, index, "education")}
-                                        />
-                                    </Grid>
-                                    <Grid item md={6}>
-                                        <TextField
-                                            className={classes.field}
-                                            name="studyType"
-                                            value={item.studyType}
-                                            label="Study Type"
-                                            variant="outlined"
-                                            fullWidth
-                                            onChange={event => handleInputChange(event, index, "education")}
-                                        />
-                                    </Grid>
-                                    <Grid item md={6}>
-                                        <TextField
-                                            className={classes.field}
-                                            name="subject"
-                                            value={item.subject}
-                                            label="Subject"
-                                            variant="outlined"
-                                            fullWidth
-                                            onChange={event => handleInputChange(event, index, "education")}
-                                        />
-                                    </Grid>
-                                    <Grid item md={6}>
-                                        <TextField
-                                            className={classes.field}
-                                            name="grade"
-                                            value={item.grade}
-                                            label="Grade"
-                                            variant="outlined"
-                                            fullWidth
-                                            onChange={event => handleInputChange(event, index, "education")}
-                                        />
-                                    </Grid>
-                                </Grid>
-
-                            </div>
-                        );
-                    })
-                }
-
-                <Typography
-                    className={classes.subtitle}
-                    variant="h5"
-                    component="h2"
-                >
-                    Career
-                </Typography>
-                {
-                    (career.length === 0) &&
-                    <Button onClick={event => handleAddField(event, 0, "career")} className={classes.btn}>
-                        <FontAwesomeIcon className={classes.icon} icon={faPlus} />
-                        Add new Career card
-                    </Button>
-                }
-                {
-                    career.map((item, index) => {
-                        return (
-                            <div key={index}>
-                                <div className="education-header">
-                                    <Typography
-                                        className={classes.itemtitle}
-                                        variant="h6"
-                                        component="h3"
-                                    >
-                                        Career {index + 1}
-                                    </Typography>
-                                    <div className="education-icons">
-                                        <FontAwesomeIcon className={classes.icon} onClick={event => handleAddField(event, index, "career")} icon={faPlus} />
-                                        <FontAwesomeIcon className={classes.icon} onClick={event => handleRemoveField(event, index, "career")} icon={faTrash} />
-                                    </div>
-                                </div>
-                                <Grid container>
-                                    <Grid item md={6}>
-                                        <TextField
-                                            className={classes.field}
-                                            name="company"
-                                            value={item.company}
-                                            label="Company"
-                                            variant="outlined"
-                                            fullWidth
-                                            onChange={event => handleInputChange(event, index, "career")}
-                                        />
-                                    </Grid>
-                                    <Grid item md={6}>
-                                        <TextField
-                                            className={classes.field}
-                                            name="position"
-                                            value={item.position}
-                                            label="Position"
-                                            variant="outlined"
-                                            fullWidth
-                                            onChange={event => handleInputChange(event, index, "career")}
-                                        />
-                                    </Grid>
-                                    <Grid item md={6}>
-                                        <TextField
-                                            className={classes.field}
-                                            name="city"
-                                            value={item.city}
-                                            label="City"
-                                            variant="outlined"
-                                            fullWidth
-                                            onChange={event => handleInputChange(event, index, "career")}
-                                        />
-                                    </Grid>
-                                    <Grid item md={6}>
-                                        <TextField
-                                            className={classes.field}
-                                            name="country"
-                                            value={item.country}
-                                            label="Country"
-                                            variant="outlined"
-                                            fullWidth
-                                            onChange={event => handleInputChange(event, index, "career")}
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </div>
-                        );
-                    })
-                }
-
-                <Typography
-                    className={classes.subtitle}
-                    variant="h5"
-                    component="h2"
-                >
-                    Projects
+                    Create CV
                 </Typography>
 
-                {
-                    shownProjects.length === 0 &&
-                    <Button className={classes.btn} onClick={() => setPopupShow(true)}>
-                        <FontAwesomeIcon className={classes.icon} icon={faPlus} />
-                        Add new Project card
-                    </Button>
-                }
-
-
-                {
-                    shownProjects.map((item, index) => {
-                        return (
-                            <div key={index}>
-                                <div className="education-header">
-                                    <Typography
-                                        className={classes.itemtitle}
-                                        variant="h6"
-                                        component="h3"
-                                    >
-                                        Project {index + 1}
-                                    </Typography>
-                                    <div className="education-icons">
-                                        <FontAwesomeIcon className={classes.icon} onClick={e => handleAddField(e, index, "projects")} icon={faPlus} />
-                                        <FontAwesomeIcon className={classes.icon} onClick={e => handleRemoveField(e, index, "projects")} icon={faTrash} />
-                                    </div>
-                                </div>
-                                <Grid container>
-                                    <Grid item md={6}>
-                                        <TextField
-                                            className={classes.field}
-                                            name="title"
-                                            value={item.title}
-                                            label="TItle"
-                                            variant="outlined"
-                                            fullWidth
-                                            onChange={event => handleInputChange(event, index, "projects")}
-                                        />
-                                    </Grid>
-                                    <Grid item md={6}>
-                                        <TextField
-                                            className={classes.field}
-                                            name="customer"
-                                            value={item.customer}
-                                            label="Customer"
-                                            variant="outlined"
-                                            fullWidth
-                                            onChange={event => handleInputChange(event, index, "projects")}
-                                        />
-                                    </Grid>
-                                    <Grid item md={6}>
-                                        <TextField
-                                            className={classes.field}
-                                            name="industry"
-                                            value={item.industry}
-                                            label="Industry"
-                                            variant="outlined"
-                                            fullWidth
-                                            onChange={event => handleInputChange(event, index, "projects")}
-                                        />
-                                    </Grid>
-                                    <Grid item md={6}>
-                                        <TextField
-                                            className={classes.field}
-                                            name="country"
-                                            value={item.country}
-                                            label="Country"
-                                            variant="outlined"
-                                            fullWidth
-                                            onChange={event => handleInputChange(event, index, "projects")}
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </div>
-                        );
-                    })
-                }
-
-                <Popup trigger={popupShow} setTrigger={setPopupShow}>
-                    <h2>Existing Projects</h2>
+                <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+                    <TextField
+                        className={classes.field}
+                        onChange={(e) => setCvName(e.target.value)}
+                        label="CV Name"
+                        variant="outlined"
+                        fullWidth
+                        required
+                        error={cvNameError}
+                    />
+                    <Typography
+                        className={classes.subtitle}
+                        variant="h5"
+                        component="h2"
+                    >
+                        User Info
+                    </Typography>
                     {
-                        projects.map((item, index) => {
+                        true ? (
+                            <TextField
+                                className={classes.field}
+                                name="name"
+                                onChange={(e) => handleInputChange(e, -1, "userInfo")}
+                                label="Name"
+                                variant="outlined"
+                                value={userInfo[0].name}
+                                fullWidth
+                                required
+                                error={nameError}
+                            />
+                        ) : (
+                            <></>
+                        )
+                    }
+
+                    <TextField
+                        className={classes.field}
+                        name="languages"
+                        onChange={(e) => handleInputChange(e, -1, "userInfo")}
+                        label="Languages"
+                        variant="outlined"
+                        value={userInfo[0].languages}
+                        fullWidth
+                        required
+                        error={languageError}
+                    />
+                    <Grid container>
+                        <Grid item md={6}>
+                            <TextField
+                                className={classes.field}
+                                name="email"
+                                onChange={(e) => handleInputChange(e, -1, "userInfo")}
+                                label="Email"
+                                variant="outlined"
+                                value={userInfo[0].email}
+                                fullWidth
+                                required
+                                error={emailError}
+                            />
+                        </Grid>
+                        <Grid item md={6}>
+                            <TextField
+                                className={classes.field}
+                                name="telephone"
+                                onChange={(e) => handleInputChange(e, -1, "userInfo")}
+                                label="Telephone"
+                                variant="outlined"
+                                value={userInfo[0].telephone}
+                                fullWidth
+                                required
+                                error={telephoneError}
+                            />
+                        </Grid>
+                        <Grid item md={4}>
+                            <TextField
+                                className={classes.field}
+                                name="beraterQualifikation"
+                                onChange={(e) => handleInputChange(e, -1, "userInfo")}
+                                label="Advisor Qualifications"
+                                variant="outlined"
+                                value={userInfo[0].beraterQualifikation}
+                                fullWidth
+                                required
+                                multiline
+                                minRows={8}
+                                error={qualiError}
+                            />
+                        </Grid>
+                        <Grid item md={8}>
+                            <TextField
+                                className={classes.field}
+                                name="kurzprofil"
+                                onChange={(e) => handleInputChange(e, -1, "userInfo")}
+                                label="Short Profile"
+                                variant="outlined"
+                                value={userInfo[0].kurzprofil}
+                                fullWidth
+                                required
+                                multiline
+                                minRows={8}
+                                error={profileError}
+                            />
+                        </Grid>
+                    </Grid>
+
+                    <Typography
+                        className={classes.subtitle}
+                        variant="h5"
+                        component="h2"
+                    >
+                        Education
+                    </Typography>
+                    {
+                        (education.length === 0) &&
+                        <Button onClick={event => handleAddField(event, 0, "education")} className={classes.btn}>
+                            <FontAwesomeIcon className={classes.icon} icon={faPlus} />
+                            Add new Education card
+                        </Button>
+                    }
+                    {
+                        education.map((item, index) => {
                             return (
-                                <div onClick={(event) => popupSubmit(event, index, -1)}>
-                                    <h5>{item.title}</h5>
+                                <div key={index}>
+                                    <div className="education-header">
+                                        <Typography
+                                            className={classes.itemtitle}
+                                            variant="h6"
+                                            component="h3"
+                                        >
+                                            Education {index + 1}
+                                        </Typography>
+                                        <div className="education-icons">
+                                            <FontAwesomeIcon className={classes.icon} onClick={event => handleAddField(event, index, "education")} icon={faPlus} />
+                                            <FontAwesomeIcon className={classes.icon} onClick={event => handleRemoveField(event, index, "education")} icon={faTrash} />
+                                        </div>
+                                    </div>
+                                    <Grid container>
+                                        <Grid item md={6}>
+                                            <TextField
+                                                className={classes.field}
+                                                name="institution"
+                                                value={item.institution}
+                                                label="Institution"
+                                                variant="outlined"
+                                                fullWidth
+                                                onChange={event => handleInputChange(event, index, "education")}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <TextField
+                                                className={classes.field}
+                                                name="studyType"
+                                                value={item.studyType}
+                                                label="Study Type"
+                                                variant="outlined"
+                                                fullWidth
+                                                onChange={event => handleInputChange(event, index, "education")}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <TextField
+                                                className={classes.field}
+                                                name="subject"
+                                                value={item.subject}
+                                                label="Subject"
+                                                variant="outlined"
+                                                fullWidth
+                                                onChange={event => handleInputChange(event, index, "education")}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <TextField
+                                                className={classes.field}
+                                                name="grade"
+                                                value={item.grade}
+                                                label="Grade"
+                                                variant="outlined"
+                                                fullWidth
+                                                onChange={event => handleInputChange(event, index, "education")}
+                                            />
+                                        </Grid>
+                                    </Grid>
+
                                 </div>
-                            )
+                            );
                         })
                     }
-                </Popup>
 
-                <Button
-                    className={classes.btn}
-                    type="submit"
-                    variant="contained"
-                >
-                    Save CV and Download CV (.docx)
-                </Button>
-            </form>
-        </Container>
+                    <Typography
+                        className={classes.subtitle}
+                        variant="h5"
+                        component="h2"
+                    >
+                        Career
+                    </Typography>
+                    {
+                        (career.length === 0) &&
+                        <Button onClick={event => handleAddField(event, 0, "career")} className={classes.btn}>
+                            <FontAwesomeIcon className={classes.icon} icon={faPlus} />
+                            Add new Career card
+                        </Button>
+                    }
+                    {
+                        career.map((item, index) => {
+                            return (
+                                <div key={index}>
+                                    <div className="education-header">
+                                        <Typography
+                                            className={classes.itemtitle}
+                                            variant="h6"
+                                            component="h3"
+                                        >
+                                            Career {index + 1}
+                                        </Typography>
+                                        <div className="education-icons">
+                                            <FontAwesomeIcon className={classes.icon} onClick={event => handleAddField(event, index, "career")} icon={faPlus} />
+                                            <FontAwesomeIcon className={classes.icon} onClick={event => handleRemoveField(event, index, "career")} icon={faTrash} />
+                                        </div>
+                                    </div>
+                                    <Grid container>
+                                        <Grid item md={6}>
+                                            <TextField
+                                                className={classes.field}
+                                                name="company"
+                                                value={item.company}
+                                                label="Company"
+                                                variant="outlined"
+                                                fullWidth
+                                                onChange={event => handleInputChange(event, index, "career")}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <TextField
+                                                className={classes.field}
+                                                name="position"
+                                                value={item.position}
+                                                label="Position"
+                                                variant="outlined"
+                                                fullWidth
+                                                onChange={event => handleInputChange(event, index, "career")}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <TextField
+                                                className={classes.field}
+                                                name="city"
+                                                value={item.city}
+                                                label="City"
+                                                variant="outlined"
+                                                fullWidth
+                                                onChange={event => handleInputChange(event, index, "career")}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <TextField
+                                                className={classes.field}
+                                                name="country"
+                                                value={item.country}
+                                                label="Country"
+                                                variant="outlined"
+                                                fullWidth
+                                                onChange={event => handleInputChange(event, index, "career")}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </div>
+                            );
+                        })
+                    }
+
+                    <Typography
+                        className={classes.subtitle}
+                        variant="h5"
+                        component="h2"
+                    >
+                        Projects
+                    </Typography>
+
+                    {
+                        shownProjects.length === 0 &&
+                        <Button className={classes.btn} onClick={() => setPopupShow(true)}>
+                            <FontAwesomeIcon className={classes.icon} icon={faPlus} />
+                            Add new Project card
+                        </Button>
+                    }
+
+
+                    {
+                        shownProjects.map((item, index) => {
+                            return (
+                                <div key={index}>
+                                    <div className="education-header">
+                                        <Typography
+                                            className={classes.itemtitle}
+                                            variant="h6"
+                                            component="h3"
+                                        >
+                                            Project {index + 1}
+                                        </Typography>
+                                        <div className="education-icons">
+                                            <FontAwesomeIcon className={classes.icon} onClick={e => handleAddField(e, index, "projects")} icon={faPlus} />
+                                            <FontAwesomeIcon className={classes.icon} onClick={e => handleRemoveField(e, index, "projects")} icon={faTrash} />
+                                        </div>
+                                    </div>
+                                    <Grid container>
+                                        <Grid item md={6}>
+                                            <TextField
+                                                className={classes.field}
+                                                name="title"
+                                                value={item.title}
+                                                label="TItle"
+                                                variant="outlined"
+                                                fullWidth
+                                                onChange={event => handleInputChange(event, index, "projects")}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <TextField
+                                                className={classes.field}
+                                                name="customer"
+                                                value={item.customer}
+                                                label="Customer"
+                                                variant="outlined"
+                                                fullWidth
+                                                onChange={event => handleInputChange(event, index, "projects")}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <TextField
+                                                className={classes.field}
+                                                name="industry"
+                                                value={item.industry}
+                                                label="Industry"
+                                                variant="outlined"
+                                                fullWidth
+                                                onChange={event => handleInputChange(event, index, "projects")}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <TextField
+                                                className={classes.field}
+                                                name="country"
+                                                value={item.country}
+                                                label="Country"
+                                                variant="outlined"
+                                                fullWidth
+                                                onChange={event => handleInputChange(event, index, "projects")}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </div>
+                            );
+                        })
+                    }
+
+                    <Popup trigger={popupShow} setTrigger={setPopupShow}>
+                        <h2>Existing Projects</h2>
+                        {
+                            projects.map((item, index) => {
+                                return (
+                                    <div onClick={(event) => popupSubmit(event, index, -1)}>
+                                        <h5>{item.title}</h5>
+                                    </div>
+                                )
+                            })
+                        }
+                    </Popup>
+
+                    <div>
+                        <Button
+                            className={classes.submitBtn}
+                            type="submit"
+                            variant="contained"
+                        >
+                            Save CV and Download CV (.docx)
+                        </Button>
+                    </div>
+                </form>
+            </Container>
+        </ThemeProvider>
     )
 }
 

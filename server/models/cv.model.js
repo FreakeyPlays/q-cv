@@ -8,7 +8,7 @@ const cvSchema = mongoose.Schema({
 		languages: { type: String, required: [true, "Please provide languages"], trim: true },
 		image: { data: Buffer, contentType: String },
 		email: { type: String, required: [true, "Please provide an email"], trim: true },
-		telephone: { type: String, required: [true, "Please provide a telephone number"], trim: true },
+		telephone: { type: String, trim: true },
 		beraterQualifikation: { type: String, required: [true, "Please provide advisor qualifications"], trim: true },
 		kurzprofil: { type: String, required: [true, "Please provide a short profile"], trim: true },
 	},
