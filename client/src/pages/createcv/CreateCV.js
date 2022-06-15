@@ -181,6 +181,7 @@ const CreateCV = () => {
     const downloadCV = (result) => {
         axios.post("https://prod-115.westus.logic.azure.com:443/workflows/f595e6ffa2d7449fb93eb92b11a4468e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=d2PEMA_gwcLyPdh7meXdRiUVtouL6qyNSGXKMIPDHxc", result)
         .then(response => {
+            console.log(response.status)
             console.log("Generating CV...");
             alert("Generating CV...");
 
