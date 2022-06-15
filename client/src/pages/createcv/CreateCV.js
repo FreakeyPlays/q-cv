@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import { FormControlLabel, Checkbox } from '@material-ui/core'
 import Popup from '../../components/popup/Popup.js';
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import './CreateCV.css';
@@ -15,6 +16,7 @@ import { faPlus, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
+// Material UI: Theme to make font consistent (Segoe UI)
 const theme = createTheme({
     typography: {
         fontFamily: [
@@ -23,6 +25,7 @@ const theme = createTheme({
     }
 });
 
+// Material UI: Styles for certain MUI components
 const useStyles = makeStyles((theme) => ({
     container: {
         padding: 100
@@ -70,6 +73,8 @@ const CreateCV = () => {
     const classes = useStyles();
 
     const receivedData = useRef(false);
+
+    // State for project Popup
     const [popupShow, setPopupShow] = useState(false);
 
     const [cvName, setCvName] = useState("");
@@ -98,9 +103,17 @@ const CreateCV = () => {
         startDate: "",
         endDate: ""
     }]);
+    
+    // State for selected projects
     const [projects, setProjects] = useState([]);
+    // State for ALL projects (these are shown in the add project popup)
     const [shownProjects, setShownProjects] = useState([]);
+    // State for checked skills
+    const [skills, setSkills] = useState([]);
+    // State for ALL skills (these are shown under skills)
+    const [shownSkills, setShownSkills] = useState([]);
 
+    // States for required userData fields error triggering after submission
     const [cvNameError, setCvNameError] = useState(false);
     const [nameError, setNameError] = useState(false);
     const [languageError, setLanguageError] = useState(false);
@@ -109,6 +122,7 @@ const CreateCV = () => {
     const [qualiError, setQualiError] = useState(false);
     const [profileError, setProfileError] = useState(false);
 
+    // Loads in user and project data
     useEffect(() => {
         if (receivedData.current === false) {
             userDataService.getUser("6293a91218be7b568841d1dd")
@@ -126,6 +140,7 @@ const CreateCV = () => {
         };
     });
 
+    // Takes user data and set states to populate form fields
     const dataMap = (response) => {
         const name = response.data.user.firstName + " " + response.data.user.lastName;
         const languages = response.data.user.sprachen.join(', ');
@@ -148,8 +163,10 @@ const CreateCV = () => {
         setuserInfo([data]);
         setEducation(edu);
         setCareer(car);
+        setShownSkills(response.data.user.skills);
     }
 
+    // Various input validation measures, once passed, saves CV to MongoDB and also downloads .docx document
     const handleSubmit = (e) => {
         e.preventDefault();
         setCvNameError(false);
@@ -168,35 +185,51 @@ const CreateCV = () => {
         if (userInfo[0].beraterQualifikation === '') setQualiError(true);
         if (userInfo[0].kurzprofil === '') setProfileError(true);
 
+        window.scrollTo(0, 0);
+
+        if (!skills.length) alert("Please add at least one skill to the CV.");
+
         if (cvName &&
             userInfo[0].name &&
             userInfo[0].languages &&
             userInfo[0].email &&
             userInfo[0].telephone &&
             userInfo[0].beraterQualifikation &&
-            userInfo[0].kurzprofil
+            userInfo[0].kurzprofil &&
+            skills.length
         ) {
             let projects = [...shownProjects];
+
+            console.log(projects);
+
+            projects.forEach(project => {
+                const activityString = project.activities.join(', ');
+                project.activities = activityString;
+            });
+
             let userData = userInfo[0];
-            let result = {cvName, education, career, userData, projects};
+            let result = {cvName, education, career, userData, projects, skills};
             
             console.log(result);
 
             //downloadCV(result);
-            //saveCV(result);
+            saveCV(result);
         };
     };
 
+    // Saving CV to MongoDB
     const saveCV = (result) => {
         cvDataService.create(result)
             .then(response => {
-                downloadCV(response);
+                // downloadCV(response);
+                console.log(response);
             })
             .catch(error => {
                 console.log(error);
             });
     };
 
+    // Downloading CV using Microsoft Power Automate
     const downloadCV = (result) => {
         axios.post("https://prod-115.westus.logic.azure.com:443/workflows/f595e6ffa2d7449fb93eb92b11a4468e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=d2PEMA_gwcLyPdh7meXdRiUVtouL6qyNSGXKMIPDHxc", result)
         .then(response => {
@@ -222,6 +255,17 @@ const CreateCV = () => {
         } else if (category === "projects") {
             const values = [...shownProjects];
             values[index][event.target.name] = event.target.value;
+        }
+    };
+
+    const handleSkillChange = (event) => {
+        if (skills.some(skill => skill.name === event.target.value)) {
+            setSkills(skills.filter((skill) => skill.name !== event.target.value));
+        } else {
+            const skill = {
+                name: event.target.value
+            };
+            setSkills([...skills, skill]);
         }
     };
 
@@ -699,6 +743,31 @@ const CreateCV = () => {
                             })
                         }
                     </Popup>
+
+                    <Typography
+                        className={classes.subtitle}
+                        variant="h5"
+                        component="h2"
+                    >
+                        Skills
+                    </Typography>
+
+                    <div className="skillContainer">
+                        {
+                            shownSkills.length ?
+                                shownSkills.map((item, index) => {
+                                    return (
+                                        <FormControlLabel
+                                            label={item.name}
+                                            value={item.name}
+                                            control={<Checkbox onChange={(event) => handleSkillChange(event)}/>}
+                                        />
+                                    )
+                                })
+                            : <span>This user has no skills. Please add a skill to this user in order to save/generate CV.</span>
+                        }
+                    </div>
+
 
                     <div>
                         <Button
