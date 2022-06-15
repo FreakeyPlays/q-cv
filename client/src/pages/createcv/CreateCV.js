@@ -182,7 +182,7 @@ const CreateCV = () => {
             
             console.log(result);
 
-            downloadCV(result);
+            //downloadCV(result);
             //saveCV(result);
         };
     };
@@ -283,7 +283,7 @@ const CreateCV = () => {
         };
 
         setShownProjects(values);
-    }
+    };
 
     return(
         <ThemeProvider theme={theme}>
@@ -478,8 +478,25 @@ const CreateCV = () => {
                                                 onChange={event => handleInputChange(event, index, "education")}
                                             />
                                         </Grid>
+                                        <Grid item md={6}>
+                                            <span className="dateInputLabel">Start date:</span>
+                                            <input className="dateInput"
+                                                type="date"
+                                                name="startDate"
+                                                value={item.startDate}
+                                                onChange={event => handleInputChange(event, index, "education")}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <span className="dateInputLabel">End date:</span>
+                                            <input className="dateInput"
+                                                type="date"
+                                                name="endDate"
+                                                value={item.endDate}
+                                                onChange={event => handleInputChange(event, index, "education")}
+                                            />
+                                        </Grid>
                                     </Grid>
-
                                 </div>
                             );
                         })
@@ -558,6 +575,24 @@ const CreateCV = () => {
                                                 label="Country"
                                                 variant="outlined"
                                                 fullWidth
+                                                onChange={event => handleInputChange(event, index, "career")}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <span className="dateInputLabel">Start date:</span>
+                                            <input className="dateInput"
+                                                type="date"
+                                                name="startDate"
+                                                value={item.startDate}
+                                                onChange={event => handleInputChange(event, index, "career")}
+                                            />
+                                        </Grid>
+                                        <Grid item md={6}>
+                                            <span className="dateInputLabel">End date:</span>
+                                            <input className="dateInput"
+                                                type="date"
+                                                name="endDate"
+                                                value={item.endDate}
                                                 onChange={event => handleInputChange(event, index, "career")}
                                             />
                                         </Grid>

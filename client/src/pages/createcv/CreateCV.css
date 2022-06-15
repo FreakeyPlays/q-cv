@@ -1,3 +1,7 @@
+body {
+    font-family: 'Segoe UI';
+}
+
 h2 {
     margin: 20px 0;
 }
@@ -20,4 +24,18 @@ h2 {
 .education-icons {
     position: relative;
     top: 30px;
+}
+
+.dateInputLabel {
+    color: grey;
+}
+
+.dateInput {
+    height: 56px;
+    border: 1px solid #cbcbcb;
+    width: 100%;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 0 12px;
+    font-size: 16px;
 }
