@@ -17,7 +17,7 @@ const Dashboard = () => {
     //for testing
     const getUserCvIds = ()=>{
         //later: get id-list from user
-        fillUserCvIdList(['62a21e2c7e355fcfbece6dd1', '62a750e4a6cd7afb70959423']);
+        fillUserCvIdList(['62ab211c637f5e8b4c11188e']);
     }
 
     useEffect( ()=>{
@@ -57,7 +57,8 @@ const Dashboard = () => {
     }
 
     const updateCv = (e) => {
-        //TODO: Go to update page and fill in data of selected cv -> hand over cv obj or cv _id
+        let id = cvDataObjectList[e.currentTarget.getAttribute("data")]._id;
+
     }
 
     return(
@@ -78,7 +79,7 @@ const Dashboard = () => {
                         <div className='headWrapper'>
                             <h3>{item.cvName}</h3>
                             <div className='interaction'>
-                                <div data={index} onClick={updateCv}>
+                                <div data={index} onClick={ updateCv }>
                                     <FontAwesomeIcon className='editIcon' icon={faPen} />
                                 </div>
                                 <div data={index} onClick={ deleteCv }>

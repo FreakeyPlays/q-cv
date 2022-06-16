@@ -126,6 +126,8 @@ const CreateCV = () => {
     const [qualiError, setQualiError] = useState(false);
     const [profileError, setProfileError] = useState(false);
 
+    const [updateId, setUpdateId] = useState("");
+
     // Loads in user and project data
     useEffect(() => {
         if (receivedData.current === false) {
@@ -253,6 +255,10 @@ const CreateCV = () => {
         })
         .catch(error => console.log(error));
     };
+
+    const addCvToUser = (cvId, userId)=>{
+        
+    }
 
     const handleInputChange = (event, index, category) => {
         if (category === "education") {
