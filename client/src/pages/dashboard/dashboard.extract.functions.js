@@ -1,6 +1,6 @@
 const extractEducation = (cv) => {
     if(cv.education.length === 0) return (<>
-        <div>No skill added.</div>
+        <div>No education added.</div>
     </>); 
     return cv.education.map((item, index) => {
         return (<>
@@ -11,7 +11,7 @@ const extractEducation = (cv) => {
 
 const extractCareer = (cv) => {
     if(cv.career.length === 0) return (<>
-        <div>No skill added.</div>
+        <div>No career added.</div>
     </>); 
     return cv.career.map((item, index) => {
         return (<>
@@ -34,7 +34,7 @@ const extractSkills = (cv) =>{
 
 const extractProjects = (cv) => {
     if(cv.projects.length === 0) return (<>
-        <div>No skill added.</div>
+        <div>No projects added.</div>
     </>); 
     return cv.projects.map((item, index) => {
         return (<>

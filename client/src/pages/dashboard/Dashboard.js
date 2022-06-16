@@ -11,7 +11,7 @@ const Dashboard = () => {
     const [userCvIdList, fillUserCvIdList] = useState([]); //list of object id's which are used to get the CVs of the current user.
     const receivedData = useRef(false);
     const [cvDataObjectList, setCvDataObjectList] = useState([]); //list of cv-objects fetched
-    const receivedIdList = useRef(false);
+    //const receivedIdList = useRef(false);
     const [showAll, setShowAll] = useState(false);
 
     //for testing

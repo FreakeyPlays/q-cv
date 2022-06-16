@@ -222,11 +222,11 @@ const CreateCV = () => {
             });
 
             let userData = userInfo[0];
-            let result = {cvName, education, career, userData, projects, skills};
+            let date = new Date().toJSON().slice(0,10);
+            let result = {cvName, education, career, userData, projects, skills, date};
             
-            console.log(result);
-
             //downloadCV(result);
+            console.log(result);
             saveCV(result);
         };
     };
@@ -234,10 +234,6 @@ const CreateCV = () => {
     // Saving CV to MongoDB
     const saveCV = (result) => {
     //check fo updateID != "" => put request, not post
-
-
-    //add date to dataset (last modified)
-
         cvDataService.create(result)
             .then(response => {
                 // downloadCV(response);
