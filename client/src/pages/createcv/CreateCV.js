@@ -16,6 +16,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import { useParams } from "react-router-dom";
+
+//get :id from link
+//const { id } = useParams();
 
 // Material UI: Theme to make font consistent (Segoe UI)
 const theme = createTheme({

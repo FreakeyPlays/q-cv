@@ -5,8 +5,11 @@ import { faPen, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { extractCareer, extractEducation, extractSkills, extractProjects } from "./dashboard.extract.functions.js";
 import "./dashboard.css";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+
+    let navigate = useNavigate();
 
     const [userCvIdList, fillUserCvIdList] = useState([]); //list of object id's which are used to get the CVs of the current user.
     const receivedData = useRef(false);
@@ -14,7 +17,7 @@ const Dashboard = () => {
     const [cvDataObjectList, setCvDataObjectList] = useState([]); //list of cv-objects fetched
     //const receivedIdList = useRef(false);
     const [showAll, setShowAll] = useState(false);
-
+    
     //for testing
     const getOwnerId = ()=>{
         //later: get id-list from user
@@ -57,7 +60,7 @@ const Dashboard = () => {
 
     const updateCv = (e) => {
         let id = cvDataObjectList[e.currentTarget.getAttribute("data")]._id;
-
+        navigate("/create-cv/"+id);
     }
 
     return(
