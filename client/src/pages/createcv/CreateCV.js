@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import './CreateCV.css';
 import { userDataService } from '../../services/user.services.js';
 import { projectDataService } from '../../services/project.service.js';
+import { skillDataService } from '../../services/skills.services.js';
 import { cvDataService } from '../../services/cv.service.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTrash} from '@fortawesome/free-solid-svg-icons'
@@ -111,7 +112,8 @@ const CreateCV = () => {
     // State for checked skills
     const [skills, setSkills] = useState([]);
     // State for ALL skills (these are shown under skills)
-    const [shownSkills, setShownSkills] = useState([]);
+    const [shownSkills, setShownSkills] = useState([]);//id list of skills
+    const [allSkillObjects, setAllSkillObjects] = useState([]);//all Skill Objects (_id and name)
 
     // States for required userData fields error triggering after submission
     const [cvNameError, setCvNameError] = useState(false);
@@ -137,8 +139,20 @@ const CreateCV = () => {
                 })
                 .catch(error => console.log(error));
             receivedData.current = true;
+
+            skillDataService.getAll()
+                .then(response => setAllSkillObjects(response.data.response))
+                .catch( e => console.error(e.message));
         };
     });
+
+    // returns name as a string of matching Skill-Object
+    const getSkillNameById = (id) => {
+        for(let item of allSkillObjects){
+            if (item._id === id) return item.name;
+        }
+        return "";
+    }
 
     // Takes user data and set states to populate form fields
     const dataMap = (response) => {
@@ -758,10 +772,11 @@ const CreateCV = () => {
                                 shownSkills.map((item, index) => {
                                     return (
                                         <FormControlLabel
-                                            label={item.name}
+                                            label={getSkillNameById(item)}
                                             value={item.name}
                                             control={<Checkbox onChange={(event) => handleSkillChange(event)}/>}
                                         />
+                                        
                                     )
                                 })
                             : <span>This user has no skills. Please add a skill to this user in order to save/generate CV.</span>
