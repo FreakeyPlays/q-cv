@@ -273,13 +273,10 @@ const CreateCV = () => {
     };
 
     const handleSkillChange = (event) => {
-        if (skills.some(skill => skill.name === event.target.value)) {
-            setSkills(skills.filter((skill) => skill.name !== event.target.value));
-        } else {
-            const skill = {
-                name: event.target.value
-            };
-            setSkills([...skills, skill]);
+        for(let skObj of allSkillObjects){
+            if(skObj.name === event.target.value){
+                setSkills([...skills, skObj.name]);
+            }
         }
     };
 
@@ -770,10 +767,11 @@ const CreateCV = () => {
                         {
                             shownSkills.length ?
                                 shownSkills.map((item, index) => {
+                                    let name = getSkillNameById(item)
                                     return (
                                         <FormControlLabel
-                                            label={getSkillNameById(item)}
-                                            value={item.name}
+                                            label={name}
+                                            value={name}
                                             control={<Checkbox onChange={(event) => handleSkillChange(event)}/>}
                                         />
                                         
