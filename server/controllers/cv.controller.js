@@ -47,6 +47,7 @@ const setCv = asyncHandler( async(req, res) =>{
     }
 
     const entry = await cvSchema.create({
+        ownerId: req.body.ownerId,
         cvName: req.body.cvName,
         date: req.body.date,
         userData: req.body.userData,

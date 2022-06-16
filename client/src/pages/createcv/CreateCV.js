@@ -104,7 +104,8 @@ const CreateCV = () => {
         startDate: "",
         endDate: ""
     }]);
-    
+    const [ownerId, setOwnderId] = useState("");    
+
     //updateID
 
     // State for selected projects
@@ -116,6 +117,8 @@ const CreateCV = () => {
     // State for ALL skills (these are shown under skills)
     const [shownSkills, setShownSkills] = useState([]);//id list of skills
     const [allSkillObjects, setAllSkillObjects] = useState([]);//all Skill Objects (_id and name)
+
+
 
     // States for required userData fields error triggering after submission
     const [cvNameError, setCvNameError] = useState(false);
@@ -163,7 +166,8 @@ const CreateCV = () => {
         const email = response.data.user.eMail;
         const beraterQualifikation = response.data.user.beratungsschwerpunkte.join(', ');
         const kurzprofil = response.data.user.kurzprofil;
-    
+        const uid = response.data.user._id;
+
         const data = {
             name: name,
             languages: languages,
@@ -172,10 +176,11 @@ const CreateCV = () => {
             beraterQualifikation: beraterQualifikation,
             kurzprofil: kurzprofil
         };
-    
+
         const edu = response.data.user.education;
         const car = response.data.user.career;
         
+        setOwnderId(uid);
         setuserInfo([data]);
         setEducation(edu);
         setCareer(car);
@@ -225,7 +230,8 @@ const CreateCV = () => {
 
             let userData = userInfo[0];
             let date = new Date().toJSON().slice(0,10);
-            let result = {cvName, education, career, userData, projects, skills, date};
+
+            let result = {cvName, ownerId, education, career, userData, projects, skills, date};
             
             //downloadCV(result);
             console.log(result);
@@ -257,7 +263,7 @@ const CreateCV = () => {
     };
 
     const addCvToUser = (cvId, userId)=>{
-        
+
     }
 
     const handleInputChange = (event, index, category) => {

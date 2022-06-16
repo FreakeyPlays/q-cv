@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const cvSchema = mongoose.Schema({
 	cvName: { type: String, required: [true, "Please provide a CV name"], trim: true },
 	date: { type: Date },
+	ownerId:{ type: mongoose.Types.ObjectId, ref:"User", require: [true, "Please provide an owner"] },
 	userData: {
 		name: { type: String, required: [true, "Please provide a name"], trim: true },
 		languages: { type: String, required: [true, "Please provide languages"], trim: true },
