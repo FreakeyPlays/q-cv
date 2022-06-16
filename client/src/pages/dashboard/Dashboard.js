@@ -10,19 +10,21 @@ const Dashboard = () => {
 
     const [userCvIdList, fillUserCvIdList] = useState([]); //list of object id's which are used to get the CVs of the current user.
     const receivedData = useRef(false);
+    const [uId, setUID] = useState("");
     const [cvDataObjectList, setCvDataObjectList] = useState([]); //list of cv-objects fetched
     //const receivedIdList = useRef(false);
     const [showAll, setShowAll] = useState(false);
 
     //for testing
-    const getUserCvIds = ()=>{
+    const getOwnerId = ()=>{
         //later: get id-list from user
+        setUID("6293a91218be7b568841d1dd"); // _id des users Marc
         fillUserCvIdList(['62ab211c637f5e8b4c11188e']);
     }
 
     useEffect( ()=>{
         if(receivedData.current === false){
-            getUserCvIds();
+            getOwnerId();
             cvDataService.getAll()
                 .then(response => setCvDataObjectList(response.data.response))
                 .catch( e => console.error(e.message));
@@ -31,7 +33,6 @@ const Dashboard = () => {
     });
 
     const formatDate = (date, div) =>{
-        console.log(date)
         let day = date.getDate();
         let month = date.getMonth() +1;
         let year = date.getFullYear();
@@ -50,9 +51,7 @@ const Dashboard = () => {
     }
 
     const checkForIdInUserIdList = (id) => {
-        for(let uid of userCvIdList){
-            if(uid === id || showAll) return true;
-        }
+        if(uId === id || showAll) return true;
         return false;
     }
 
@@ -72,9 +71,10 @@ const Dashboard = () => {
             <div className="itemWrapper">
             {
             cvDataObjectList.map( (item, index) => {
-                    if(!checkForIdInUserIdList(item._id))return(<></>)
+                    if(!checkForIdInUserIdList(item.ownerId))return(<> </>)
 
                     return(
+                    <>
                     <div key={index} className='careerItem' data={index}>
                         <div className='headWrapper'>
                             <h3>{item.cvName}</h3>
@@ -97,6 +97,7 @@ const Dashboard = () => {
                             <div></div>
                         </div>
                     </div>
+                    </>
                     )
                 })
             }

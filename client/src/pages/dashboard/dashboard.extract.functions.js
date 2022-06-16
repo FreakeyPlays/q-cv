@@ -25,7 +25,6 @@ const extractSkills = (cv) =>{
         <div>No skill added.</div>
     </>); 
     return cv.skills.map((item, index) => {
-        console.log(item.tzj);
         return (<>
             <div key={index}>{item.name}</div>
         </>)
