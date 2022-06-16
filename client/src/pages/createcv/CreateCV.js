@@ -105,6 +105,8 @@ const CreateCV = () => {
         endDate: ""
     }]);
     
+    //updateID
+
     // State for selected projects
     const [projects, setProjects] = useState([]);
     // State for ALL projects (these are shown in the add project popup)
@@ -148,10 +150,8 @@ const CreateCV = () => {
 
     // returns name as a string of matching Skill-Object
     const getSkillNameById = (id) => {
-        for(let item of allSkillObjects){
-            if (item._id === id) return item.name;
-        }
-        return "";
+        let skillObj = allSkillObjects.filter( skill => skill._id === id)[0];
+        return skillObj?skillObj.name:"404, name not found";
     }
 
     // Takes user data and set states to populate form fields
@@ -233,6 +233,11 @@ const CreateCV = () => {
 
     // Saving CV to MongoDB
     const saveCV = (result) => {
+    //check fo updateID != "" => put request, not post
+
+
+    //add date to dataset (last modified)
+
         cvDataService.create(result)
             .then(response => {
                 // downloadCV(response);
@@ -272,12 +277,16 @@ const CreateCV = () => {
         }
     };
 
-    const handleSkillChange = (event) => {
-        for(let skObj of allSkillObjects){
-            if(skObj.name === event.target.value){
-                setSkills([...skills, skObj.name]);
-            }
+    const handleSkillChange = (event) => {      
+        //if box is deselected
+        if(!event.target.checked){
+            setSkills(skills.filter( skill => skill.name !== event.target.value ))
+        }else{
+            setSkills([...skills, { "name": allSkillObjects.filter( skill => skill.name === event.target.value)[0].name }]);
         }
+        console.log(skills)
+        
+        
     };
 
     const handleAddField = (event, index, category) => {
@@ -747,7 +756,7 @@ const CreateCV = () => {
                         {
                             projects.map((item, index) => {
                                 return (
-                                    <div onClick={(event) => popupSubmit(event, index, -1)}>
+                                    <div key={index} onClick={(event) => popupSubmit(event, index, -1)}>
                                         <h5>{item.title}</h5>
                                     </div>
                                 )
@@ -770,6 +779,7 @@ const CreateCV = () => {
                                     let name = getSkillNameById(item)
                                     return (
                                         <FormControlLabel
+                                            key={index}
                                             label={name}
                                             value={name}
                                             control={<Checkbox onChange={(event) => handleSkillChange(event)}/>}
