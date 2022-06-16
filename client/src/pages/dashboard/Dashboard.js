@@ -11,7 +11,6 @@ const Dashboard = () => {
 
     let navigate = useNavigate();
 
-    const [userCvIdList, fillUserCvIdList] = useState([]); //list of object id's which are used to get the CVs of the current user.
     const receivedData = useRef(false);
     const [uId, setUID] = useState("");
     const [cvDataObjectList, setCvDataObjectList] = useState([]); //list of cv-objects fetched
@@ -22,14 +21,13 @@ const Dashboard = () => {
     const getOwnerId = ()=>{
         //later: get id-list from user
         setUID("6293a91218be7b568841d1dd"); // _id des users Marc
-        fillUserCvIdList(['62ab211c637f5e8b4c11188e']);
     }
 
     useEffect( ()=>{
         if(receivedData.current === false){
             getOwnerId();
             cvDataService.getAll()
-                .then(response => setCvDataObjectList(response.data.response))
+                .then(res => setCvDataObjectList(res.data.response))
                 .catch( e => console.error(e.message));
             receivedData.current = true;
         }

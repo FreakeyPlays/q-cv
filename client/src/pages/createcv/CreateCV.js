@@ -75,6 +75,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreateCV = () => {
+    //contains the id if page is visited by edit-cv (/create-cv/:id)
+    //undefined if no id.
+    const { id } = useParams();
+
     const classes = useStyles();
 
     const receivedData = useRef(false);
@@ -122,8 +126,6 @@ const CreateCV = () => {
     const [shownSkills, setShownSkills] = useState([]);//id list of skills
     const [allSkillObjects, setAllSkillObjects] = useState([]);//all Skill Objects (_id and name)
 
-
-
     // States for required userData fields error triggering after submission
     const [cvNameError, setCvNameError] = useState(false);
     const [nameError, setNameError] = useState(false);
@@ -133,17 +135,29 @@ const CreateCV = () => {
     const [qualiError, setQualiError] = useState(false);
     const [profileError, setProfileError] = useState(false);
 
-    const [updateId, setUpdateId] = useState("");
-
     // Loads in user and project data
     useEffect(() => {
         if (receivedData.current === false) {
-            userDataService.getUser("6293a91218be7b568841d1dd") //62947556c1f84bedce00094a
-                .then(response => {
-                    dataMap(response);
-                })
-                .catch(error => console.log(error));
-            
+
+        if(id){
+            cvDataService.get(id)
+                .then( (res) => {
+                        mapCv(res);
+                        userDataService.getUser(res.data.response.ownerId)
+                        .then(response => {
+                            dataMap(response);
+                        })
+                        .catch(error => console.log(error))
+                    }
+                )
+                .catch( error => console.log( error ) );
+            } else {
+                userDataService.getUser("6293a91218be7b568841d1dd")
+                    .then(response => {
+                        dataMap(response);
+                    })
+                    .catch(error => console.log(error));
+            }    
             projectDataService.getAll()
                 .then(response => {
                     setProjects(response.data.response);
@@ -156,6 +170,14 @@ const CreateCV = () => {
                 .catch( e => console.error(e.message));
         };
     });
+
+    const mapCv = (res) => {
+        const edu = res.data.response.education;
+        const car = res.data.response.career;
+        const projects = res.data.response.projects;
+
+
+    }
 
     // returns name as a string of matching Skill-Object
     const getSkillNameById = (id) => {
@@ -296,11 +318,8 @@ const CreateCV = () => {
         }else{
             setSkills([...skills, { "name": allSkillObjects.filter( skill => skill.name === event.target.value)[0].name }]);
         }
-        console.log(skills)
-        
-        
     };
-
+    
     const handleAddField = (event, index, category) => {
         let newFields = {};
         if (category === "education") {
