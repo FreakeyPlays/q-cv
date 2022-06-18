@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const CreateCV = () => {
+const CreateCV = (params) => {
     //contains the id if page is visited by edit-cv (/create-cv/:id)
     //undefined if no id.
     const { id } = useParams();
@@ -138,6 +138,7 @@ const CreateCV = () => {
     // Loads in user and project data
     useEffect(() => {
         if (receivedData.current === false) {
+            window.scrollTo(0, 0);
             if (id) {
                 cvDataService.get(id)
                     .then(res => {
@@ -174,6 +175,18 @@ const CreateCV = () => {
         //console.log(res);
 
         setCvName(res.data.response.cvName);
+
+        const edu = res.data.response.education;
+        for (let e of edu) {
+            e.startDate = (e.startDate).substring(0, 10);
+            e.endDate = (e.endDate).substring(0, 10);
+        }
+
+        for (let c of career) {
+            c.startDate = (c.startDate).substring(0, 10);
+            c.endDate = (c.endDate).substring(0, 10);
+        }
+
         setEducation(res.data.response.education);
         setCareer(res.data.response.career);
         setShownProjects(res.data.response.projects);
@@ -184,16 +197,10 @@ const CreateCV = () => {
                 setShownSkills(response.data.user.skills);
             })
             .catch (e => console.log(e));
-        
-        // For each skill in the CV, map it to skill state
-        // (res.data.response.skills).map(skill => {
-        //     console.log("Adding ", skill.name, "to skills");
-        //     setSkills(oldSkills => [...oldSkills, { name: skill.name }]);
-        // });
-
-        //console.log(res.data.response.skills);
 
         setSkills(res.data.response.skills);
+        setOwnderId(res.data.response.ownerId);
+        
     }
 
     // returns name as a string of matching Skill-Object
@@ -262,16 +269,21 @@ const CreateCV = () => {
         ) {
             let projects = [...shownProjects];
 
-            projects.forEach(project => {
-                const activityString = project.activities.join(', ');
-                project.activities = activityString;
-            });
+            if (params.title != 'Edit') {
+                projects.forEach(project => {
+                    console.log(project);
+                    const activityString = (project.activities).join(', ');
+                    project.activities = activityString;
+                });
+            }
 
             let userData = userInfo[0];
             let date = new Date().toJSON().slice(0,10);
 
             let result = {cvName, ownerId, education, career, userData, projects, skills, date};
-            
+
+            if (params.title === 'Edit') result._id = id;
+
             //downloadCV(result);
             console.log(result);
             saveCV(result);
@@ -281,9 +293,10 @@ const CreateCV = () => {
     // Saving CV to MongoDB
     const saveCV = (result) => {
     //check fo updateID != "" => put request, not post
-        cvDataService.create(result)
+        let promise = params.function(result);
+
+        promise
             .then(response => {
-                // downloadCV(response);
                 console.log(response);
             })
             .catch(error => {
@@ -321,6 +334,7 @@ const CreateCV = () => {
         } else if (category === "projects") {
             const values = [...shownProjects];
             values[index][event.target.name] = event.target.value;
+            setProjects(values);
         }
     };
 
@@ -753,7 +767,7 @@ const CreateCV = () => {
                                                 className={classes.field}
                                                 name="title"
                                                 value={item.title}
-                                                label="TItle"
+                                                label="Title"
                                                 variant="outlined"
                                                 fullWidth
                                                 onChange={event => handleInputChange(event, index, "projects")}
@@ -825,16 +839,13 @@ const CreateCV = () => {
                                 shownSkills.map((item, index) => {
                                     let name = getSkillNameById(item)
                                     let check = false;
-                                    if (skills.some(skill => { skill.name = name })) {
-                                        console.log("exists!");
-                                        check = true;
-                                    }
+                                    if (skills.some(skill => { return skill.name === name })) check = true;
                                     return (
                                         <FormControlLabel
                                             key={index}
                                             label={name}
                                             value={name}
-                                            // checked={check}
+                                            checked={check}
                                             control={<Checkbox onChange={(event) => handleSkillChange(event)}/>}
                                         />
                                     )

@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "./components/menu/Menu";
 import { projectDataService } from "./services/project.service";
+import { cvDataService } from "./services/cv.service";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from "./pages/dashboard/Dashboard";
 import UserData from "./pages/userdata/UserData";
@@ -28,8 +29,8 @@ const App = () => {
                     <Route path="projects/create" element={<ManageProject function={projectDataService.create} title="Create" />} />
                     <Route path="projects/copy/:id" element={<ManageProject function={projectDataService.copy} title="Copy" />} />
                     <Route path="projects/edit/:id" element={<ManageProject function={projectDataService.update} title="Edit" />} />
-                    <Route path="/create-cv" element={<CreateCV />} />
-                    <Route path="/create-cv/:id" element={<CreateCV />} />
+                    <Route path="/create-cv" element={<CreateCV function={cvDataService.create} />} />
+                    <Route path="/create-cv/:id" element={<CreateCV function={cvDataService.update} title="Edit"/>} />
                 </Routes>
             </Menu>
         </Router>
