@@ -141,6 +141,7 @@ const CreateCV = () => {
             if (id) {
                 cvDataService.get(id)
                     .then(res => {
+                        console.log(res);
                         mapCv(res);
                     })
                     .catch( error => console.log( error ) );
@@ -163,11 +164,15 @@ const CreateCV = () => {
         };
         receivedData.current = true;
 
-        console.log(shownSkills);
-        //console.log(allSkillObjects);
+        // console.log(shownSkills);
+        // console.log(skills);
+        // console.log(allSkillObjects);
     });
 
     const mapCv = (res) => {
+
+        //console.log(res);
+
         setCvName(res.data.response.cvName);
         setEducation(res.data.response.education);
         setCareer(res.data.response.career);
@@ -176,10 +181,19 @@ const CreateCV = () => {
 
         userDataService.getUser(res.data.response.ownerId)
             .then(response => {
-                console.log(response);
                 setShownSkills(response.data.user.skills);
             })
             .catch (e => console.log(e));
+        
+        // For each skill in the CV, map it to skill state
+        // (res.data.response.skills).map(skill => {
+        //     console.log("Adding ", skill.name, "to skills");
+        //     setSkills(oldSkills => [...oldSkills, { name: skill.name }]);
+        // });
+
+        //console.log(res.data.response.skills);
+
+        setSkills(res.data.response.skills);
     }
 
     // returns name as a string of matching Skill-Object
@@ -810,14 +824,19 @@ const CreateCV = () => {
                             shownSkills.length ?
                                 shownSkills.map((item, index) => {
                                     let name = getSkillNameById(item)
+                                    let check = false;
+                                    if (skills.some(skill => { skill.name = name })) {
+                                        console.log("exists!");
+                                        check = true;
+                                    }
                                     return (
                                         <FormControlLabel
                                             key={index}
                                             label={name}
                                             value={name}
+                                            // checked={check}
                                             control={<Checkbox onChange={(event) => handleSkillChange(event)}/>}
                                         />
-                                        
                                     )
                                 })
                             : <span>This user has no skills. Please add a skill to this user in order to save/generate CV.</span>
