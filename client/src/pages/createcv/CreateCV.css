@@ -16,6 +16,10 @@ h2 {
     width: 30%;
 }
 
+.list {
+    list-style: none;
+}
+
 .education-header {
     display: flex;
     justify-content: space-between;
