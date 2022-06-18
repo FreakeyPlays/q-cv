@@ -138,51 +138,54 @@ const CreateCV = () => {
     // Loads in user and project data
     useEffect(() => {
         if (receivedData.current === false) {
-
-        if(id){
-            cvDataService.get(id)
-                .then( (res) => {
+            if (id) {
+                cvDataService.get(id)
+                    .then(res => {
                         mapCv(res);
-                        userDataService.getUser(res.data.response.ownerId)
-                        .then(response => {
-                            dataMap(response);
-                        })
-                        .catch(error => console.log(error))
-                    }
-                )
-                .catch( error => console.log( error ) );
+                    })
+                    .catch( error => console.log( error ) );
             } else {
                 userDataService.getUser("6293a91218be7b568841d1dd")
                     .then(response => {
                         dataMap(response);
                     })
                     .catch(error => console.log(error));
-            }    
+            }
             projectDataService.getAll()
                 .then(response => {
                     setProjects(response.data.response);
                 })
                 .catch(error => console.log(error));
-            receivedData.current = true;
 
             skillDataService.getAll()
                 .then(response => setAllSkillObjects(response.data.response))
                 .catch( e => console.error(e.message));
         };
+        receivedData.current = true;
+
+        console.log(shownSkills);
+        //console.log(allSkillObjects);
     });
 
     const mapCv = (res) => {
-        const edu = res.data.response.education;
-        const car = res.data.response.career;
-        const projects = res.data.response.projects;
+        setCvName(res.data.response.cvName);
+        setEducation(res.data.response.education);
+        setCareer(res.data.response.career);
+        setShownProjects(res.data.response.projects);
+        setuserInfo([res.data.response.userData]);
 
-
+        userDataService.getUser(res.data.response.ownerId)
+            .then(response => {
+                console.log(response);
+                setShownSkills(response.data.user.skills);
+            })
+            .catch (e => console.log(e));
     }
 
     // returns name as a string of matching Skill-Object
     const getSkillNameById = (id) => {
         let skillObj = allSkillObjects.filter( skill => skill._id === id)[0];
-        return skillObj?skillObj.name:"404, name not found";
+        return skillObj ? skillObj.name : "404, name not found";
     }
 
     // Takes user data and set states to populate form fields
@@ -232,8 +235,6 @@ const CreateCV = () => {
         if (userInfo[0].beraterQualifikation === '') setQualiError(true);
         if (userInfo[0].kurzprofil === '') setProfileError(true);
 
-        window.scrollTo(0, 0);
-
         if (!skills.length) alert("Please add at least one skill to the CV.");
 
         if (cvName &&
@@ -246,8 +247,6 @@ const CreateCV = () => {
             skills.length
         ) {
             let projects = [...shownProjects];
-
-            console.log(projects);
 
             projects.forEach(project => {
                 const activityString = project.activities.join(', ');
@@ -389,7 +388,9 @@ const CreateCV = () => {
                     component="h1"
                     gutterBottom
                 >
-                    Create CV
+                    {
+                        id ? 'Update CV' : 'Create CV'
+                    }
                 </Typography>
 
                 <form noValidate autoComplete='off' onSubmit={handleSubmit}>
@@ -398,6 +399,7 @@ const CreateCV = () => {
                         onChange={(e) => setCvName(e.target.value)}
                         label="CV Name"
                         variant="outlined"
+                        value={cvName}
                         fullWidth
                         required
                         error={cvNameError}
