@@ -17,7 +17,8 @@
     "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
     "mongoose": "^6.2.10",
-    "nodemon": "^2.0.15",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "node-fetch": "^3.2.6",
+    "nodemon": "^2.0.15"
   }
 }
