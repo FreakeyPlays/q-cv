@@ -9,6 +9,7 @@ import projectRouter from "./routes/project.router.js";
 import educationRouter from "./routes/education.router.js";
 import careerRouter from "./routes/career.router.js";
 import userRouter from "./routes/user.router.js";
+import keycloakRouter from "./routes/keycloak.router.js";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use('/api/projects', projectRouter);
 app.use("/api/education", educationRouter);
 app.use('/api/careers', careerRouter);
 app.use('/api/user', userRouter);
+app.use("/api/keycloak", keycloakRouter)
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
