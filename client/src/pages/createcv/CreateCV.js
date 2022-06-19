@@ -13,7 +13,7 @@ import { projectDataService } from '../../services/project.service.js';
 import { skillDataService } from '../../services/skills.services.js';
 import { cvDataService } from '../../services/cv.service.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faTrash, faX } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useRef, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import axios from 'axios';
@@ -436,6 +436,12 @@ const CreateCV = (params) => {
     return(
         <ThemeProvider theme={theme}>
             <Container className={classes.container}>
+                {
+                    (params.title === "Edit") &&
+                    <button id="cancel-button" onClick={(e) => {e.preventDefault(); window.location.href="/";}}>
+                        <FontAwesomeIcon className="icon fa-2x" icon={faX} />
+                    </button>
+                }
                 <Typography
                     className={classes.title}
                     variant="h3"

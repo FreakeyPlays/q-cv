@@ -12,6 +12,11 @@ h2 {
     border: 1px solid red;
 }
 
+#cancel-button {
+    float: right;
+    background-color: white;
+}
+
 #submit-button {
     width: 30%;
 }
