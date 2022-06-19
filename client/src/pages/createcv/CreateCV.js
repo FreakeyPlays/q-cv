@@ -144,7 +144,6 @@ const CreateCV = (params) => {
             if (id) {
                 cvDataService.get(id)
                     .then(res => {
-                        console.log(res);
                         mapCv(res);
                     })
                     .catch( error => console.log( error ) );
@@ -202,7 +201,6 @@ const CreateCV = (params) => {
 
         setSkills(res.data.response.skills);
         setOwnerId(res.data.response.ownerId);
-        
     }
 
     // returns name as a string of matching Skill-Object
@@ -294,7 +292,7 @@ const CreateCV = (params) => {
             if (params.title === 'Edit') result._id = id;
 
             //downloadCV(result);
-            console.log(result);
+            // console.log(result);
             saveCV(result);
             window.location.href = "/";
         };
@@ -307,7 +305,7 @@ const CreateCV = (params) => {
 
         promise
             .then(response => {
-                console.log(response);
+                // console.log(response);
             })
             .catch(error => {
                 console.log(error);

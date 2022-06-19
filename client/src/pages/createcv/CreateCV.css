@@ -21,6 +21,10 @@ h2 {
     width: 30%;
 }
 
+.icon {
+    padding: 10px;
+}
+
 .list {
     list-style: none;
 }
