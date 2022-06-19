@@ -8,6 +8,7 @@ import { FormControlLabel, Checkbox } from '@material-ui/core'
 import Popup from '../../components/popup/Popup.js';
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import './CreateCV.css';
+import { CVInputs } from './cv.input.js';
 import { userDataService } from '../../services/user.services.js';
 import { projectDataService } from '../../services/project.service.js';
 import { skillDataService } from '../../services/skills.services.js';
@@ -228,6 +229,8 @@ const CreateCV = (params) => {
         };
 
         const edu = response.data.user.education;
+        edu.map(e => ({...e, dragId: uuidv4()}));
+
         const car = response.data.user.career;
         
         setOwnerId(uid);
@@ -248,6 +251,16 @@ const CreateCV = (params) => {
         setQualiError(false);
         setProfileError(false);
 
+        setValidation({
+            cvName: false,
+            name: false,
+            language: false,
+            email: false,
+            telephone: false,
+            quali: false,
+            profile: false
+        });
+
         if (cvName === '') { setCvNameError(true); window.scrollTo(0, 0); };
         if (userInfo[0].name === '') { setNameError(true); window.scrollTo(0, 0); };
         if (userInfo[0].languages === '') { setLanguageError(true); window.scrollTo(0, 0); };
@@ -255,6 +268,14 @@ const CreateCV = (params) => {
         if (userInfo[0].telephone === '') { setTelephoneError(true); window.scrollTo(0, 0); };
         if (userInfo[0].beraterQualifikation === '') { setQualiError(true); window.scrollTo(0, 0); };
         if (userInfo[0].kurzprofil === '') { setProfileError(true); window.scrollTo(0, 0); };
+
+        // if (cvName === '') { validation.cvName setCvNameError(true); window.scrollTo(0, 0); };
+        // if (userInfo[0].name === '') { setNameError(true); window.scrollTo(0, 0); };
+        // if (userInfo[0].languages === '') { setLanguageError(true); window.scrollTo(0, 0); };
+        // if (userInfo[0].email === '') { setEmailError(true); window.scrollTo(0, 0); };
+        // if (userInfo[0].telephone === '') { setTelephoneError(true); window.scrollTo(0, 0); };
+        // if (userInfo[0].beraterQualifikation === '') { setQualiError(true); window.scrollTo(0, 0); };
+        // if (userInfo[0].kurzprofil === '') { setProfileError(true); window.scrollTo(0, 0); };
 
         if (!skills.length) alert("Please add at least one skill to the CV.");
 
@@ -469,23 +490,18 @@ const CreateCV = (params) => {
                     >
                         User Info
                     </Typography>
-                    {
-                        true ? (
-                            <TextField
-                                className={classes.field}
-                                name="name"
-                                onChange={(e) => handleInputChange(e, -1, "userInfo")}
-                                label="Name"
-                                variant="outlined"
-                                value={userInfo[0].name}
-                                fullWidth
-                                required
-                                error={nameError}
-                            />
-                        ) : (
-                            <></>
-                        )
-                    }
+
+                    <TextField
+                        className={classes.field}
+                        name="name"
+                        onChange={(e) => handleInputChange(e, -1, "userInfo")}
+                        label="Name"
+                        variant="outlined"
+                        value={userInfo[0].name}
+                        fullWidth
+                        required
+                        error={nameError}
+                    />
 
                     <TextField
                         className={classes.field}
@@ -595,50 +611,23 @@ const CreateCV = (params) => {
                                                                 </div>
                                                             </div>
                                                             <Grid container>
-                                                                <Grid item md={6}>
-                                                                    <TextField
-                                                                        className={classes.field}
-                                                                        name="institution"
-                                                                        value={item.institution}
-                                                                        label="Institution"
-                                                                        variant="outlined"
-                                                                        fullWidth
-                                                                        onChange={event => handleInputChange(event, index, "education")}
-                                                                    />
-                                                                </Grid>
-                                                                <Grid item md={6}>
-                                                                    <TextField
-                                                                        className={classes.field}
-                                                                        name="studyType"
-                                                                        value={item.studyType}
-                                                                        label="Study Type"
-                                                                        variant="outlined"
-                                                                        fullWidth
-                                                                        onChange={event => handleInputChange(event, index, "education")}
-                                                                    />
-                                                                </Grid>
-                                                                <Grid item md={6}>
-                                                                    <TextField
-                                                                        className={classes.field}
-                                                                        name="subject"
-                                                                        value={item.subject}
-                                                                        label="Subject"
-                                                                        variant="outlined"
-                                                                        fullWidth
-                                                                        onChange={event => handleInputChange(event, index, "education")}
-                                                                    />
-                                                                </Grid>
-                                                                <Grid item md={6}>
-                                                                    <TextField
-                                                                        className={classes.field}
-                                                                        name="grade"
-                                                                        value={item.grade}
-                                                                        label="Grade"
-                                                                        variant="outlined"
-                                                                        fullWidth
-                                                                        onChange={event => handleInputChange(event, index, "education")}
-                                                                    />
-                                                                </Grid>
+                                                                {
+                                                                    CVInputs.education.map(((cvInput, cvIndex) => {
+                                                                        return (
+                                                                            <Grid key={cvIndex} item md={6}>
+                                                                                <TextField
+                                                                                    className={classes.field}
+                                                                                    name={cvInput.name}
+                                                                                    value={item[cvInput.name]}
+                                                                                    label={cvInput.label}
+                                                                                    variant="outlined"
+                                                                                    fullWidth
+                                                                                    onChange={e => handleInputChange(e, index, "education")}
+                                                                                />
+                                                                            </Grid>
+                                                                        )
+                                                                    }))
+                                                                }
                                                                 <Grid item md={6}>
                                                                     <span className="dateInputLabel">Start date:</span>
                                                                     <input className="dateInput"
@@ -696,83 +685,83 @@ const CreateCV = (params) => {
                                                 {(provided) => (
                                                     <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                                                         <div key={index}>
-                                                                                                        <div className="education-header">
-                                                                                                            <Typography
-                                                                                                                className={classes.itemtitle}
-                                                                                                                variant="h6"
-                                                                                                                component="h3"
-                                                                                                            >
-                                                                                                                Career {index + 1}
-                                                                                                            </Typography>
-                                                                                                            <div className="education-icons">
-                                                                                                                <FontAwesomeIcon className={classes.icon} onClick={event => handleAddField(event, index, "career")} icon={faPlus} />
-                                                                                                                <FontAwesomeIcon className={classes.icon} onClick={event => handleRemoveField(event, index, "career")} icon={faTrash} />
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <Grid container>
-                                                                                                            <Grid item md={6}>
-                                                                                                                <TextField
-                                                                                                                    className={classes.field}
-                                                                                                                    name="company"
-                                                                                                                    value={item.company}
-                                                                                                                    label="Company"
-                                                                                                                    variant="outlined"
-                                                                                                                    fullWidth
-                                                                                                                    onChange={event => handleInputChange(event, index, "career")}
-                                                                                                                />
-                                                                                                            </Grid>
-                                                                                                            <Grid item md={6}>
-                                                                                                                <TextField
-                                                                                                                    className={classes.field}
-                                                                                                                    name="position"
-                                                                                                                    value={item.position}
-                                                                                                                    label="Position"
-                                                                                                                    variant="outlined"
-                                                                                                                    fullWidth
-                                                                                                                    onChange={event => handleInputChange(event, index, "career")}
-                                                                                                                />
-                                                                                                            </Grid>
-                                                                                                            <Grid item md={6}>
-                                                                                                                <TextField
-                                                                                                                    className={classes.field}
-                                                                                                                    name="city"
-                                                                                                                    value={item.city}
-                                                                                                                    label="City"
-                                                                                                                    variant="outlined"
-                                                                                                                    fullWidth
-                                                                                                                    onChange={event => handleInputChange(event, index, "career")}
-                                                                                                                />
-                                                                                                            </Grid>
-                                                                                                            <Grid item md={6}>
-                                                                                                                <TextField
-                                                                                                                    className={classes.field}
-                                                                                                                    name="country"
-                                                                                                                    value={item.country}
-                                                                                                                    label="Country"
-                                                                                                                    variant="outlined"
-                                                                                                                    fullWidth
-                                                                                                                    onChange={event => handleInputChange(event, index, "career")}
-                                                                                                                />
-                                                                                                            </Grid>
-                                                                                                            <Grid item md={6}>
-                                                                                                                <span className="dateInputLabel">Start date:</span>
-                                                                                                                <input className="dateInput"
-                                                                                                                    type="date"
-                                                                                                                    name="startDate"
-                                                                                                                    value={item.startDate}
-                                                                                                                    onChange={event => handleInputChange(event, index, "career")}
-                                                                                                                />
-                                                                                                            </Grid>
-                                                                                                            <Grid item md={6}>
-                                                                                                                <span className="dateInputLabel">End date:</span>
-                                                                                                                <input className="dateInput"
-                                                                                                                    type="date"
-                                                                                                                    name="endDate"
-                                                                                                                    value={item.endDate}
-                                                                                                                    onChange={event => handleInputChange(event, index, "career")}
-                                                                                                                />
-                                                                                                            </Grid>
-                                                                                                        </Grid>
+                                                            <div className="education-header">
+                                                                <Typography
+                                                                    className={classes.itemtitle}
+                                                                    variant="h6"
+                                                                    component="h3"
+                                                                >
+                                                                    Career {index + 1}
+                                                                </Typography>
+                                                                <div className="education-icons">
+                                                                    <FontAwesomeIcon className={classes.icon} onClick={event => handleAddField(event, index, "career")} icon={faPlus} />
+                                                                    <FontAwesomeIcon className={classes.icon} onClick={event => handleRemoveField(event, index, "career")} icon={faTrash} />
+                                                                </div>
+                                                            </div>
+                                                            <Grid container>
+                                                                <Grid item md={6}>
+                                                                    <TextField
+                                                                        className={classes.field}
+                                                                        name="company"
+                                                                        value={item.company}
+                                                                        label="Company"
+                                                                        variant="outlined"
+                                                                        fullWidth
+                                                                        onChange={event => handleInputChange(event, index, "career")}
+                                                                    />
+                                                                </Grid>
+                                                                <Grid item md={6}>
+                                                                    <TextField
+                                                                        className={classes.field}
+                                                                        name="position"
+                                                                        value={item.position}
+                                                                        label="Position"
+                                                                        variant="outlined"
+                                                                        fullWidth
+                                                                        onChange={event => handleInputChange(event, index, "career")}
+                                                                    />
+                                                                </Grid>
+                                                                <Grid item md={6}>
+                                                                    <TextField
+                                                                        className={classes.field}
+                                                                        name="city"
+                                                                        value={item.city}
+                                                                        label="City"
+                                                                        variant="outlined"
+                                                                        fullWidth
+                                                                        onChange={event => handleInputChange(event, index, "career")}
+                                                                    />
+                                                                </Grid>
+                                                                <Grid item md={6}>
+                                                                    <TextField
+                                                                        className={classes.field}
+                                                                        name="country"
+                                                                        value={item.country}
+                                                                        label="Country"
+                                                                        variant="outlined"
+                                                                        fullWidth
+                                                                        onChange={event => handleInputChange(event, index, "career")}
+                                                                    />
+                                                                </Grid>
+                                                                <Grid item md={6}>
+                                                                    <span className="dateInputLabel">Start date:</span>
+                                                                    <input className="dateInput"
+                                                                        type="date"
+                                                                        name="startDate"
+                                                                        value={item.startDate}
+                                                                        onChange={event => handleInputChange(event, index, "career")}
+                                                                    />
+                                                                </Grid>
+                                                                <Grid item md={6}>
+                                                                    <span className="dateInputLabel">End date:</span>
+                                                                    <input className="dateInput"
+                                                                        type="date"
+                                                                        name="endDate"
+                                                                        value={item.endDate}
+                                                                        onChange={event => handleInputChange(event, index, "career")}
+                                                                    />
+                                                                </Grid>
+                                                            </Grid>
                                                         </div>
                                                     </li>
                                                 )}
