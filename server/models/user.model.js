@@ -10,9 +10,10 @@ const userSchema = mongoose.Schema({
     kurzprofil:{type:String},
     beratungsschwerpunkte:[{type:String}],
     projektRollen:[{type:String}],
-    skills:[{type:mongoose.Types.ObjectId}],
-    career:[{type:mongoose.Types.ObjectId}],
-    education:[{type:mongoose.Types.ObjectId}],
+    skills:[{type:mongoose.Types.ObjectId, ref:"Skill"}],
+    career:[{type:mongoose.Types.ObjectId, ref:"Career"}],
+    education:[{type:mongoose.Types.ObjectId, ref:"Education"}],
+    projects:[{type: mongoose.Types.ObjectId, ref:"Project"}],
     shortProfile:{type:String, trim:true},
     isAdmin:{type:Boolean}
 }, {
