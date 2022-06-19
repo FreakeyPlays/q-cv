@@ -253,7 +253,7 @@ const delCareer = asyncHandler( async(req,res) =>{
 })
 
 const setProject = asyncHandler( async(req,res) =>{
-    const user = await User.findById(req.params.id,);
+    const user = await User.findById(req.params.id);
     user.projects.push(req.params.projectID);
 
     const updated = await User.findByIdAndUpdate(user.id, user, {new:true});
