@@ -1,17 +1,32 @@
 import { useEffect, useState } from "react";
 import { projectDataService } from "../../services/project.service";
 import ProjectPost from "../../components/project/ProjectPost.js";
+import UserService from "../../services/keycloakUser.service.js"
+import Titlebar from "../../components/titlebar/Titlebar";
+import DeletePopup from "../../components/popup/deletePopup/DeletePopup.js";
 
 import "./Projects.css"
-import Titlebar from "../../components/titlebar/Titlebar";
-
-const currentUserID = "627d6e4624b23d01f548f867";
 
 const Projects = () => {
+
+    const [currentUserID, setCurrentUserID] = useState("");
+    UserService.getLoggedInUID().then(data => setCurrentUserID(data));
 
     const [projects, setProjects] = useState([]);
     const [showAll, setShowAll] = useState(false)
     const [searchFilter, setSearchFilter] = useState("");
+
+    const [deleteItemPopup, setDeleteItemPopup] = useState(false);
+    const [selectedID, setSelectedID] = useState("");
+    const deleteProjectItem = (e) => {
+        e.preventDefault();
+        projectDataService.delete(selectedID)
+            .then(() => {
+                setDeleteItemPopup(false);
+                setSelectedID("");
+            })
+            .catch(e => console.warn(e.message));
+    }
 
     useEffect(() => {
         if(showAll){
@@ -34,7 +49,7 @@ const Projects = () => {
             })
             .catch(e => console.error(e.message));
         }
-    }, [showAll, searchFilter]);
+    }, [showAll, searchFilter, currentUserID, deleteItemPopup]);
 
     return(
         <>
@@ -48,10 +63,15 @@ const Projects = () => {
             <div className="projectsContainer">
                 {projects.splice(0).reverse().map((item, index) => {
                         return(
-                            <ProjectPost item={item} key={index} />
+                            <ProjectPost item={item} key={index} setIDFunc={setSelectedID} deleteFunc={setDeleteItemPopup} />
                         )
                     })}
             </div>
+            <DeletePopup 
+                triggerVar={deleteItemPopup} 
+                setTriggerFunc={setDeleteItemPopup}
+                deleteFunc={deleteProjectItem}
+            />
         </>
     )
 }

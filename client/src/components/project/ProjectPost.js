@@ -1,40 +1,22 @@
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClone, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { projectDataService } from "../../services/project.service";
 import ProjectPostItems from "./projectPost.items";
+import UserService from "../../services/keycloakUser.service.js"
 
 import "./ProjectPost.css";
-import React from "react";
 
-const isAdmin = false;
-const currentUserID = "627d6e4624b23d01f548f867";
+const ProjectPost = ({ item, setIDFunc, deleteFunc }) => {
+    const [currentUserID, setCurrentUserId] = useState("");
+    UserService.getLoggedInUID().then(data => setCurrentUserId(data));
 
-function dummyCheckOwner(uid){
-    if(uid === currentUserID){
-        return true;
-    }
-    return false;
-}
+    const isAdmin = useState(false);
+    isAdmin.current = UserService.getIsAdmin();
 
-function deleteProject(id, title){
-    let wasOkPressed = window.confirm("Do you really want to delete\n"+title);
+    const isOwner = useState(false);
+    isOwner.current = currentUserID === item.assignedUser ? true : false;
 
-    if(!wasOkPressed){
-        return;
-    }
-
-    let promise = projectDataService.delete(id);
-
-    promise
-        .then(() => window.location.href = "/projects")
-        .catch(e => {
-            alert("Error: Something went Wrong!");
-            console.warn(e.message);
-        })
-}
-
-const ProjectPost = ({ item }) => {
     return(
         <div className="projectPost">
             <div className="titleSection">
@@ -43,13 +25,16 @@ const ProjectPost = ({ item }) => {
                 <Link to={"/projects/copy/" + item._id}>
                     <FontAwesomeIcon icon={faClone} />
                 </Link>
-                {(isAdmin || dummyCheckOwner(item.assignedUser)) ? (
+                {(isAdmin.current || isOwner.current ) ? (
                     <>
                         <Link to={"/projects/edit/" + item._id}>
                             <FontAwesomeIcon icon={faPen} />
                         </Link>
                         <Link to={"/projects"}>
-                            <FontAwesomeIcon icon={faTrash} onClick={() => deleteProject(item._id, item.title)} />
+                            <FontAwesomeIcon icon={faTrash} onClick={() => {
+                                setIDFunc(item._id);
+                                deleteFunc(true);
+                            }} />
                         </Link>
                     </>
                 ) : (
