@@ -47,7 +47,7 @@ const ProjectPost = ({ item, setIDFunc, deleteFunc }) => {
                 
                 {ProjectPostItems.map(element => {
                     return (
-                        element.optional || element.isStored(item) ? (
+                        element.required || element.isStored(item) ? (
                             <div key={element.id} className={element.classNames}>
                                 <h3>{element.title}</h3>
                                 <p>{element.parse(item)}</p>
