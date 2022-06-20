@@ -28,7 +28,7 @@ export const ProjectInputs = [
         placeholder: "e.g. Telecommunications",
         label: "Industry",
         errorMessage: "Please provide a valid Industry!",
-        pattern: "^[A-Za-z]{1,}$",
+        pattern: "^.{1,}$",
         required: true,
         customClass: "formIndustry"
     },
@@ -39,7 +39,7 @@ export const ProjectInputs = [
         placeholder: "e.g. Germany",
         label: "Country",
         errorMessage: "Please provide a valid Country!",
-        pattern: "^[A-Za-z]{1,}$",
+        pattern: "^.{1,}$",
         required: true,
         customClass: "formCountry"
     },
@@ -50,7 +50,7 @@ export const ProjectInputs = [
         placeholder: "e.g. Project Manager",
         label: "Position",
         errorMessage: "Please provide a valid Position!",
-        pattern: "^[A-Za-z]{1,}$",
+        pattern: "^.{1,}$",
         required: true,
         customClass: "formPosition"
     },
@@ -116,7 +116,7 @@ export const ProjectInputs = [
         placeholder: "e.g. Stuttgart",
         label: "Location",
         errorMessage: "Please provide a valid Location!",
-        pattern: "^[A-Za-z0-9]{1,}$",
+        pattern: "^.{1,}$",
         required: true,
         customClass: "formLocation"
     },
