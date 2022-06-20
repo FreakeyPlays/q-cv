@@ -60,6 +60,7 @@ const Projects = () => {
                 showAll={true}
                 path="/projects/create" 
             />
+            
             <div className="projectsContainer">
                 {projects.splice(0).reverse().map((item, index) => {
                         return(
@@ -67,6 +68,7 @@ const Projects = () => {
                         )
                     })}
             </div>
+
             <DeletePopup 
                 triggerVar={deleteItemPopup} 
                 setTriggerFunc={setDeleteItemPopup}

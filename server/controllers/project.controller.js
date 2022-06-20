@@ -2,7 +2,7 @@ import Project from "../models/project.model.js";
 import asyncHandler from "express-async-handler";
 import { apiResponse } from "./response.js";
 
-// @desc Set project
+// @desc Create a project
 // @route POST /api/project/
 // @access Private
 const setProject = asyncHandler( async (req, res) => {
