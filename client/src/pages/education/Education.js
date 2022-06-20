@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
 import EducationPost from "../../components/education/EducationPost.js";
-import Titlebar from "../../components/titlebar/Titlebar.js";
-import { educationDataService } from "../../services/education.service.js";
-import DeletePopup from "../../components/popup/deletePopup/DeletePopup.js";
-import EditPopup from "../../components/popup/editPopup/EditPopup.js";
 import educationInputs from "./education.inputs.js";
 
-import "./Education.css";
+import Titlebar from "../../components/titlebar/Titlebar.js";
+import DeletePopup from "../../components/popup/deletePopup/DeletePopup.js";
+import EditPopup from "../../components/popup/editPopup/EditPopup.js";
 import CreatePopup from "../../components/popup/createPopup/CreatePopup.js";
 
-const currentUserID = "627d6e4624b23d01f548f867";
+import UserService from "../../services/keycloakUser.service.js";
+import { educationDataService } from "../../services/education.service.js";
+import { userDataService } from "../../services/user.services.js";
+
+import "./Education.css";
 
 const Education = () => {
+    const [currentUserID, setCurrentUserID] = useState("");
+    UserService.getLoggedInUID().then(data => setCurrentUserID(data));
+
     const [education, setEducation] = useState([]);
     const [dataReceived, setDataReceived] = useState(false);
 
@@ -30,7 +35,7 @@ const Education = () => {
             startDate: "",
             endDate: ""
         });
-    }
+    };
 
     const [newItemPopup, setNewItemPopup] = useState(false);
     const [deleteItemPopup, setDeleteItemPopup] = useState(false);
@@ -39,7 +44,7 @@ const Education = () => {
     const [selectedID, setSelectedID] = useState("");
 
     useEffect(() => {
-        if(!dataReceived.current){
+        if(!dataReceived.current && currentUserID ){
             educationDataService.getAll({"owner": currentUserID})
                 .then(res => {
                     setEducation(res.data.response);
@@ -47,22 +52,23 @@ const Education = () => {
                 })
                 .catch(e => console.error(e.message));
         }
-    }, [dataReceived, deleteItemPopup, updateItemPopup, newItemPopup, item]);
+    }, [dataReceived, deleteItemPopup, updateItemPopup, newItemPopup, item, currentUserID]);
 
-    const createEducationItem = (evt) => {
-        evt.preventDefault();
+    const createEducationItem = (e) => {
+        e.preventDefault();
         item["assignedUser"] = currentUserID;
         educationDataService.create(item)
-            .then(() => {
+            .then(res => {
                 setNewItemPopup(false);
                 setDataReceived(false);
                 resetItem();
+                userDataService.setEducation({"_id": currentUserID, "educationID": res.data.response._id});
             })
-            .catch(e => console.warn(e.message))
+            .catch(e => console.warn(e.message));
     }
 
-    const updateEducationItem = (evt) => {
-        evt.preventDefault();
+    const updateEducationItem = (e) => {
+        e.preventDefault();
         educationDataService.update(item)
             .then(() => {
                 setUpdateItemPopup(false);
@@ -73,13 +79,14 @@ const Education = () => {
             .catch(e => console.warn(e.message));
     }
 
-    const deleteEducationItem = (evt) => {
-        evt.preventDefault();
+    const deleteEducationItem = (e) => {
+        e.preventDefault();
         educationDataService.delete(selectedID)
-            .then(() => {
+            .then(res => {
                 setDeleteItemPopup(false);
                 setSelectedID("");
                 setDataReceived(false);
+                userDataService.delEducation({"_id": currentUserID, "educationID": res.data.response._id});
             })
             .catch(e => console.warn(e.message));
     }

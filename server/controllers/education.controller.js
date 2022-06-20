@@ -2,7 +2,7 @@ import Education from "../models/education.model.js";
 import asyncHandler from "express-async-handler";
 import { apiResponse } from "./response.js";
 
-// @desc Set education
+// @desc Create a education
 // @route POST /api/education/
 // @access Private
 const setEducation = asyncHandler( async (req, res) => {
@@ -13,8 +13,8 @@ const setEducation = asyncHandler( async (req, res) => {
     const endDate = req.body.endDate;
     const assignedUser = req.body.assignedUser;
 
-    if( !title || !degree || !fieldOfStudy || 
-        !startDate || !endDate || !assignedUser){
+    if( !title || !degree || !startDate ||
+        !endDate || !assignedUser){
         
         apiResponse(res, false, 400, "A required parameter is missing or incorrect");
         throw new Error("A required parameter is missing or incorrect");
