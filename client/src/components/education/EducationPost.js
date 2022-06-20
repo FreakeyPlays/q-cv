@@ -1,3 +1,4 @@
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import EducationPostItems from "./educationPost.items";
@@ -41,10 +42,14 @@ const EducationPost = ({ item, setIdFunc, setDeleteFunc, setUpdateFunc, setItemF
                 
                 {EducationPostItems.map(element => {
                     return (
-                        <div key={element.id} className={element.classNames}>
-                            <h3>{element.title}</h3>
-                            <p>{element.parse(item)}</p>
-                        </div>
+                        element.required || element.isStored(item) ? (
+                            <div key={element.id} className={element.classNames}>
+                                <h3>{element.title}</h3>
+                                <p>{element.parse(item)}</p>
+                            </div>
+                        ) : (
+                            <React.Fragment key={element.id} />
+                        )
                     )
                 })}
 

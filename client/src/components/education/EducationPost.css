@@ -1,8 +1,8 @@
 .educationPost{
     width: 80%;
     max-width: 960px;
-    border: solid 1px rgba(51, 51, 51, 30%);
-    background-color: #f1f3f4;
+    border: solid 1px #3333334d;
+    background-color: #efefef;
     border-radius: 16px;
     padding: 16px;
     display: flex;

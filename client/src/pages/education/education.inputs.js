@@ -1,6 +1,6 @@
 const educationInputs = [
     {
-        id: 1,
+        id: 0,
         name: "title",
         type: "text",
         placeholder: "Title",
@@ -8,7 +8,7 @@ const educationInputs = [
         required: true
     },
     {
-        id: 2,
+        id: 1,
         name: "degree",
         type: "text",
         placeholder: "Degree",
@@ -16,7 +16,7 @@ const educationInputs = [
         required: true
     },
     {
-        id: 3,
+        id: 2,
         name: "fieldOfStudy",
         type: "text",
         placeholder: "Field of Study",
@@ -24,7 +24,7 @@ const educationInputs = [
         required: true
     },
     {
-        id: 4,
+        id: 3,
         name: "startDate",
         type: "date",
         placeholder: "Start Date",
@@ -32,7 +32,7 @@ const educationInputs = [
         required: true
     },
     {
-        id: 5,
+        id: 4,
         name: "endDate",
         type: "date",
         placeholder: "End Date",
