@@ -1,6 +1,6 @@
 import React from "react";
 import "./Menu.css";
-import { MenuItems } from "./Menu.items.js"
+import getMenueItems from "./Menu.items.js"
 import { NavLink } from 'react-router-dom'
 import UserService from "../../services/keycloakUser.service.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,7 +39,7 @@ const Menu = ({ children }) => {
                 </div>
             </div>
             <ul className="navigation_list">
-                {MenuItems.map((item, index) => {
+                {getMenueItems().map((item, index) => {
                     return(
                         <li className={item.className} key={index}>
                             <NavLink to={item.url} className={(navData) => (navData.isActive ? "activeLink" : "")}>

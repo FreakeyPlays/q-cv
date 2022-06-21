@@ -9,7 +9,6 @@ import { Button } from '@material-ui/core';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import Titlebar from "../../components/titlebar/Titlebar";
 
-skillDataService.getUserSkillSet();
 
 const ITSkills = () => {
     const[buttonPopup, setButtonPopup] = useState(false);

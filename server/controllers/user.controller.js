@@ -1,5 +1,6 @@
 import User from '../models/user.model.js';
 import asyncHandler from 'express-async-handler';
+import '../keycloal.controller.js';
 
 const createUser = asyncHandler( async(req,res) =>{
     //gets data from request

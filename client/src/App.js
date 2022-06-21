@@ -9,6 +9,7 @@ import Career from "./pages/career/Career";
 import ITSkills from "./pages/itskills/ITSkills";
 import Projects from "./pages/projects/Projects";
 import AdminUserData from "./pages/userdata/AdminUserData";
+import UserService from "./services/keycloakUser.service";
 
 
 import "./App.css"
@@ -28,7 +29,7 @@ const App = () => {
                     <Route path="projects/create" element={<ManageProject function={projectDataService.create} title="Create" />} />
                     <Route path="projects/copy/:id" element={<ManageProject function={projectDataService.copy} title="Copy" />} />
                     <Route path="projects/edit/:id" element={<ManageProject function={projectDataService.update} title="Edit" />} />
-                    <Route path="/AdminUserData" element={<AdminUserData />} />
+                    { UserService.getIsAdmin() ? <Route path="/AdminUserData" element={<AdminUserData />} /> : <></>}
                 </Routes>
             </Menu>
         </Router>
