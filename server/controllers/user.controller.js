@@ -1,6 +1,5 @@
 import User from '../models/user.model.js';
 import asyncHandler from 'express-async-handler';
-import '../keycloal.controller.js';
 
 const createUser = asyncHandler( async(req,res) =>{
     //gets data from request
@@ -29,9 +28,11 @@ const createUser = asyncHandler( async(req,res) =>{
     res.json({
         ok: true,
         status: 200,
-        message: "User created, Admin: " + isAdmin,
-
+        message: "User created",
+        response: newUser
     })
+
+    
 });
 
 //function for returning all users without any parameter

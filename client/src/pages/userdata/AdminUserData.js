@@ -5,6 +5,7 @@ import './AdminUSerData.css';
 import {pwdInput, AdminUserInput} from './AdminUserInput.js';
 import Popup from '../../components/popup/Popup.js';
 import Titlebar from '../../components/titlebar/Titlebar';
+import UserService from '../../services/keycloakUser.service';
 
 import { Button } from '@material-ui/core';
 import Form from 'react-bootstrap/Form';
@@ -14,25 +15,29 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormInput from '../../components/formInput/FormInput';
+import DeletePopup from '../../components/popup/deletePopup/DeletePopup';
 
 const AdminUserData = () =>{
     //State Variales section
     const [users, setUsers] = useState([]); //stored User Datas
     const [selectedUser, setUserID] = useState(""); //stores selected User ID
     const [isAdminVal, setAdmin] = useState(false); //state variable for checking is admin status
-    const [newPwd, setPwd] = useState("");
-    const [user, setUser] = useState({
+    const [newPwd, setPwd] = useState(""); //new Password for update
+    const [selectedItem, setSelectedItem] = useState(""); //also selected user
+    const [selectedKeyID, setSelectedKeyID] = useState(""); //keycloak id from db
+    const [user, setUser] = useState({ //cache for used user
         firstName:"",
         lastName:"",
         eMail:"",
         password:"",
         isAdmin: false
-    }); //cache for used user
+    }); 
 
     //update state variables
     const [updatePopup, setUpdatePopup] = useState(false);
     const [createPopup, setCreatePopup] = useState(false);
     const [passwordPopup, setPasswordPopup] = useState(false);
+    const [deletePopup, setDeletePopup] = useState(false);
     
     useEffect(() =>{
         retrieveUsers();
@@ -42,24 +47,37 @@ const AdminUserData = () =>{
     const retrieveUsers = () =>{
         
         userDataService.getUsers().then(response=>{
-            console.log(response.data)
             setUsers(response.data.user)
         }).catch( e =>{
-            console.log(e)
+            console.warn(e)
         })
     }
 
+    //function to update user
     const updateUser = (e) =>{
         e.preventDefault();
         let cach = {};  //cache for changed data
         
-        for(let i = 0; i < 4; i++){ //adding new data into cach
+        //adding new data into cach
+        for(let i = 0; i < 4; i++){ 
             cach[e.target[i].name] = e.target[i].value;
         }
         cach["_id"] = selectedUser;          //set userid into cache --> Important for API call
-        
+
+        // body for update keycloak user
+        const body = {
+            email: cach.eMail,
+            firstName: cach.firstName,
+            lastName: cach.lastName
+        }
+
         //update Api call
-        userDataService.updateUser(cach).then(() => window.location.reload(false)).catch((e) => console.log("Update fehlgeschlagen!"));
+        userDataService.updateUser(cach)
+            .then(() => {
+                //inner keycloak update function after user on mongodb got updated
+                UserService.updateKeycloakUser(selectedKeyID,body).then(() => window.location.reload(false)).catch((e) => console.warn(e));
+            })
+            .catch((e) => console.warn("Update fehlgeschlagen!"));
 
         //clears the state user object ( --> otherwise it would be shown in create user popup )
         for(let j = 0; j < 5; j++){
@@ -68,13 +86,19 @@ const AdminUserData = () =>{
     }
 
     //function for setting new pwd
-    const setPWD = () =>{
+    const setPWD = (e) =>{
+        e.preventDefault();
 
         let cach = {};
         cach["_id"] = selectedUser;
         cach["password"] = newPwd;
 
-        userDataService.updateUser(cach).then(() => window.location.reload(false)).catch((e) => console.log(e));
+        userDataService.updateUser(cach)
+            .then(() => {
+                //keycloak password reset 
+                UserService.resetKeycloakPassword(selectedKeyID,{password: newPwd}).then(()=> window.location.reload(false)).catch((e) => {console.warn(e);alert("pwdTEst");})
+            })
+            .catch((e) => {console.warn(e); alert("pwd")});
         setPwd("");
     }
 
@@ -88,10 +112,29 @@ const AdminUserData = () =>{
         cach["isAdmin"] = isAdminVal;
         
         //create user api call
-        userDataService.createUser(cach).then(() => window.location.reload(false)).catch((e) => console.log(e));
+        userDataService.createUser(cach)
+            .then(response =>{
+                const body ={
+                    email: response.data.response.eMail,
+                    firstName: response.data.response.firstName,
+                    lastName: response.data.response.lastName,
+                    password: response.data.response.password,
+                    id: response.data.response._id,
+                    isAdmin: response.data.response.isAdmin
+                }
+            
+                UserService.createKeycloakUser(body)
+                    .then((res) => {
+                        userDataService.updateUser({
+                            _id: body.id,
+                            keycloakID: res.data.response.kc_uid
+                        }).then(() => window.location.reload(false)).catch((e) => console.warn(e));
+                    })
+                    .catch((e)=>{alert("ichstinke"); console.warn(e) });
+            } )
+            .catch((e) => console.warn(e));
+
         setAdmin(false);
-
-
     }
 
     //change state functions
@@ -103,8 +146,15 @@ const AdminUserData = () =>{
     }
     function handlePwdChange(e){
         setPwd(e.target.value);
-        console.log(newPwd);
     }
+    const deleteUserFunction = (e) =>{
+        userDataService.deleteUser(selectedItem)
+            .then(res =>{
+                UserService.deleteKeycloakUser(selectedKeyID)
+                    .then(() => {setDeletePopup(false); window.location.reload(false)})
+                    .catch((evt) => console.warn(evt));
+            })
+    } 
 
     return(
     //divided into first the normal page and after into extra pages like Popups etv.
@@ -130,9 +180,9 @@ const AdminUserData = () =>{
                                         <Card.Header className="cardHeader" as="h4">{item.firstName} {item.lastName}
                                             <div className="buttonWrapper">
                                             <div data={index} onClick={(e) =>{
-                                                    userDataService.deleteUser(item._id).then(res =>{
-                                                    window.location.reload(false);
-                                                    })
+                                                    setSelectedItem(item._id);
+                                                    setSelectedKeyID(item.keycloakID);
+                                                    setDeletePopup(true);
                                                 }}>
                                                 <FontAwesomeIcon className="icon" icon={faTrash}/>
                                             </div>
@@ -145,6 +195,7 @@ const AdminUserData = () =>{
                                                     isAdmin:users[e.currentTarget.getAttribute("data")].isAdmin 
                                                 }
                                                 setUserID(users[e.currentTarget.getAttribute("data")]._id);
+                                                setSelectedKeyID(users[e.currentTarget.getAttribute("data")].keycloakID);
                                                 setUser(uData);
                                                 setUpdatePopup(true);
                                                 }}>
@@ -157,6 +208,7 @@ const AdminUserData = () =>{
                                         <div className='changePWDButton'>
                                             <Button variant="Text" data={index} onClick={(e) =>{
                                                 setUserID(users[e.currentTarget.getAttribute("data")]._id);
+                                                setSelectedKeyID(users[e.currentTarget.getAttribute("data")].keycloakID);
                                                 setPasswordPopup(true);
                                             }}>Neues Passwort</Button>
                                         </div>
@@ -223,6 +275,12 @@ const AdminUserData = () =>{
                 </div>  
             </form>
         </Popup>
+
+        <DeletePopup 
+            triggerVar={deletePopup}
+            setTriggerFunc={setDeletePopup}
+            deleteFunc={deleteUserFunction}
+        />
 
     </>
     )
