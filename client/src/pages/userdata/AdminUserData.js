@@ -205,8 +205,9 @@ const AdminUserData = () =>{
                                         </Card.Header>
                                         <Card.Text>ID: {item._id}</Card.Text>
                                         <Card.Text>E-Mail: {item.eMail}</Card.Text>
+                                        {item.isAdmin ? <Card.Text>Admin</Card.Text>:<></>}
                                         <div className='changePWDButton'>
-                                            <Button variant="Text" data={index} onClick={(e) =>{
+                                            <Button  data={index} onClick={(e) =>{
                                                 setUserID(users[e.currentTarget.getAttribute("data")]._id);
                                                 setSelectedKeyID(users[e.currentTarget.getAttribute("data")].keycloakID);
                                                 setPasswordPopup(true);
