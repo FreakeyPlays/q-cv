@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { skillDataService } from '../../services/skills.services.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faPen, faTrash} from '@fortawesome/free-solid-svg-icons'
 import Popup from '../../components/popup/Popup.js';
 import TextField from '@material-ui/core/TextField'
 import "./ITSkills.css";
 import { Button } from '@material-ui/core';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import Titlebar from "../../components/titlebar/Titlebar";
 
+skillDataService.getUserSkillSet();
 
 const ITSkills = () => {
     const[buttonPopup, setButtonPopup] = useState(false);
@@ -22,6 +24,8 @@ const ITSkills = () => {
     const[newUpdateSkillName, setNewUpdateSkillName] = useState('');
     const[oldUneditedName, setOldUneditedName] = useState('');
     
+
+
     const handleUpdateSubmit = (e) =>{
         e.preventDefault();
         if(updateTargetId){
@@ -65,6 +69,10 @@ const ITSkills = () => {
 
     return(
         <>
+            <Titlebar 
+                path = "/it-skills"
+                function = {() => setButtonPopup(true)}
+            />
             <h1>IT-Skills</h1>
             <div className='allItems'>
                 {
@@ -98,10 +106,7 @@ const ITSkills = () => {
                 })
             }
             </div>
-            <div className='addSkillIcon' onClick={() => setButtonPopup(true)}>
-                <FontAwesomeIcon className='skillPlusIcon' icon={faPlus} />
-            </div>
-            
+                       
             <Popup trigger ={buttonPopup}  setTrigger={setButtonPopup}>
                 <h3>New Skill</h3>
                     <form noValidate autoComplete='off' onSubmit={handleSubmit}>
