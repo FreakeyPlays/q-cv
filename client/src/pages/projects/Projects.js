@@ -16,6 +16,7 @@ const Projects = () => {
     const [showAll, setShowAll] = useState(false)
     const [searchFilter, setSearchFilter] = useState("");
 
+
     const [deleteItemPopup, setDeleteItemPopup] = useState(false);
     const [selectedID, setSelectedID] = useState("");
     const deleteProjectItem = (e) => {

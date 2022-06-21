@@ -41,6 +41,7 @@ const Titlebar = (props) => {
                     ): (
                         <></>
                     )}
+
                     <CreateButton link={props.path} function={props.function ? props.function : null} />
                 </div>
             </div>
