@@ -6,9 +6,18 @@ services:
     ports:
       - "8080:8080"
     command: 
-      - start-dev
+      [
+        "start-dev",
+        "-Dkeycloak.migration.action=import",
+        "-Dkeycloak.migration.provider=dir",
+        "-Dkeycloak.migration.dir=/opt/keycloak/realm-config",
+        "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING"
+      ]
+    volumes:
+      - ./realm-config:/opt/keycloak/realm-config
     networks:
       - mern-app
+    restart: always
   react-app:
     image: react-app
     env_file: ./client/config/dev.env
