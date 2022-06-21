@@ -2,32 +2,116 @@
     display: flex;
     padding: 25px;
     border: 1px solid #E8E8E8;
+    background-color: #efefef;
     width: 70%;
     margin: auto;
     margin-top: 20px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
-    border-top-left-radius: .6em;
-    border-top-right-radius: .6em;
-    border-bottom-right-radius: .6em;
-    border-bottom-left-radius: .6em;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
     flex-direction: column;
+    width: 80%;
+    max-width: 960px;
+}
+
+h3{
+    color: #3dc0f1;
+    border-bottom: 1px solid rgba(51,51,51,.3);
 }
 
 .itemWrapper{
     padding-top: 110px;
     padding-bottom: 60px;
+    
+}
+
+.interaction{
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 8px;
 }
 
 .editIcon{
     color: #333;
-    display: flex;
-    padding: 5px;
+}
+
+h2{
+    color: #333;
 }
 
 .headWrapper{
-    display: flex;
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
     justify-content: space-between;
-    border-bottom: 1px solid #E8E8E8;
-    border-bottom-right-radius: .6em;
-    border-bottom-left-radius: .6em;
+    grid-column-gap: 16px;
+    padding-bottom: 8px;
+    border-bottom: solid 1px #333;
+    align-items: center;
+}
+
+.companyWrapper{
+    display: grid;
+    grid-template-columns: repeat(6, minmax(100px, 1fr));
+    grid-gap: 16px;
+}
+
+.fEdu {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.fCar {
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+.fSki{
+    grid-column-start: 5;
+    grid-column-end: 7;
+}
+.fPro {
+    grid-column-start: 1;
+    grid-column-end: 7;}
+.flastUpdate {
+    grid-column-start: 5;
+    grid-column-end: 7;
+}
+
+@media screen and (max-width: 1280px) {
+    .companyWrapper{
+        grid-template-columns: repeat(4, minmax(100px, 1fr));
+    }
+    .fEdu,
+    .fSki {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    .fSki {
+        grid-column-end: 5;
+    }
+    .fCar {
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+    .fPro {
+        grid-column-start: 1;
+        grid-column-end: 5;}
+    .flastUpdate {
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+}
+@media screen and (max-width: 750px) {
+    .companyWrapper{
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+    .fEdu,
+    .fCar,
+    .fSki,
+    .fPro,
+    .flastUpdate{
+        grid-column-start: 1;
+        grid-column-end: 3;
+}
 }

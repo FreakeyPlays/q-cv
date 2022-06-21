@@ -20,7 +20,7 @@ const Dashboard = () => {
     //for testing
     const getOwnerId = ()=>{
         //later: get id-list from user
-        setUID("6293a91218be7b568841d1dd"); // _id des users Marc
+        setUID("62961e08f9b16e4ba142dd05"); // _id des users Marc
     }
 
     useEffect( ()=>{
@@ -78,7 +78,7 @@ const Dashboard = () => {
                     <>
                     <div key={index} className='careerItem' data={index}>
                         <div className='headWrapper'>
-                            <h3>{item.cvName}</h3>
+                            <h2>{item.cvName}</h2>
                             <div className='interaction'>
                                 <div data={index} onClick={ updateCv }>
                                     <FontAwesomeIcon className='editIcon' icon={faPen} />
@@ -90,12 +90,11 @@ const Dashboard = () => {
                         </div>
                         
                         <div className='companyWrapper'>
-                        <div > <h4>Education:</h4> {extractEducation(item)}</div><br/>
-                        <div ><h4>Career:</h4> {extractCareer(item)}</div><br/>
-                        <div><h4>Skills:</h4> {extractSkills(item)}</div><br/>
-                        <div><h4>Projects:</h4> {extractProjects(item)}</div><br/>
-                            <div>updated: { formatDate(new Date(item.date))}</div><br/>
-                            <div></div>
+                            <div className ="fEdu"> <h3>Education</h3> <p>{extractEducation(item)}</p></div>
+                            <div className ="fCar"><h3>Career</h3><p>{extractCareer(item)}</p></div>
+                            <div className ="fSki"><h3>Skills</h3> <p>{extractSkills(item)}</p></div>
+                            <div className ="fPro"><h3>Projects</h3> <div>{extractProjects(item)}</div></div>
+                            <div className="flastUpdate">updated: {formatDate(new Date(item.date))}</div>
                         </div>
                     </div>
                     </>

@@ -13,22 +13,22 @@ const extractCareer = (cv) => {
     if(cv.career.length === 0) return (<>
         <div>No career added.</div>
     </>); 
-    return cv.career.map((item, index) => {
-        return (<>
-            <div key={index}>{item.company}</div>
-        </>)
-    });
+    let nameArray = [];
+    for (let i of cv.career){
+        nameArray.push(i.company);
+    }
+    return parse(nameArray);
 }
 
 const extractSkills = (cv) =>{
     if(cv.skills.length === 0) return (<>
         <div>No skill added.</div>
-    </>); 
-    return cv.skills.map((item, index) => {
-        return (<>
-            <div key={index}>{item.name}</div>
-        </>)
-    });
+    </>);
+    let nameArray = [];
+    for (let i of cv.skills){
+        nameArray.push(i.name);
+    }
+    return parse(nameArray);
 }
 
 const extractProjects = (cv) => {
@@ -36,10 +36,15 @@ const extractProjects = (cv) => {
         <div>No projects added.</div>
     </>); 
     return cv.projects.map((item, index) => {
+        const last = index >= (cv.projects.length-1);
         return (<>
-            <div key={index}>{item.title}</div>
+            <p key={index}>{item.title}{last ? "" : ","}</p>
         </>)
     });
+}
+
+function parse(array, trenner = ", "){
+    return array.join(trenner);
 }
 
 export{

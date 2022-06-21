@@ -149,7 +149,7 @@ const CreateCV = (params) => {
                     })
                     .catch( error => console.log( error ) );
             } else {
-                userDataService.getUser("6293a91218be7b568841d1dd")
+                userDataService.getUser("62961e08f9b16e4ba142dd05")
                     .then(response => {
                         dataMap(response);
                     })
@@ -251,15 +251,6 @@ const CreateCV = (params) => {
         setQualiError(false);
         setProfileError(false);
 
-        setValidation({
-            cvName: false,
-            name: false,
-            language: false,
-            email: false,
-            telephone: false,
-            quali: false,
-            profile: false
-        });
 
         if (cvName === '') { setCvNameError(true); window.scrollTo(0, 0); };
         if (userInfo[0].name === '') { setNameError(true); window.scrollTo(0, 0); };
