@@ -434,6 +434,8 @@ const CreateCV = (params) => {
         const values = [...shownProjects];
         let project = projects[projectIdx];
         project.dragId = uuidv4();
+        project.startDate = (project.startDate).slice(0,10);
+        project.endDate = (project.endDate).slice(0,10);
 
         if (shownProjectIdx === -1) { // from button
             values.push(projects[projectIdx]);
@@ -806,47 +808,38 @@ const CreateCV = (params) => {
                                                                 </div>
                                                             </div>
                                                             <Grid container>
+                                                                {
+                                                                    CVInputs.project.map((cvInput, cvIndex) => {
+                                                                        return (
+                                                                            <Grid key={cvIndex} item md={6}>
+                                                                                <TextField
+                                                                                    className={classes.field}
+                                                                                    name={cvInput.name}
+                                                                                    value={item[cvInput.name]}
+                                                                                    label={cvInput.label}
+                                                                                    variant="outlined"
+                                                                                    fullWidth
+                                                                                    onChange={e => handleInputChange(e, index, "projects")}
+                                                                                />
+                                                                            </Grid>
+                                                                        )
+                                                                    }) 
+                                                                }
                                                                 <Grid item md={6}>
-                                                                    <TextField
-                                                                        className={classes.field}
-                                                                        name="title"
-                                                                        value={item.title}
-                                                                        label="Title"
-                                                                        variant="outlined"
-                                                                        fullWidth
+                                                                    <span className="dateInputLabel">Start date:</span>
+                                                                    <input className="dateInput"
+                                                                        type="date"
+                                                                        name="startDate"
+                                                                        value={item.startDate}
                                                                         onChange={event => handleInputChange(event, index, "projects")}
                                                                     />
                                                                 </Grid>
                                                                 <Grid item md={6}>
-                                                                    <TextField
-                                                                        className={classes.field}
-                                                                        name="customer"
-                                                                        value={item.customer}
-                                                                        label="Customer"
-                                                                        variant="outlined"
-                                                                        fullWidth
-                                                                        onChange={event => handleInputChange(event, index, "projects")}
-                                                                    />
-                                                                </Grid>
-                                                                <Grid item md={6}>
-                                                                    <TextField
-                                                                        className={classes.field}
-                                                                        name="industry"
-                                                                        value={item.industry}
-                                                                        label="Industry"
-                                                                        variant="outlined"
-                                                                        fullWidth
-                                                                        onChange={event => handleInputChange(event, index, "projects")}
-                                                                    />
-                                                                </Grid>
-                                                                <Grid item md={6}>
-                                                                    <TextField
-                                                                        className={classes.field}
-                                                                        name="country"
-                                                                        value={item.country}
-                                                                        label="Country"
-                                                                        variant="outlined"
-                                                                        fullWidth
+                                                                    <span className="dateInputLabel">End date:</span>
+                                                                    <input className="dateInput"
+                                                                        type="date"
+                                                                        name="endDate"
+                                                                        value={item.endDate}
                                                                         onChange={event => handleInputChange(event, index, "projects")}
                                                                     />
                                                                 </Grid>
