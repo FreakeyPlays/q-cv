@@ -1,12 +1,10 @@
-//import { faAslInterpreting } from "@fortawesome/free-solid-svg-icons";
-
 const ProjectPostItems = [
     {
         id: 1,
         title: "Customer",
         key: "customer",
         classNames: "projectCustomer column",
-        optional: true,
+        required: true,
         parse(item){
             return item[this.key];
         }
@@ -16,7 +14,7 @@ const ProjectPostItems = [
         title: "Industry",
         key: "industry",
         classNames: "projectIndustry column",
-        optional: true,
+        required: true,
         parse(item){
             return item[this.key];
         }
@@ -26,7 +24,7 @@ const ProjectPostItems = [
         title: "Country",
         key: "country",
         classNames: "projectCountry column",
-        optional: true,
+        required: true,
         parse(item){
             return item[this.key];
         }
@@ -36,7 +34,7 @@ const ProjectPostItems = [
         title: "Position",
         key: "position",
         classNames: "projectPosition column",
-        optional: true,
+        required: true,
         parse(item){
             return item[this.key];
         }
@@ -46,7 +44,7 @@ const ProjectPostItems = [
         title: "Duration",
         key: ["startDate", "endDate"],
         classNames: "projectDuration column",
-        optional: true,
+        required: true,
         parse(item){
             let start = new Date(item[this.key[0]]).toLocaleDateString();
             let end = new Date(item[this.key[1]]).toLocaleDateString();
@@ -58,7 +56,7 @@ const ProjectPostItems = [
         title: "Activities",
         key: "activities",
         classNames: "projectActivities column",
-        optional: false,
+        required: false,
         parse(item){
             return item[this.key].join(", ");
         },
@@ -71,7 +69,7 @@ const ProjectPostItems = [
         title: "Environment",
         key: "environment",
         classNames: "projectEnvironment column",
-        optional: false,
+        required: false,
         parse(item){
             return item[this.key];
         },
@@ -87,7 +85,7 @@ const ProjectPostItems = [
         title: "Location",
         key: "location",
         classNames: "projectLocation column",
-        optional: true,
+        required: true,
         parse(item){
             return item[this.key];
         }
@@ -97,7 +95,7 @@ const ProjectPostItems = [
         title: "Team Size",
         key: "teamSize",
         classNames: "projectTeamSize column",
-        optional: true,
+        required: true,
         parse(item){
             return item[this.key];
         }
@@ -107,7 +105,7 @@ const ProjectPostItems = [
         title: "Description",
         key: "description",
         classNames: "projectDescription fullColumn",
-        optional: true,
+        required: true,
         parse(item){
             return item[this.key];
         }

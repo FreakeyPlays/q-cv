@@ -61,7 +61,7 @@ const ITSkills = () => {
     useEffect( ()=>{
         if(receivedData.current === false){
             skillDataService.getAll()
-                .then(response => setSkill(response.data))
+                .then(response => setSkill(response.data.response))
                 .catch( e => console.error(e.message));
             receivedData.current = true;
         }
@@ -95,7 +95,7 @@ const ITSkills = () => {
                                             skillDataService.deleteSkill(id).then(res => {
                                                 window.location.reload(false);
                                                 receivedData.current = false;
-                                            })
+                                            }).catch( e => console.error(e.message) )
                                         }
                                     }>
                                     <FontAwesomeIcon className='skillIcon' icon={faTrash} />

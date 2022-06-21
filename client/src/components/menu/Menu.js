@@ -1,8 +1,8 @@
 import React from "react";
 import "./Menu.css";
-import { MenuItems } from "./Menu.items"
-import { NavLink, Link } from 'react-router-dom'
-
+import { MenuItems } from "./Menu.items.js"
+import { NavLink } from 'react-router-dom'
+import UserService from "../../services/keycloakUser.service.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -20,7 +20,7 @@ const Menu = ({ children }) => {
             menu.classList.toggle("showMenu");
         }
     });
-
+    
     return(
         <>
         <nav className="menu" id="menu">
@@ -30,11 +30,11 @@ const Menu = ({ children }) => {
                     <img className="profile_image" src="/profile.webp" alt="profile"></img>
                     <div className="profile">
                         <span id="userId">
-                            John Doe
+                            {UserService.getKCName() ? UserService.getKCName() : "John Doe"}
                         </span>
-                        <Link to={"/"}>
+                        <p className="logoutBtn" onClick={UserService.doLogout}>
                             Log out
-                        </Link>
+                        </p>
                     </div>
                 </div>
             </div>

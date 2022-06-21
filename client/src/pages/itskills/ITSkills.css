@@ -71,7 +71,7 @@
 }
 
 .interaction{
-    width: 10%;
+    width: 40px;
     display: flex;
     justify-content: space-between ;
 }

@@ -1,7 +1,6 @@
 const Dashboard = () => {
     return(
-        <>
-        </>
+       <></>
     )
 }
 

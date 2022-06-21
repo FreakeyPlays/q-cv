@@ -1,6 +1,9 @@
 import axios from "axios";
+import { userDataService } from "./user.services.js"
 
-const basePath = "http://localhost:5000/api/projects"
+const ADDRESS = process.env.REACT_APP_URL;
+const PORT = process.env.REACT_APP_API_PORT;
+const basePath = "http://" + ADDRESS + ":" + PORT + "/api/projects"
 
 export const projectDataService = {
     getAll(){
@@ -11,16 +14,30 @@ export const projectDataService = {
         return axios.get(basePath + `/${id}`);
     },
 
-    create(data){
-        return axios.post(basePath + "/", data);
+    create(body){
+        let response = axios.post(basePath + "/", body)
+            .then(res => {
+                userDataService.setProject({"_id": res.data.response.assignedUser, "projectID": res.data.response._id});
+                return res;
+            });
+        return response;
     },
 
     copy(data){
-        return axios.post(basePath + "/", data);
+        let response = axios.post(basePath + "/", data)
+            .then(res => {
+                userDataService.setProject({"_id": res.data.response.assignedUser, "projectID": res.data.response._id});
+                return res;
+            })
+        return response;
     },
 
     delete(id){
-        return axios.delete(basePath + `/${id}`);
+        let response = axios.delete(basePath + `/${id}`)
+            .then(res => {
+                userDataService.delProject({"_id": res.data.response.assignedUser, "projectID": id})
+            });
+        return response;
     },
 
     update(data){

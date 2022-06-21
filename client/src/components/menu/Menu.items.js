@@ -38,8 +38,8 @@ export const MenuItems = [
         icon: faClipboard
     },
     {
-        title: "Create CV",
-        url: "/create-cv",
+        title: "User",
+        url: "/AdminUserData",
         className: "navLink",
         icon: faPlus
     }

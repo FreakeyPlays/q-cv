@@ -1,0 +1,24 @@
+.main{
+    height: 100%;
+}
+
+.contentContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding-top: 100px;
+}
+
+.inputContent{
+    margin: auto;
+    width: 90%;
+}
+
+.subButton{
+    margin:auto;
+    padding-top: 10px;
+}
+
+.subButton Button{
+    background-color: #3dc0f1;
+}
