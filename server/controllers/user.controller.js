@@ -184,7 +184,7 @@ const setSkill = asyncHandler( async(req,res) =>{
 const delSkill = asyncHandler( async(req,res) =>{
     const user = await User.findById(req.params.id);
     var index = user.skills.indexOf(req.params.skillID);
-    user.education.splice(index,1);
+    user.skills.splice(index,1);
 
     const updated = await User.findByIdAndUpdate(user.id, user, {new:true});
 
