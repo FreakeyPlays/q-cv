@@ -28,7 +28,6 @@ const ITSkills = () => {
     const isAdmin = useRef(false);
 
     isAdmin.current = UserService.getIsAdmin();
-    console.log(isAdmin.current);
     UserService.getLoggedInUID()
     .then( res => setUserId( res ) )
     .catch( e => console.error(e.message) )
@@ -39,7 +38,6 @@ const ITSkills = () => {
             skillDataService.updateSkill(updateTargetId,{
                 "name":newUpdateSkillName
             }).then((res)=>{
-                console.log(res.params);
                 window.location.reload(false);
                 receivedData.current = false;
             })
@@ -104,7 +102,7 @@ const removeSkillFromUser = (e)  => {
 const addSkillToUser = (e) => {
     let id = skill[e.currentTarget.getAttribute("data")]._id
     if(id)userDataService.setSkill({_id: userId, skillID: id})
-    .then(res => {console.log(res)
+    .then(res => {
     window.location.reload(false)})
     .catch(e => console.error(e.message))
 }
@@ -157,7 +155,6 @@ const userHasSkill = ( sk ) => {
                             </div>:<></>}
                             {isAdmin.current?<div data={index} onClick={ (e) =>  {
                                         setUpdateTargetId(skill[e.currentTarget.getAttribute("data")]._id);
-                                        console.log("Item with id has been clicked: " + updateTargetId);
                                         setUpdatePopup(true);
                                         setOldUneditedName(skill[e.currentTarget.getAttribute("data")].name);
                                     }
