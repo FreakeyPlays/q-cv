@@ -66,7 +66,7 @@ const getKeycloakUser = (id) => {
 const getLoggedInUID = () => {
     return axios.get(basePath + "/" + getKCUID())
     .then(res => res.data.response.attributes.MONGODB_UID[0])
-    .catch(e => console.log(e));
+    .catch(e => console.warn(e));
 }
 
 const getIsAdmin = () => {

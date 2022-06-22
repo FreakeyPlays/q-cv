@@ -72,7 +72,7 @@ const UserData = () => {
             }
         }
 
-        userDataService.updateUser(cache).then(() => window.location.reload(false)).catch((e) => console.log("Update fehlgeschlagen!"));
+        userDataService.updateUser(cache).then(() => window.location.reload(false)).catch((e) => console.warn("Update fehlgeschlagen!"));
         activeUser.current = false;
     }
 

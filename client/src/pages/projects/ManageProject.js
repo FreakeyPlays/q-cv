@@ -82,7 +82,7 @@ const ManageProject = (params) => {
 
         params.function(tmp)
             .then(() => window.location.href = "/projects")
-            .catch((e) => console.log(e));
+            .catch((e) => console.warn(e));
     }
 
     function handleOnChange(e){
