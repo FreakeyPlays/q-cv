@@ -27,10 +27,9 @@ const UserData = () => {
     useEffect(() =>{
         if(activeUser.current === false && userId !== ""){
             userDataService.getUser(userId).then(response=>{
-                console.log(response.data)
                 setUser(response.data.user)
             }).catch( e =>{
-                console.log(e)
+                console.warn(e)
             })
             activeUser.current = true;
         } 
@@ -47,8 +46,6 @@ const UserData = () => {
         }
 
         cache["_id"] = userId;
-
-        console.log(cache);
 
         //Array Section --> split up strings
         let cacheSprachen = cache["sprachen"].split(",");
