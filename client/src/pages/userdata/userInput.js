@@ -25,46 +25,38 @@ const  userInput = [
     },
     {
         id: 4,
-        name: "password",
-        type: "text",
-        placeholder:"Passwort",
-        label: "Passwort",
-        required: true
-    },
-    {
-        id: 5,
         name: "sprachen",
         type: "text",
         placeholder: "Deutsch,Englisch,...",
         label: "Sprachen",
         errorMessage: "Please use the right Formatation! (..,..)",
-        required: false
+        required: true
     },
     {
-        id: 6,
+        id: 5,
         name: "kurzprofil",
         type: "text",
         label: "Kurzprofil",
-        required: false,
+        required: true,
     },
     {
-        id: 7,
+        id: 6,
         name: "beratungsschwerpunkte",
         type: "text",
         placeholder: "Managment,Leiter,...",
         label: "Beratungsschwerpunkte",
         errorMessage: "Please use the right Formatation! (..,..)", 
-        required: false
+        required: true
     },
     {
-        id: 8,
+        id: 7,
         name: "projektRollen",
         type: "text",
         placeholder: "Scrum Master,Product Owner,...",
         label: "Projektrollen",
         errorMessage: "Please use the right Formatation! (..,..)",
         required: false,
-    },
+    }
 ];
 
 export{

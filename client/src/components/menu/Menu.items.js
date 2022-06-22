@@ -43,7 +43,7 @@ const MenuItems = [
 const AdminMenueItems = [
     {
         title: "User",
-        url: "/AdminUserData",
+        url: "/user",
         className: "navLink",
         icon: faPlus
     }

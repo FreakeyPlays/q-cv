@@ -1,7 +1,7 @@
 import React from "react";
 import Menu from "./components/menu/Menu";
 import { projectDataService } from "./services/project.service";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from "./pages/dashboard/Dashboard";
 import UserData from "./pages/userdata/UserData";
 import Education from "./pages/education/Education";
@@ -29,7 +29,8 @@ const App = () => {
                     <Route path="projects/create" element={<ManageProject function={projectDataService.create} title="Create" />} />
                     <Route path="projects/copy/:id" element={<ManageProject function={projectDataService.copy} title="Copy" />} />
                     <Route path="projects/edit/:id" element={<ManageProject function={projectDataService.update} title="Edit" />} />
-                    { UserService.getIsAdmin() ? <Route path="/AdminUserData" element={<AdminUserData />} /> : <></>}
+                    { UserService.getIsAdmin() ? <Route path="/user" element={<AdminUserData />} /> : <></>}
+                    <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </Menu>
         </Router>

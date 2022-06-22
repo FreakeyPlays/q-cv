@@ -42,7 +42,7 @@ const UserData = () => {
         let cache = {};
 
         //Adding the new Data to cache 
-        for(let i = 0; i < 8; i++){ 
+        for(let i = 0; i < 7; i++){ 
             cache[e.target[i].name] = e.target[i].value;
         }
 
