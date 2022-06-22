@@ -28,9 +28,11 @@ const createUser = asyncHandler( async(req,res) =>{
     res.json({
         ok: true,
         status: 200,
-        message: "User created, Admin: " + isAdmin,
-
+        message: "User created",
+        response: newUser
     })
+
+    
 });
 
 //function for returning all users without any parameter

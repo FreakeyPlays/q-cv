@@ -4,9 +4,11 @@ import FormInput from "../../components/formInput/FormInput";
 import { userDataService } from "../../services/user.services";
 import { userInput } from "./userInput.js";
 import "./UserData.css";
+import UserService from "../../services/keycloakUser.service";
 
 const UserData = () => {
-    const currentUser = "6293a91218be7b568841d1dd";
+    const [userId, setUserId] = useState("");
+    UserService.getLoggedInUID().then(data=>setUserId(data));
 
     //Use State Variables
     const activeUser = useRef(false);
@@ -23,21 +25,15 @@ const UserData = () => {
 
     //if question for prevent infinity loop of getting the same user
     useEffect(() =>{
-        if(activeUser.current === false){
-            retrieveUser();
+        if(activeUser.current === false && userId !== ""){
+            userDataService.getUser(userId).then(response=>{
+                setUser(response.data.user)
+            }).catch( e =>{
+                console.warn(e)
+            })
             activeUser.current = true;
         } 
-    })
-
-    //function for getting user by ID (ID hard coded !)
-    const retrieveUser = () =>{
-        userDataService.getUser(currentUser).then(response=>{
-            console.log(response.data)
-            setUser(response.data.user)
-        }).catch( e =>{
-            console.log(e)
-        })
-    }
+    },[userId,activeUser])
 
     //Update function for user data inside DB
     function updateUser(e){
@@ -45,13 +41,11 @@ const UserData = () => {
         let cache = {};
 
         //Adding the new Data to cache 
-        for(let i = 0; i < 8; i++){ 
+        for(let i = 0; i < 7; i++){ 
             cache[e.target[i].name] = e.target[i].value;
         }
 
-        cache["_id"] = currentUser;
-
-        console.log(cache);
+        cache["_id"] = userId;
 
         //Array Section --> split up strings
         let cacheSprachen = cache["sprachen"].split(",");
@@ -79,7 +73,7 @@ const UserData = () => {
         }
 
         userDataService.updateUser(cache).then(() => window.location.reload(false)).catch((e) => console.log("Update fehlgeschlagen!"));
-        retrieveUser();
+        activeUser.current = false;
     }
 
     function handleChange(e){

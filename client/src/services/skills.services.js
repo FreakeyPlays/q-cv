@@ -5,7 +5,6 @@ const PORT = process.env.REACT_APP_API_PORT;
 const basePath = "http://" + ADDRESS + ":" + PORT + "/api/skills";
 
 export const skillDataService = {
-
     getAll(){
         return axios.get(basePath);
     },

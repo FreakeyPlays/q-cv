@@ -15,7 +15,8 @@ const userSchema = mongoose.Schema({
     education:[{type:mongoose.Types.ObjectId, ref:"Education"}],
     projects:[{type: mongoose.Types.ObjectId, ref:"Project"}],
     shortProfile:{type:String, trim:true},
-    isAdmin:{type:Boolean}
+    isAdmin:{type:Boolean},
+    keycloakID:{type: String}
 }, {
     timestamps: true
 })
