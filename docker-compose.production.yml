@@ -17,6 +17,7 @@ services:
       - ./realm-config:/opt/keycloak/realm-config
     networks:
       - mern-app
+    restart: always
   react-app:
     image: react-app-production
     build: ./client
