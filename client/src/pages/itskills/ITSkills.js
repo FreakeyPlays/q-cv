@@ -67,7 +67,7 @@ const ITSkills = () => {
         if(userId !== '' && receivedData.current === false){
             skillDataService.getAll()
                 .then(response => {
-                    setSkill(response.data.response)
+                    setAndSortSkill(response.data.response)
                     userDataService.getUser(userId)
                         .then(res => {
                             for(let s of response.data.response){
@@ -77,6 +77,7 @@ const ITSkills = () => {
                                     }
                                     }
                                 }
+                                uSkills.sort( sortString )
                                 setUSkills([...uSkills]);
                             }
                         )
@@ -87,32 +88,52 @@ const ITSkills = () => {
         }
     },[userId, skill, uSkills]);
 
-const removeSkillFromUser = (e)  => {
-    let name = e.currentTarget.getAttribute("data");
-    let id;
-    for( let s of skill){
-        if(s.name === name)id = s._id
+    const setAndSortSkill = ( skillArr ) => {
+        let tmp = skillArr;
+        if(tmp)tmp.sort( (a, b) => {
+            let fa = a.name.toLowerCase(),
+            fb = b.name.toLowerCase();
+            if (fa < fb) return -1;
+            if (fa > fb) return 1; 
+            return 0;
+        });
+        setSkill( tmp );
     }
 
-    if(id)userDataService.delSkill({_id: userId, skillID: id})
-    .then( res => window.location.reload(false))
-    .catch( e => console.error( e.message ) );// Logged in user und skill id übergeben, check user.service.js dafür
-}
 
-const addSkillToUser = (e) => {
-    let id = skill[e.currentTarget.getAttribute("data")]._id
-    if(id)userDataService.setSkill({_id: userId, skillID: id})
-    .then(res => {
-    window.location.reload(false)})
-    .catch(e => console.error(e.message))
-}
-
-const userHasSkill = ( sk ) => {
-    for( let s of uSkills){
-        if(s === sk)return true;
+    const sortString = (a, b) => {
+        let fa = a.toLowerCase(),
+        fb = b.toLowerCase();
+        if (fa < fb) return -1;
+        if (fa > fb) return 1; 
+        return 0;
     }
-    return false;
-}
+
+    const removeSkillFromUser = (e)  => {
+        let name = e.currentTarget.getAttribute("data");
+        let id;
+        for( let s of skill){
+            if(s.name === name)id = s._id
+        }
+
+        if(id)userDataService.delSkill({_id: userId, skillID: id})
+        .then( res => window.location.reload(false))
+        .catch( e => console.error( e.message ) );// Logged in user und skill id übergeben, check user.service.js dafür
+    }
+
+    const addSkillToUser = (e) => {
+        let id = skill[e.currentTarget.getAttribute("data")]._id
+        if(id)userDataService.setSkill({_id: userId, skillID: id})
+        .then(res => window.location.reload(false))
+        .catch(e => console.error(e.message))
+    }
+
+    const userHasSkill = ( sk ) => {
+        for( let s of uSkills){
+            if(s === sk)return true;
+        }
+        return false;
+    }
     return(
         <>
             <Titlebar 

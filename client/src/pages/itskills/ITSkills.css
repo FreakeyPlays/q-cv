@@ -65,8 +65,10 @@
     padding-top:128px;
 }
 
+.allItems::-webkit-scrollbar,
 .userItems::-webkit-scrollbar{
-    width: 12px;
+    width: 8px;
+    height: 95%;
 }
 
 .userItems::-webkit-scrollbar-track {
@@ -74,12 +76,15 @@
 }
 
 .userItems::-webkit-scrollbar-thumb {
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: inset 0 0 3px #333; 
 }
 
-.userItems::-webkit-scrollbar{
-    width: 12px;
+.allItems::-webkit-scrollbar-button:start:decrement,
+.userItems::-webkit-scrollbar-button:start:decrement,
+.allItems::-webkit-scrollbar-button:end:increment,
+.userItems::-webkit-scrollbar-button:end:increment{
+    height: 2%;
 }
 
 .allItems::-webkit-scrollbar-track {

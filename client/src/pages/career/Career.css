@@ -1,21 +1,27 @@
-.careerItem{
+.itemWrapper{
+    width: 100%;
     display: flex;
-    padding: 25px;
-    border: 1px solid #E8E8E8;
-    width: 70%;
-    margin: auto;
-    margin-top: 20px;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
-    border-top-left-radius: .6em;
-    border-top-right-radius: .6em;
-    border-bottom-right-radius: .6em;
-    border-bottom-left-radius: .6em;
     flex-direction: column;
+    grid-gap: 16px;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 128px;
+    padding-bottom: 60px;
 }
 
-.itemWrapper{
-    padding-top: 110px;
-    padding-bottom: 60px;
+.careerItem{
+    width: 80%;
+    max-width: 960px;
+    border: solid 1px rgba(51, 51, 51, 30%);
+    background-color: #efefef;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 16px;
+    gap: 16px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 5px 15px 0px;
 }
 
 .skillIcon{
@@ -25,9 +31,87 @@
 }
 
 .headWrapper{
-    display: flex;
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
     justify-content: space-between;
-    border-bottom: 1px solid #E8E8E8;
-    border-bottom-right-radius: .6em;
-    border-bottom-left-radius: .6em;
+    grid-column-gap: 16px;
+    padding-bottom: 8px;
+    border-bottom: solid 1px #333;
+    align-items: center;
+}
+
+.careerBody{
+    display: grid;
+    grid-template-columns: repeat(6, minmax(100px, 2fr));
+    grid-gap: 8px;
+}
+
+.careerBody h3 {
+    color: #3dc0f1;
+    border-bottom: solid 1px rgba(51, 51, 51, 30%);
+}
+
+.col{
+    grid-column: span 2;
+    display: flex;
+      flex-direction: column;
+}
+
+.formComp{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.formLoc{
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+
+.formActivity{
+    grid-column-start: 1;
+    grid-column-end: 7;
+}
+
+.formRole,
+.formTime{
+    grid-column-start: 5;
+    grid-column-end: 7;
+}
+
+@media screen and (max-width: 1280px) {
+    .careerBody{
+        grid-template-columns: repeat(4, minmax(100px, 1fr));
+    }
+
+    .formComp{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .formRole,
+    .formActivity{
+        grid-column-start: 1;
+        grid-column-end: 5;
+    }
+    
+    .formTime{
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .careerBody{
+        grid-template-columns: 256px;
+    }
+
+    .formComp,
+    .formRole,
+    .formLoc,
+    .formActivity,
+    .formTime{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    
 }
