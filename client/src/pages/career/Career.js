@@ -55,6 +55,13 @@ const Career = () => {
                 if(id === gc._id) tmpSet.push(gc);
             }            
         }
+        //sorting career cards based on startDate (descending)
+        tmpSet.sort( (a, b) => {
+            let da = new Date(a.startDate);
+            let db = new Date(b.startDate);
+            return db - da; //da-db would ab ascending
+        })
+        console.log(tmpSet);
         setCareerSet(tmpSet);
     }
 
@@ -174,6 +181,7 @@ const Career = () => {
     const formatDate = (date, div) =>{
         let day = date.getDate();
         let month = date.getMonth();
+        month++;
         let year = date.getFullYear();
         let divider = div === undefined ? "." : div;
         return ((day > 9? day : ("0"+day))+ divider + (month > 9? month : ("0"+month)) + divider + year + " ");
