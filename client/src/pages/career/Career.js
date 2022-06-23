@@ -9,19 +9,31 @@ import { Button } from '@material-ui/core';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import { careerInput } from './career.input.js';
 import FormInput from '../../components/formInput/FormInput';
+import UserService from "../../services/keycloakUser.service.js";
+import {userDataService} from "../../services/user.services.js";
 
 const Career = () => {
 
     const [careerSet, setCareerSet] = useState([]);
+    const [globalCareerSet, setGlobalCareerSet] = useState([]);
     const receivedData = useRef(false);
-
+    const userCarrerIsSet = useRef(false);
     const [updatePopup, setUpdatePopup] = useState(false);
     const [newItemPopup, setNewItemPopup] = useState(false);
     const [deleteItemPopup, setDeleteItemPopup] = useState(false);
 
+    //Holds the UID
+    const[userId, setUserId] = useState('');
+    UserService.getLoggedInUID()
+    .then( res => setUserId( res ) )
+    .catch( e => console.error(e.message) );
+
     //Holds the object-id
     const [_idOfItemToDelete, set_idOfItemToDelete] = useState('');
     const [selectForUpdate, setSelectForUpdate] = useState('');
+
+    //Holds the _id-array of the career-cards owned by the user
+    const[userCareerIdList, setUserCareerIdList] = useState([]);
 
     //Holds the index of the Item in the careerSetArray
     const itemToDelete = useRef(-1);
@@ -36,14 +48,39 @@ const Career = () => {
         jobDescription: ""
     });
 
+    const filterForUserSets = () => {
+        const tmpSet = [];
+        for(let gc of globalCareerSet){
+            for(let id of userCareerIdList){
+                if(id === gc._id) tmpSet.push(gc);
+            }            
+        }
+        setCareerSet(tmpSet);
+    }
+
     useEffect( ()=>{
-        if(receivedData.current === false){
-            careerDataService.getAll()
-                .then(response => setCareerSet(response.data))
+        if(!receivedData.current && userId){
+            userDataService.getUser(userId)
+            .then(userRes => {
+                console.log(userRes);
+                setUserCareerIdList(userRes.data.user.career);
+                careerDataService.getAll()
+                .then(careerRes => setGlobalCareerSet(careerRes.data))
                 .catch( e => console.error(e.message));
+            })
+            .catch(e => console.error(e.message))
             receivedData.current = true;
         }
-    });
+
+        
+    }, [userId]);
+
+    useEffect( () => {
+        if(!userCarrerIsSet.current && globalCareerSet.length !== 0 &&  userCareerIdList.length !== 0 ){
+            filterForUserSets();
+            userCarrerIsSet.current = true;
+        }
+    }, [globalCareerSet, userCareerIdList]);
 
     const theme = createTheme({
         palette: {
@@ -87,7 +124,10 @@ const Career = () => {
             data[i.name] = i.value;
         }
         careerDataService.newCareerItem(data)
-        .then(window.location.reload(false))
+        .then(res => {
+            userDataService.setCareer({_id:userId, careerID: res.data._id})
+            window.location.reload(false);
+        })
         .catch(e => console.error(e.message));
     };
 
@@ -108,10 +148,18 @@ const Career = () => {
     }
 
     const deleteCareerItem = () =>  {
-            careerDataService.deleteCareerItem(_idOfItemToDelete).then(res => {
-            window.location.reload(false);
-            receivedData.current = false;
-            }).catch( e => console.error(e.message) )
+            userDataService.delCareer({_id: userId, careerID: _idOfItemToDelete})
+            .then( res => {
+                careerDataService.deleteCareerItem(_idOfItemToDelete)
+                .then(res => {
+                    window.location.reload(false);
+                    receivedData.current = false;
+                }).catch( e => {
+                    console.warn("Career-Id has been deleted from the user, but not from the career table on the DataBase!");
+                    console.error(e.message);
+                } )
+            })
+            .catch( e => console.error(e.message));
     }
 
     const openDeletePopup = (e) =>{
