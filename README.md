@@ -39,10 +39,10 @@ foo@bar:~/Q-CV$ make build-[dev|production]
 foo@bar:~/Q-CV$ make run-[dev|production]
 ```
 11. Connect to the Keycloak Server by accessing your Address with the Keycloak Port defined in the .env file.<br>
-   Example:`http://127.0.0.1:8080`
+   Default:`http://127.0.0.1:8080`
 12. Retrieve the new Client Secret from the Keycloak Server.
     - Login using the Username and Password from the .env file in `/server/config/[dev|production].env`[^1].
-    - Make sure you are inside the `Master` Realm (Check the name in the Top-Left corner).
+    - Make sure you are inside the `Master` Realm (Check the name in the Top-Left corner). If you are inside another Realm, just change the realm by clicking the current name and switching to Q-CV.
     - Navigate to the Clients Section on the Left Side.
     - Select `admin-cli` in the Clients List.
     - Navigate to the `Credentials` section of the admin-cli.
@@ -55,24 +55,24 @@ foo@bar:~/Q-CV$ make stop-[dev|production]
 foo@bar:~/Q-CV$ make run-[dev|production]
 ``` 
 14. Access the Keycloak Server based on your defined Address and Port.<br>
-   Example:`http://127.0.0.1:8080`
+   Default:`http://127.0.0.1:8080`
 15. Create a new Temporary Administrator to access the Software and Create User.
     - Login using the Username and Password from the .env file in `/server/config/[dev|production].env`[^1].
-    - Make sure you are inside the `Q-CV` Realm (Check the name in the Top-Left corner).
+    - Make sure you are inside the `Q-CV` Realm (Check the name in the Top-Left corner). If you are inside another Realm, just change the realm by clicking the current name and switching to Q-CV.
     - Navigate to the Users Section on the Left Side.
     - Click the `Add User` Button.
     - Provide the needed Information, add the User to the `/Admins` group and save the Information.
     - Switch to the Credentials Tab and provide a Password.
 16. Access the Software based on your defined Address and Port.<br>
-   Example:`http://127.0.0.1:3000`
+   Default:`http://127.0.0.1:3000`
 17. Log in the Software with the Information of the Temporary Administrator.
-18. Now you can create new Users which can create CS's. Your Temporary Administrator could now be deleted.
+18. Now you can create new Users which can access the complete software. Your temporary Administrator can now be deleted in the Keycloak Admin Console.
 
 ## 🛠️ - .env Files
 ### /client/config/
 |Name  |Description   |Environment  |Type  |
 |---|---|:---:|:---:|
-| REACT_APP_URL | This Variable defines the Address where our Frontend gets served. The Default Value is `localhost/127.0.0.1`. | dev/production |Address|
+| REACT_APP_URL | This Variable defines the Address where our Frontend gets served. The Default Value is `localhost or 127.0.0.1`. | dev/production |Address|
 | REACT_APP_API_PORT | This Variable defines the Port where our Frontend gets served. The Default Value is `3000`. | dev/production |Port|
 
 ### /server/config/
