@@ -742,17 +742,15 @@
     {
       "id": "38cec919-79a5-45ba-a77b-3ffbeeb1ffaf",
       "clientId": "nodejs-microservice",
-      "rootUrl": "http://localhost:3000/",
-      "adminUrl": "http://localhost:3000",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "http://localhost:3000/*"
+        "*"
       ],
       "webOrigins": [
-        "http://localhost:3000"
+        "*"
       ],
       "notBefore": 0,
       "bearerOnly": false,
