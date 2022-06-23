@@ -62,7 +62,6 @@ const Career = () => {
         if(!receivedData.current && userId){
             userDataService.getUser(userId)
             .then(userRes => {
-                console.log(userRes);
                 setUserCareerIdList(userRes.data.user.career);
                 careerDataService.getAll()
                 .then(careerRes => setGlobalCareerSet(careerRes.data))
@@ -71,8 +70,6 @@ const Career = () => {
             .catch(e => console.error(e.message))
             receivedData.current = true;
         }
-
-        
     }, [userId]);
 
     useEffect( () => {
@@ -125,7 +122,7 @@ const Career = () => {
         }
         careerDataService.newCareerItem(data)
         .then(res => {
-            userDataService.setCareer({_id:userId, careerID: res.data._id})
+            userDataService.setCareer({_id:userId, careerID: res.data._id}).then().catch(e => console.error(e.message));
             window.location.reload(false);
         })
         .catch(e => console.error(e.message));
@@ -197,7 +194,7 @@ const Career = () => {
                     return(
                     <div key = {index} className='careerItem' data={index}>
                         <div className='headWrapper'>
-                            <h3>{item.title}</h3>
+                            <h2>{item.title}</h2>
                             <div className='interaction'>
                             <div data={index} onClick={ openUpdatePopup }>
                                     <FontAwesomeIcon className='skillIcon' icon={faPen} />
@@ -207,17 +204,16 @@ const Career = () => {
                                 </div>
                             </div>
                         </div>
-                        
-                        <div className='companyWrapper'>
-                            <div >Name of Company/Institution: {item.company}</div>
-                            <div >Location: {item.location}</div>
-                        </div>
-                        <div>As: {item.position}</div>
-                        <div>What: {item.jobDescription}</div>
-                        <div>
-                            When: {formatDate(new Date(item.startDate))}
-                            {" - "}
-                            {formatDate(new Date(item.endDate))}
+                        <div className='careerBody'>
+                            <div className='formComp col'><h3>Company/Institution</h3><p>{item.company}</p></div>
+                            <div className='formLoc col'><h3>Location</h3><p>{item.location}</p></div>
+                            <div className='formRole col'><h3>Position</h3><p>{item.position}</p></div>
+                            <div className='formActivity col'><h3>Description</h3><p>{item.jobDescription}</p></div>
+                            <div className='formTime col'>
+                                <h3>Duration</h3> <p>{formatDate(new Date(item.startDate))}
+                                {" - "}
+                                {formatDate(new Date(item.endDate))}</p>
+                            </div>
                         </div>
                     </div>
                     )
