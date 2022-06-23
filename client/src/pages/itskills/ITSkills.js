@@ -67,7 +67,7 @@ const ITSkills = () => {
         if(userId !== '' && receivedData.current === false){
             skillDataService.getAll()
                 .then(response => {
-                    setSkill(response.data.response)
+                    setAndSortSkill(response.data.response)
                     userDataService.getUser(userId)
                         .then(res => {
                             for(let s of response.data.response){
@@ -77,6 +77,7 @@ const ITSkills = () => {
                                     }
                                     }
                                 }
+                                uSkills.sort( sortString )
                                 setUSkills([...uSkills]);
                             }
                         )
@@ -86,6 +87,27 @@ const ITSkills = () => {
             receivedData.current = true;
         }
     },[userId, skill, uSkills]);
+
+const setAndSortSkill = ( skillArr ) => {
+    let tmp = skillArr;
+    if(tmp)tmp.sort( (a, b) => {
+        let fa = a.name.toLowerCase(),
+        fb = b.name.toLowerCase();
+        if (fa < fb) return -1;
+        if (fa > fb) return 1; 
+        return 0;
+    });
+    setSkill( tmp );
+}
+
+
+const sortString = (a, b) => {
+    let fa = a.toLowerCase(),
+    fb = b.toLowerCase();
+    if (fa < fb) return -1;
+    if (fa > fb) return 1; 
+    return 0;
+}
 
 const removeSkillFromUser = (e)  => {
     let name = e.currentTarget.getAttribute("data");
