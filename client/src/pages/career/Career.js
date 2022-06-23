@@ -60,8 +60,7 @@ const Career = () => {
             let da = new Date(a.startDate);
             let db = new Date(b.startDate);
             return db - da; //da-db would ab ascending
-        })
-        console.log(tmpSet);
+        });
         setCareerSet(tmpSet);
     }
 
@@ -288,6 +287,4 @@ const Career = () => {
     )
 }
 
-
-//deleteItemPopup
 export default Career;
