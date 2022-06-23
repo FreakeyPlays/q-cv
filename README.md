@@ -70,24 +70,31 @@ foo@bar:~/Q-CV$ make run-[dev|production]
 
 ## 🛠️ - .env Files
 ### /client/config/
-|Name  |Description   |Environment  |
-|---|---|:---:|
-| REACT_APP_URL | This Variable defines the Address where our Frontend gets served. The Default Value is `localhost/127.0.0.1`. | dev/production |
-| REACT_APP_API_PORT | This Variable defines the Port where our Frontend gets served. The Default Value is `3000`. | dev/production |
+|Name  |Description   |Environment  |Type  |
+|---|---|:---:|:---:|
+| REACT_APP_URL | This Variable defines the Address where our Frontend gets served. The Default Value is `localhost/127.0.0.1`. | dev/production |Address|
+| REACT_APP_API_PORT | This Variable defines the Port where our Frontend gets served. The Default Value is `3000`. | dev/production |Port|
 
 ### /server/config/
-|Name  |Description   |Environment  |
-|---|---|:---:|
-| MONGO_URI | This Variable contains the Connection String to the MongoDB Cluster where the Data will be saved in. (String needs to contain the Username, Password and Clustername) | dev/production |
-| PORT | This Variable defines the Port where our Backend gets served. The Default Value is `5000`. | dev/production |
-| KC_CLIENT_SECRET | This Variable contains the Client Secret, which Kecloak needs to validate our API Requests. | dev/production |
-| KC_URI | This Variable defines the Address where our Keycloak gets served. The Default Value is `keycloak`. | dev/production |
-| KC_PORT | This Variable defines the Port where our Keycloak gets served. The Default Value is `8080`. | dev/production |
+|Name  |Description   |Environment  |Type  |
+|---|---|:---:|:---:|
+| MONGO_URI | This Variable contains the Connection String to the MongoDB Cluster where the Data will be saved in. (String needs to contain the Username, Password and Clustername) | dev/production |String|
+| PORT | This Variable defines the Port where our Backend gets served. The Default Value is `5000`. | dev/production |Port|
+| KC_CLIENT_SECRET | This Variable contains the Client Secret, which Kecloak needs to validate our API Requests. | dev/production |String|
+| KC_URI | This Variable defines the Address where our Keycloak gets served. The Default Value is `keycloak`. | dev/production |Address|
+| KC_PORT | This Variable defines the Port where our Keycloak gets served. The Default Value is `8080`. | dev/production |Port|
 
 ### /config/
-|Name  |Description   |Environment  |
-|---|---|:---:|
-| KEYCLOAK_ADMIN | This Variable defines the Username to log in the Admin Console of Keycloak. The Default Value is `admin`. | dev/production |
-| KEYCLOAK_ADMIN_PASSWORD | This Variable defines the Password to log in the Admin Console of Keycloak. The Default Value is `admin`. | dev/production |
+|Name  |Description   |Environment  |Type  |
+|---|---|:---:|:---:|
+| KEYCLOAK_ADMIN | This Variable defines the Username to log in the Admin Console of Keycloak. The Default Value is `admin`. | dev/production |String|
+| KEYCLOAK_ADMIN_PASSWORD | This Variable defines the Password to log in the Admin Console of Keycloak. The Default Value is `admin`. | dev/production |String|
+| KEYCLOAK_FRONTEND_URL | This Variable defines the URL where you can reach the Keycloak Frontend. | production |Address|
+| KC_HOSTNAME | This Variable defines the URL where you can reach Keycloak. | production |Address|
+| KC_HOSTNAME_PORT | This Variable defines the Port to access Keycloak. | production |Port|
+| KC_HTTP_ENABLED | This Variable defines if Keycloak can be accessed via HTTP instead of HTTPS. | production |Boolean|
+| KC_HOSTNAME_STRICT_HTTPS | This Variable defines if Keycloak needs HTTPS. | production |Boolean|
+| KC_PROXY | This Variable defines if Keycloak is defined behind a Proxy. | production |String|
+| KC_HOSTNAME_STRICT | This Variable defines if the Frontend is a Strict-defined Address. | production |Boolean|
 
 [^1]: `[dev|production]` means to choose either dev or production. If you want to run for example the dev-Environment, please enter all commands/file names with the dev prefix.
