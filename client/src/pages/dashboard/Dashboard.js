@@ -86,7 +86,8 @@ const Dashboard = () => {
     }
 
     const onDownload = (url) => {
-        window.open(url, '_blank').focus();
+        if (!url) alert("No SharePoint Link exists in this CV.");
+        else window.open(url, '_blank').focus();
     }
     return(
         <>
@@ -101,11 +102,10 @@ const Dashboard = () => {
             cvDataObjectList.map( (item, index) => {
                     return !checkForIdInUserIdList(item.ownerId) ? (<React.Fragment key={index}></React.Fragment>)
                     : ( <div key={index} className='careerItem' data={index}>
-                            
                             <div className='headWrapper'>
                                 <h2>{item.cvName}</h2>
                                 <div className='interaction'>
-                                <div data={index} onClick={ () => onDownload("https://quanto-solutions.de/") }>
+                                <div data={index} onClick={ () => onDownload(item.sharepointLink) }>
                                     <FontAwesomeIcon className='editIcon' icon={faDownload} />
                                 </div>
                                 {belongsOrAdmin(item.ownerId) ?( <>

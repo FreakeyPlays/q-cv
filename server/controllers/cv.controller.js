@@ -54,7 +54,8 @@ const setCv = asyncHandler( async(req, res) =>{
         education: req.body.education,
         career: req.body.career,
         skills: req.body.skills,
-        projects: req.body.projects
+        projects: req.body.projects,
+        sharepointLink: req.body.sharepointLink
     });
 
     apiResponse(res, true, 201, "Added CV", entry);

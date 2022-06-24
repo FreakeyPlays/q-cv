@@ -304,6 +304,13 @@ const CreateCV = (params) => {
 
             let mappedEducation = education.map(({dragId, ...keepAttrs}) => keepAttrs);
 
+            mappedEducation.forEach(edu => {
+                if (edu.institution === "") edu.institution = "(Institution)";
+                if (edu.studyType === "") edu.studyType = "(Study type)";
+                if (edu.subject === "") edu.subject = "(Subject)";
+                if (edu.grade === "") edu.grade = "(Grade)";
+            });
+
             projects.forEach(project => {
                 var activityString = project.activites;
                 delete project.dragId;
@@ -312,6 +319,10 @@ const CreateCV = (params) => {
             });
 
             career.forEach(car => {
+                if (car.company === "") car.company = "(Company)";
+                if (car.position === "") car.position = "(Position)";
+                if (car.city === "") car.city = "(City)";
+                if (car.country === "") car.country = "(Country)";
                 delete car.dragId;
             });
 
@@ -331,7 +342,6 @@ const CreateCV = (params) => {
             downloadCV(result);
             //saveCV(result);
             // console.log(result);
-            //window.location.href = "/";
         };
     };
 
@@ -353,10 +363,8 @@ const CreateCV = (params) => {
         axios.post("https://prod-115.westus.logic.azure.com:443/workflows/f595e6ffa2d7449fb93eb92b11a4468e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=d2PEMA_gwcLyPdh7meXdRiUVtouL6qyNSGXKMIPDHxc", result)
         .then(response => {
             result.sharepointLink = response.data;
-            console.log("SharePoint link acquired, saving CV.");
             saveCV(result);
-            console.log("CV saved.");
-            console.log(result);
+            window.location.href = "/";
         })
         .catch(error => console.warn(error));
     };
@@ -456,8 +464,8 @@ const CreateCV = (params) => {
             console.log(allCareerObjects[projectIdx]);
             values = [...career];
             let x = allCareerObjects[projectIdx];
-            x.city = "-";
-            x.country = allCareerObjects[projectIdx].location;
+            x.city = allCareerObjects[projectIdx].location;
+            x.country = "(Country)"
             x.dragId = uuidv4();
             x.startDate = (x.startDate).slice(0,10);
             x.endDate = (x.endDate).slice(0,10);
@@ -476,7 +484,8 @@ const CreateCV = (params) => {
             x.institution = allEduObjects[projectIdx].title;
             x.studyType = allEduObjects[projectIdx].degree;
             x.subject = allEduObjects[projectIdx].fieldOfStudy;
-            x.grade = "-";
+            x.grade = "(Grade)";
+            x.subject = "(Subject)";
             x.startDate = allEduObjects[projectIdx].startDate.slice(0,10);
             x.endDate = allEduObjects[projectIdx].endDate.slice(0,10);
 
