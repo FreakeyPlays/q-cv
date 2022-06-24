@@ -19,17 +19,17 @@ const Dashboard = () => {
     .catch( e => console.error(e.message) );
 
     const receivedData = useRef(false);
-    const gotId = useRef(false,)
+    const gotId = useRef(false);
     const [cvDataObjectList, setCvDataObjectList] = useState([]); //list of cv-objects fetched
     //const receivedIdList = useRef(false);
     const [showAll, setShowAll] = useState(false);
 
     useEffect( ( ) => {
-        if(!gotId){
+        if(!gotId.current){
             UserService.getLoggedInUID()
             .then( res => { 
                 setUID( res )
-                gotId = true;
+                gotId.current = true;
             } )
             .catch( e => console.error(e.message) );
         }
@@ -38,7 +38,15 @@ const Dashboard = () => {
     useEffect( ()=>{
         if(receivedData.current === false){
             cvDataService.getAll()
-                .then(res => setCvDataObjectList(res.data.response))
+                .then(res => {
+                    let tmp = res.data.response;
+                    tmp.sort( (a, b) => {
+                        let da = new Date(a.date);
+                        let db = new Date(b.date);
+                        return db - da; //da-db would ab ascending
+                    });
+                    setCvDataObjectList(tmp);
+                })
                 .catch( e => console.error(e.message));
             receivedData.current = true;
         }
