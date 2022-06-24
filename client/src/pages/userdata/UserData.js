@@ -72,7 +72,25 @@ const UserData = () => {
             }
         }
 
-        userDataService.updateUser(cache).then(() => window.location.reload(false)).catch((e) => console.warn("Update fehlgeschlagen!"));
+        const kc_body = {
+            email: cache["eMail"],
+            firstName: cache["firstName"],
+            lastName: cache["lastName"]
+        }
+
+        userDataService.updateUser(cache)
+            .then(() => {
+                UserService.updateKeycloakUser(UserService.getKCUID(), kc_body)
+                    .then(() =>{
+                        window.location.reload(false);
+                    })
+                    .catch(e => {
+                        console.warn(e);
+                    })
+            })
+            .catch((e) => {
+                console.warn("Update fehlgeschlagen!")
+            });
         activeUser.current = false;
     }
 

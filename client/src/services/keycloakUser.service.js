@@ -88,7 +88,8 @@ const UserService = {
     deleteKeycloakUser,
     getKeycloakUser,
     getLoggedInUID,
-    getIsAdmin
+    getIsAdmin,
+    getKCUID
 };
 
 export default UserService;
