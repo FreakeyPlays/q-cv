@@ -45,7 +45,8 @@ const cvSchema = mongoose.Schema({
     	environment: { type: String, trim: true},
     	location: { type: String, required: [true, "Please provide a Project Location"], trim: true },
     	teamSize: { type: String, required: [true, "Please provide a Project Team Size"] }
-    }]
+    }],
+	sharepointLink: { type: String, required: [true, "Please insert a SharePoint link"], trim: true }
 });
 
 export default mongoose.model('CV', cvSchema);

@@ -62,6 +62,27 @@ const getAllProjects = asyncHandler( async (req, res) => {
     apiResponse(res, true, 200, "Returned all Projects", projects);
 })
 
+// @desc Get all educations
+// @route GET /api/education/
+// @access Private
+const getAllUserProjects = asyncHandler( async (req, res) => {
+    const owner = req.params.id;
+
+    if(!owner){
+        apiResponse(res, false, 400, "Missing owner ID");
+        throw new Error("Missing owner ID");
+    }
+
+    const project = await Project.find({ assignedUser: owner });
+
+    if(project === undefined){
+        apiResponse(res, false, 404, "No Projects found");
+        throw new Error("No Careers found");
+    }
+
+    apiResponse(res, true, 200, "Returned all Projects of Owner", project);
+});
+
 // @desc Get project by ID
 // @route GET /api/project/:id
 // @access Private
@@ -108,6 +129,7 @@ const deleteProject = asyncHandler( async (req, res) => {
 export {
     setProject,
     getAllProjects,
+    getAllUserProjects,
     getProject,
     updateProject,
     deleteProject

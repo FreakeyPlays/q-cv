@@ -142,11 +142,17 @@ const CreateCV = (params) => {
             if (receivedData.current === false) {
                 window.scrollTo(0, 0);
                 
-                projectDataService.getAll()
-                .then(response => {
-                    setProjects(response.data.response);
-                })
-                .catch(e => console.warn(e.message));
+                projectDataService.getAllById({ owner: userId })
+                    .then(response => {
+                        let temp = response.data.response;
+                        temp.sort( (a, b) => {
+                            let da = new Date(a.startDate);
+                            let db = new Date(b.startDate);
+                            return db - da; //da-db would ab ascending
+                        });
+                        setProjects(temp);
+                    })
+                    .catch(e => console.warn(e.message));
     
                 skillDataService.getAll()
                     .then(response => setAllSkillObjects(response.data.response))
@@ -163,7 +169,7 @@ const CreateCV = (params) => {
                         setAllEduObjects(temp);
                     })
                     .catch(e => console.error(e.message));
-                console.log(userId);
+
                 careerDataService.getAllById({ owner: userId })
                     .then(response => {
                         let temp = response.data.response;
@@ -322,16 +328,15 @@ const CreateCV = (params) => {
             if (params.title === 'Edit') result._id = id;
 
             console.log(result);
-            //downloadCV(result);
-            saveCV(result);
+            downloadCV(result);
+            //saveCV(result);
             // console.log(result);
-            window.location.href = "/";
+            //window.location.href = "/";
         };
     };
 
-    // Saving CV to MongoDB
+    //Saving CV to MongoDB
     const saveCV = (result) => {
-    //check fo updateID != "" => put request, not post
         let promise = params.function(result);
 
         promise
@@ -347,8 +352,11 @@ const CreateCV = (params) => {
     const downloadCV = (result) => {
         axios.post("https://prod-115.westus.logic.azure.com:443/workflows/f595e6ffa2d7449fb93eb92b11a4468e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=d2PEMA_gwcLyPdh7meXdRiUVtouL6qyNSGXKMIPDHxc", result)
         .then(response => {
-            console.log(response);
-            alert("Generating CV...");
+            result.sharepointLink = response.data;
+            console.log("SharePoint link acquired, saving CV.");
+            saveCV(result);
+            console.log("CV saved.");
+            console.log(result);
         })
         .catch(error => console.warn(error));
     };
@@ -445,8 +453,11 @@ const CreateCV = (params) => {
             };
             setShownProjects(values);
         } else if (category === "career") {
+            console.log(allCareerObjects[projectIdx]);
             values = [...career];
             let x = allCareerObjects[projectIdx];
+            x.city = "-";
+            x.country = allCareerObjects[projectIdx].location;
             x.dragId = uuidv4();
             x.startDate = (x.startDate).slice(0,10);
             x.endDate = (x.endDate).slice(0,10);
@@ -458,12 +469,14 @@ const CreateCV = (params) => {
             };
             setCareer(values);
         } else if (category === "education") {
+            console.log(allEduObjects[projectIdx]);
             values = [...education];
             let x = {};
             x.dragId = uuidv4();
             x.institution = allEduObjects[projectIdx].title;
             x.studyType = allEduObjects[projectIdx].degree;
             x.subject = allEduObjects[projectIdx].fieldOfStudy;
+            x.grade = "-";
             x.startDate = allEduObjects[projectIdx].startDate.slice(0,10);
             x.endDate = allEduObjects[projectIdx].endDate.slice(0,10);
 
@@ -904,7 +917,7 @@ const CreateCV = (params) => {
                             allCareerObjects.map((item, index) => {
                                 return (
                                     <div className='listItem' key={index} onClick={(event) => popupSubmit(event, index, -1, "career")}>
-                                        <h5>{item.company}</h5>
+                                        <h5>{item.title}</h5>
                                     </div>
                                 )
                             })
