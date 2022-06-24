@@ -10,6 +10,10 @@ const Titlebar = (props) => {
     
     const [showAll, setShowAll] = useState(false)
 
+    if(props.function){
+
+    }
+
     return(
         <div className="titlebar">
             <div className="buttonContainer">
@@ -37,7 +41,8 @@ const Titlebar = (props) => {
                     ): (
                         <></>
                     )}
-                    <CreateButton link={props.path} function={props.function ? props.function : undefined} />
+
+                    <CreateButton link={props.path} function={props.function ? props.function : null} />
                 </div>
             </div>
             {props.searchbar ? (

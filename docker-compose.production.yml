@@ -1,5 +1,23 @@
 version: "3"
 services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:18.0.0
+    env_file: ./config/production.env
+    ports:
+      - "8080:8080"
+    command: 
+      [
+        "start",
+        "-Dkeycloak.migration.action=import",
+        "-Dkeycloak.migration.provider=dir",
+        "-Dkeycloak.migration.dir=/opt/keycloak/realm-config",
+        "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING"
+      ]
+    volumes:
+      - ./realm-config:/opt/keycloak/realm-config
+    networks:
+      - mern-app
+    restart: always
   react-app:
     image: react-app-production
     build: ./client

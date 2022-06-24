@@ -1,6 +1,7 @@
 import {faGrip, faUser, faGraduationCap, faBriefcase, faLaptopCode, faClipboard, faPlus} from "@fortawesome/free-solid-svg-icons"
+import UserService from "../../services/keycloakUser.service"
 
-export const MenuItems = [
+const MenuItems = [
     {
         title: "Dashboard",
         url: "/",
@@ -38,3 +39,22 @@ export const MenuItems = [
         icon: faClipboard
     }
 ]
+
+const AdminMenueItems = [
+    {
+        title: "User",
+        url: "/user",
+        className: "navLink",
+        icon: faPlus
+    }
+] 
+
+const getMenueItems = () =>{
+    let items = [...MenuItems];
+    if(UserService.getIsAdmin()){
+        items = [...items,...AdminMenueItems];
+    }
+    return items;
+}
+
+export default getMenueItems;

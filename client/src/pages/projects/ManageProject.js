@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import FormInput from "../../components/formInput/FormInput";
 import { projectDataService } from "../../services/project.service";
 import { ProjectInputs } from "./project.input";
+import UserService from "../../services/keycloakUser.service.js"
 
 import "./ManageProject.css";
 
 const ManageProject = (params) => {
     const { id } = useParams();
+    const currentUserID = useRef(null);
+    UserService.getLoggedInUID().then(data => currentUserID.current = data);
     const [refresh, setRefresh] = useState(true);
     const [values, setValues] = useState({
         title: "",
@@ -27,8 +30,8 @@ const ManageProject = (params) => {
     useEffect(() => {
         if(id && refresh){
             projectDataService.get(id)
-                .then(response => {
-                    let projectToCopy = response.data.project;
+                .then(res => {
+                    let projectToCopy = res.data.response;
                     let tmpValues = {}
                     
                     for(let key of Object.keys(values)){
@@ -49,7 +52,10 @@ const ManageProject = (params) => {
                     setValues(tmpValues);
                     setRefresh(false)
                 })
-                .catch(() => {setRefresh(false)});
+                .catch((e) => {
+                    setRefresh(true)
+                    console.warn(e.message);
+                });
         }
     },[refresh, id, values]);
 
@@ -60,8 +66,8 @@ const ManageProject = (params) => {
         for(let i = 0; i < 12; i++){
             tmp[e.target[i].name] = e.target[i].value;
         }
-        //TODO set user
-        tmp["assignedUser"] = "627d6e4624b23d01f548f867";
+        
+        tmp["assignedUser"] = currentUserID.current;
 
         let tmpActivities = tmp["activities"].split(",");
         tmp["activities"] = [];
@@ -74,11 +80,9 @@ const ManageProject = (params) => {
             tmp["_id"] = id;
         }
 
-        let promise = params.function(tmp);
-
-        promise
+        params.function(tmp)
             .then(() => window.location.href = "/projects")
-            .catch((e) => console.log(e));
+            .catch((e) => console.warn(e));
     }
 
     function handleOnChange(e){
