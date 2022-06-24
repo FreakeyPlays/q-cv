@@ -141,18 +141,6 @@ const CreateCV = (params) => {
         if (userId) {
             if (receivedData.current === false) {
                 window.scrollTo(0, 0);
-
-                careerDataService.getAll({ owner: userId })
-                    .then(response => {
-                        let temp = response.data;
-                        temp.sort( (a, b) => {
-                            let da = new Date(a.startDate);
-                            let db = new Date(b.startDate);
-                            return db - da; //da-db would ab ascending
-                        });
-                        setAllCareerObjects(temp);
-                    })
-                    .catch(e => console.warn(e.message));
                 
                 projectDataService.getAll()
                 .then(response => {
@@ -175,6 +163,20 @@ const CreateCV = (params) => {
                         setAllEduObjects(temp);
                     })
                     .catch(e => console.error(e.message));
+                console.log(userId);
+                careerDataService.getAllById({ owner: userId })
+                    .then(response => {
+                        let temp = response.data.response;
+                        temp.sort( (a, b) => {
+                            let da = new Date(a.startDate);
+                            let db = new Date(b.startDate);
+                            return db - da; //da-db would ab ascending
+                        });
+                        setAllCareerObjects(temp);
+                    })
+                    .catch(e => {
+                        console.warn(e.message)
+                    });
 
                 if (id) {
                     cvDataService.get(id)
@@ -323,7 +325,7 @@ const CreateCV = (params) => {
             //downloadCV(result);
             saveCV(result);
             // console.log(result);
-            //window.location.href = "/";
+            window.location.href = "/";
         };
     };
 

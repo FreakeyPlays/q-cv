@@ -9,6 +9,10 @@ export const careerDataService = {
         return axios.get(basePath, { params: data });
     },
 
+    getAllById(data){
+        return axios.get(basePath + '/all/' + data.owner);
+    },
+
     newCareerItem(data){
         return axios.post(basePath, data);
     },

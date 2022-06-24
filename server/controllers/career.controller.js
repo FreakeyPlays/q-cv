@@ -1,5 +1,6 @@
 import Career from '../models/career.model.js'; 
 import asyncHandler from 'express-async-handler';
+import { apiResponse } from "./response.js";
 
 // @desc set careerItem
 // @route SET /api/careers
@@ -55,7 +56,8 @@ const getCareers = asyncHandler( async(req, res) =>{
 // @route GET /api/education/
 // @access Private
 const getAllCareers = asyncHandler( async (req, res) => {
-    const owner = req.query.owner;
+    console.log(req);
+    const owner = req.params.id;
 
     if(!owner){
         apiResponse(res, false, 400, "Missing owner ID");
