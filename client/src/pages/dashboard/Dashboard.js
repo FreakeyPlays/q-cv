@@ -1,6 +1,7 @@
 import Titlebar from "../../components/titlebar/Titlebar";
 import { useState, useEffect, useRef } from 'react';
 import { cvDataService } from '../../services/cv.service.js';
+import UserService from "../../services/keycloakUser.service.js";
 import { faPen, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { extractCareer, extractEducation, extractSkills, extractProjects } from "./dashboard.extract.functions.js";
@@ -11,21 +12,31 @@ const Dashboard = () => {
 
     let navigate = useNavigate();
 
+    //Holds the UID 
+    const [userId, setUID] = useState("");
+    UserService.getLoggedInUID()
+    .then( res => setUID( res ) )
+    .catch( e => console.error(e.message) );
+
     const receivedData = useRef(false);
-    const [uId, setUID] = useState("");
+    const gotId = useRef(false,)
     const [cvDataObjectList, setCvDataObjectList] = useState([]); //list of cv-objects fetched
     //const receivedIdList = useRef(false);
     const [showAll, setShowAll] = useState(false);
-    
-    //for testing
-    const getOwnerId = ()=>{
-        //later: get id-list from user
-        setUID("62961e08f9b16e4ba142dd05"); // _id des users Marc
-    }
+
+    useEffect( ( ) => {
+        if(!gotId){
+            UserService.getLoggedInUID()
+            .then( res => { 
+                setUID( res )
+                gotId = true;
+            } )
+            .catch( e => console.error(e.message) );
+        }
+    });
 
     useEffect( ()=>{
         if(receivedData.current === false){
-            getOwnerId();
             cvDataService.getAll()
                 .then(res => setCvDataObjectList(res.data.response))
                 .catch( e => console.error(e.message));
@@ -52,7 +63,7 @@ const Dashboard = () => {
     }
 
     const checkForIdInUserIdList = (id) => {
-        if(uId === id || showAll) return true;
+        if(userId === id || showAll) return true;
         return false;
     }
 
