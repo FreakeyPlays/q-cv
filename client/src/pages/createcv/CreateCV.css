@@ -52,3 +52,19 @@ h2 {
     padding: 0 12px;
     font-size: 16px;
 }
+
+.listItem {
+    padding: 10px;
+    transition: 1s;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: 300ms;
+    position: relative;
+    left: 0;
+}
+
+.listItem:hover {
+    background-color: #3dc0f1;
+    color: white;
+    left: 10px;
+}

@@ -12,6 +12,8 @@ import { CVInputs } from './cv.input.js';
 import { userDataService } from '../../services/user.services.js';
 import { projectDataService } from '../../services/project.service.js';
 import { skillDataService } from '../../services/skills.services.js';
+import { careerDataService } from '../../services/career.service.js';
+import { educationDataService} from '../../services/education.service.js';
 import { cvDataService } from '../../services/cv.service.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTrash, faX } from '@fortawesome/free-solid-svg-icons'
@@ -88,6 +90,8 @@ const CreateCV = (params) => {
 
     // State for project Popup
     const [popupShow, setPopupShow] = useState(false);
+    // State for popup category
+    const [popupCategory, setPopupCategory] = useState("");
 
     const [cvName, setCvName] = useState("");
 
@@ -123,6 +127,10 @@ const CreateCV = (params) => {
     const [projects, setProjects] = useState([]);
     // State for ALL projects (these are shown in the add project popup)
     const [shownProjects, setShownProjects] = useState([]);
+    // State for ALL careers (These are shown in the add career popup)
+    const [allCareerObjects, setAllCareerObjects] = useState([]);
+    // State for ALL education (These are shwon in the add education popup)
+    const [allEduObjects, setAllEduObjects] = useState([]);
     // State for checked skills
     const [skills, setSkills] = useState([]);
     // State for ALL skills (these are shown under skills)
@@ -142,6 +150,25 @@ const CreateCV = (params) => {
     useEffect(() => {
         if (receivedData.current === false) {
             window.scrollTo(0, 0);
+            projectDataService.getAll()
+            .then(response => {
+                setProjects(response.data.response);
+            })
+            .catch(e => console.log(e.message));
+
+            skillDataService.getAll()
+                .then(response => setAllSkillObjects(response.data.response))
+                .catch(e => console.error(e.message));
+
+            educationDataService.getAll()
+                .then(response => setAllCareerObjects(response.data.response))
+                .catch(e => console.error(e.message));
+            
+            careerDataService.getAll()
+                .then(response => {
+                    setAllCareerObjects(response.data)
+                })
+                .catch(e => console.log(e.message));
             if (id) {
                 cvDataService.get(id)
                     .then(res => {
@@ -150,20 +177,11 @@ const CreateCV = (params) => {
                     .catch( error => console.log( error ) );
             } else {
                 userDataService.getUser("62a7a6589203b0b919fa1c73")
-                    .then(response => {
-                        dataMap(response);
+                    .then(res => {
+                        mapUser(res);
                     })
                     .catch(error => console.log(error));
             }
-            projectDataService.getAll()
-                .then(response => {
-                    setProjects(response.data.response);
-                })
-                .catch(error => console.log(error));
-
-            skillDataService.getAll()
-                .then(response => setAllSkillObjects(response.data.response))
-                .catch( e => console.error(e.message));
         };
         receivedData.current = true;
 
@@ -214,11 +232,11 @@ const CreateCV = (params) => {
     // returns name as a string of matching Skill-Object
     const getSkillNameById = (id) => {
         let skillObj = allSkillObjects.filter( skill => skill._id === id)[0];
-        return skillObj ? skillObj.name : "404, name not found";
+        return skillObj ? skillObj.name : "404";
     }
 
     // Takes user data and set states to populate form fields
-    const dataMap = (response) => {
+    const mapUser = (response) => {
         const name = response.data.user.firstName + " " + response.data.user.lastName;
         const languages = response.data.user.sprachen.join(', ');
         const email = response.data.user.eMail;
@@ -281,13 +299,16 @@ const CreateCV = (params) => {
 
             let mappedEducation = education.map(({dragId, ...keepAttrs}) => keepAttrs);
 
-            if (params.title !== 'Edit') {
-                projects.forEach(project => {
-                    console.log(project);
-                    const activityString = (project.activities).join(', ');
-                    project.activities = activityString;
-                });
-            }
+            projects.forEach(project => {
+                var activityString = project.activites;
+                delete project.dragId;
+                if (Array.isArray(project.activities)) activityString = (project.activities).join(', ');
+                project.activities = activityString;
+            });
+
+            career.forEach(car => {
+                delete car.dragId;
+            });
 
             let result = {};
             result.cvName = cvName;
@@ -301,10 +322,10 @@ const CreateCV = (params) => {
 
             if (params.title === 'Edit') result._id = id;
 
-            //downloadCV(result);
-            // console.log(result);
-            saveCV(result);
-            window.location.href = "/";
+            // downloadCV(result);
+            // saveCV(result);
+            console.log(result);
+            // window.location.href = "/";
         };
     };
 
@@ -315,7 +336,7 @@ const CreateCV = (params) => {
 
         promise
             .then(response => {
-                // console.log(response);
+                console.log(response);
             })
             .catch(error => {
                 console.log(error);
@@ -353,7 +374,6 @@ const CreateCV = (params) => {
     };
 
     const handleSkillChange = (event) => {      
-        //if box is deselected
         if(!event.target.checked){
             setSkills(skills.filter( skill => skill.name !== event.target.value ))
         }else{
@@ -364,34 +384,14 @@ const CreateCV = (params) => {
     const handleAddField = (event, index, category) => {
         let newFields = {};
         if (category === "education") {
-            newFields = {
-                dragId: uuidv4(),
-                institution: "",
-                subject: "",
-                studyType: "",
-                startDate: "",
-                endDate: "",
-                grade: ""
-            };
-            const values = [...education];
-            values.splice(index+1, 0, newFields);
-            setEducation(values);
+            setPopupCategory("education");
         } else if (category === "career") {
-            newFields = {
-                dragId: uuidv4(),
-                company: "",
-                city: "",
-                country: "",
-                position: "",
-                startDate: "",
-                endDate: ""
-            };
-            const values = [...career];
-            values.splice(index+1, 0, newFields);
-            setCareer(values);
+            setPopupCategory("career");
         } else if (category === "projects") {
-            setPopupShow(true);
+            console.log(projects);
+            setPopupCategory("projects");
         }
+        setPopupShow(true);
     };
 
     const handleRemoveField = (event, index, category) => {
@@ -429,21 +429,51 @@ const CreateCV = (params) => {
         }
     };
 
-    const popupSubmit = (event, projectIdx, shownProjectIdx) => {
+    const popupSubmit = (event, projectIdx, shownProjectIdx, category) => {
         setPopupShow(false);
-        const values = [...shownProjects];
-        let project = projects[projectIdx];
-        project.dragId = uuidv4();
-        project.startDate = (project.startDate).slice(0,10);
-        project.endDate = (project.endDate).slice(0,10);
+        var values;
+        if (category === "projects") {
+            values = [...shownProjects];
+            let project = projects[projectIdx];
+            project.dragId = uuidv4();
+            project.startDate = (project.startDate).slice(0,10);
+            project.endDate = (project.endDate).slice(0,10);
+    
+            if (shownProjectIdx === -1) { // from button
+                values.push(project);
+            } else {
+                values.splice(shownProjectIdx+1, 0, project);
+            };
+            setShownProjects(values);
+        } else if (category === "career") {
+            values = [...career];
+            let x = allCareerObjects[projectIdx];
+            x.dragId = uuidv4();
+            x.startDate = (x.startDate).slice(0,10);
+            x.endDate = (x.endDate).slice(0,10);
+    
+            if (shownProjectIdx === -1) { // from button
+                values.push(x);
+            } else {
+                values.splice(shownProjectIdx+1, 0, x);
+            };
+            setCareer(values);
+        } else if (category === "education") {
+            values = [...education];
+            let x = allEduObjects[projectIdx];
+            x.dragId = uuidv4();
+            x.startDate = (x.startDate).slice(0,10);
+            x.endDate = (x.endDate).slice(0,10);
 
-        if (shownProjectIdx === -1) { // from button
-            values.push(projects[projectIdx]);
-        } else {
-            values.splice(shownProjectIdx+1, 0, project);
-        };
+            if (shownProjectIdx === -1) { // from button
+                values.push(x);
+            } else {
+                values.splice(shownProjectIdx+1, 0, x);
+            };
+            setEducation(values);
+        }
 
-        setShownProjects(values);
+        setPopupCategory("");
     };
 
     return(
@@ -663,7 +693,7 @@ const CreateCV = (params) => {
                     </Typography>
                     {
                         (career.length === 0) &&
-                        <Button onClick={event => handleAddField(event, 0, "career")} className={classes.btn}>
+                        <Button onClick={event => handleAddField(event, -1, "career")} className={classes.btn}>
                             <FontAwesomeIcon className={classes.icon} icon={faPlus} />
                             Add new Career card
                         </Button>
@@ -778,7 +808,7 @@ const CreateCV = (params) => {
 
                     {
                         shownProjects.length === 0 &&
-                        <Button className={classes.btn} onClick={() => setPopupShow(true)}>
+                        <Button className={classes.btn} onClick={(e) => handleAddField(e, -1, "projects")}>
                             <FontAwesomeIcon className={classes.icon} icon={faPlus} />
                             Add new Project card
                         </Button>
@@ -857,12 +887,34 @@ const CreateCV = (params) => {
                     </DragDropContext>
 
                     <Popup trigger={popupShow} setTrigger={setPopupShow}>
-                        <h2>Existing Projects</h2>
+                        {(popupCategory) === "projects" && <h2>Existing Projects</h2>}
+                        {(popupCategory) === "career" && <h2>Existing Careers</h2>}
                         {
+                            (popupCategory === "projects") &&
                             projects.map((item, index) => {
                                 return (
-                                    <div key={index} onClick={(event) => popupSubmit(event, index, -1)}>
+                                    <div className='listItem' key={index} onClick={(event) => popupSubmit(event, index, -1, "projects")}>
                                         <h5>{item.title}</h5>
+                                    </div>
+                                )
+                            })
+                        }
+                        {
+                            (popupCategory === "career") &&
+                            allCareerObjects.map((item, index) => {
+                                return (
+                                    <div className='listItem' key={index} onClick={(event) => popupSubmit(event, index, -1, "career")}>
+                                        <h5>{item.company}</h5>
+                                    </div>
+                                )
+                            })
+                        }
+                        {
+                            (popupCategory === "education") &&
+                            allEduObjects.map((item, index) => {
+                                return (
+                                    <div className='listItem' key={index} onClick={(event) => popupShow(event, index, -1, "education")}>
+                                        <h5>{item.institution}</h5>
                                     </div>
                                 )
                             })
