@@ -1,5 +1,5 @@
 import Titlebar from "../../components/titlebar/Titlebar";
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { cvDataService } from '../../services/cv.service.js';
 import UserService from "../../services/keycloakUser.service.js";
 import { faPen, faTrash} from '@fortawesome/free-solid-svg-icons'
@@ -83,32 +83,29 @@ const Dashboard = () => {
             <div className="itemWrapper">
             {
             cvDataObjectList.map( (item, index) => {
-                    if(!checkForIdInUserIdList(item.ownerId))return(<> </>)
-
-                    return(
-                    <>
-                    <div key={index} className='careerItem' data={index}>
-                        <div className='headWrapper'>
-                            <h2>{item.cvName}</h2>
-                            <div className='interaction'>
-                                <div data={index} onClick={ updateCv }>
-                                    <FontAwesomeIcon className='editIcon' icon={faPen} />
-                                </div>
-                                <div data={index} onClick={ deleteCv }>
-                                    <FontAwesomeIcon className='editIcon' icon={faTrash} />
+                    return !checkForIdInUserIdList(item.ownerId) ? (<React.Fragment key={index}></React.Fragment>)
+                    : (
+                        <div key={index} className='careerItem' data={index}>
+                            <div className='headWrapper'>
+                                <h2>{item.cvName}</h2>
+                                <div className='interaction'>
+                                    <div data={index} onClick={ updateCv }>
+                                        <FontAwesomeIcon className='editIcon' icon={faPen} />
+                                    </div>
+                                    <div data={index} onClick={ deleteCv }>
+                                        <FontAwesomeIcon className='editIcon' icon={faTrash} />
+                                    </div>
                                 </div>
                             </div>
+                            
+                            <div className='companyWrapper'>
+                                <div className ="fEdu"> <h3>Education</h3> {extractEducation(item)}</div>
+                                <div className ="fCar"><h3>Career</h3><p>{extractCareer(item)}</p></div>
+                                <div className ="fSki"><h3>Skills</h3> <p>{extractSkills(item)}</p></div>
+                                <div className ="fPro"><h3>Projects</h3> <div>{extractProjects(item)}</div></div>
+                                <div className="flastUpdate">updated: {formatDate(new Date(item.date))}</div>
+                            </div>
                         </div>
-                        
-                        <div className='companyWrapper'>
-                            <div className ="fEdu"> <h3>Education</h3> <p>{extractEducation(item)}</p></div>
-                            <div className ="fCar"><h3>Career</h3><p>{extractCareer(item)}</p></div>
-                            <div className ="fSki"><h3>Skills</h3> <p>{extractSkills(item)}</p></div>
-                            <div className ="fPro"><h3>Projects</h3> <div>{extractProjects(item)}</div></div>
-                            <div className="flastUpdate">updated: {formatDate(new Date(item.date))}</div>
-                        </div>
-                    </div>
-                    </>
                     )
                 })
             }

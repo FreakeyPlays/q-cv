@@ -4,7 +4,8 @@ import { setCareer, deleteCareer, getCareers, getAllCareers, getCareerById, upda
 const careerRouter = express.Router();
 const careerRoute = '/';
 
-careerRouter.route(careerRoute).get(getCareers).post(setCareer).get(getAllCareers);
+careerRouter.route(careerRoute).get(getCareers).post(setCareer);
+careerRouter.route(careerRoute+"all/:id").get(getAllCareers);
 careerRouter.route(careerRoute+":id").delete(deleteCareer).get(getCareerById).put(updateCareer);
 
 export default careerRouter;
