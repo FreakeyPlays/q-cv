@@ -20,7 +20,6 @@
 .userBox{
     display:flex;
     flex-direction: row;
-    margin: auto;
     margin-top: 10px;
     height: 150px;
     padding: 10px;
