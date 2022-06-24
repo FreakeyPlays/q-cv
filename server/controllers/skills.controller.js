@@ -1,4 +1,5 @@
-import Skill from '../models/skills.model.js'; 
+import Skill from '../models/skills.model.js';
+import User from '../models/user.model.js';
 import asyncHandler from 'express-async-handler';
 import { apiResponse } from './response.js';
 
@@ -57,7 +58,7 @@ const updateSkill = asyncHandler( async(req, res) =>{
 // @access Private
 const deleteSkill = asyncHandler(async(req, res) => {
     const skillSet = await Skill.findById(req.params.id);
-
+    removeSkillIdFromUsers(req.params.id);
     if(!skillSet) {
         apiResponse(res, false, 404, "Skill not found");
         throw new Error('Goal not found')
@@ -65,6 +66,35 @@ const deleteSkill = asyncHandler(async(req, res) => {
 
     await skillSet.remove();
     apiResponse(res, true, 200, "Deleted Skill", skillSet);
+});
+
+const removeSkillIdFromUsers = asyncHandler(async(id) => {
+    const allUser = await User.find();
+    for(let u of allUser){
+        var index = u.skills.indexOf(id);
+        if(index){
+            u.skills.splice(index,1);
+            await User.findByIdAndUpdate(u.id, u, {new:true});
+        }
+    }
+
+    
+});
+
+//This Method Checks every User for Skill IDs, which do not exist in the Skill-DB
+//and removes them from the User.
+const clearAllUsersFromNonExistingSkillIds = asyncHandler(async(id) =>{
+    for(let u of allUser){
+        for(let us of u.skills){
+            const skillSet = await Skill.findById(us);
+
+            if(!skillSet){
+                var index = u.skills.indexOf(us);
+                u.skills.splice(index,1);
+                await User.findByIdAndUpdate(u.id, u, {new:true});
+            }
+        }
+    }
 });
 
 export {
