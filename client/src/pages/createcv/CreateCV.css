@@ -68,3 +68,45 @@ h2 {
     color: white;
     left: 10px;
 }
+
+.load-popup {
+    margin: 0 auto;
+    position: fixed;
+    top: 35%;
+    left: 35%;
+    width: 600px;
+    height: 150px;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.load-popup h4 {
+    position: relative;
+    top: 60px;
+    left: 87px;
+}
+
+.load-container {
+    height: 25px;
+    width: 80%;
+    left: 55px;
+    top: 50px;
+    background-color: #333;
+    position: relative;
+    border-radius: 20px;
+}
+
+.load-bar {
+    position: absolute;
+    height: 100%;
+    background-color: #3dc0f1;
+    border-radius: 20px;
+    animation: progress-animation 10s forwards;
+    animation-timing-function: linear;
+}
+
+@keyframes progress-animation {
+    0% { width: 0% }
+    100% { width: 100% }
+}

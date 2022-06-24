@@ -93,6 +93,8 @@ const CreateCV = (params) => {
     const [popupShow, setPopupShow] = useState(false);
     // State for popup category
     const [popupCategory, setPopupCategory] = useState("");
+    // State for loading bar Popup
+    const [loadShow, setLoadShow] = useState(false);
 
     const[userId, setUserId] = useState('');
     UserService.getLoggedInUID()
@@ -339,6 +341,7 @@ const CreateCV = (params) => {
             if (params.title === 'Edit') result._id = id;
 
             console.log(result);
+            setLoadShow(true);
             downloadCV(result);
             //saveCV(result);
             // console.log(result);
@@ -986,6 +989,15 @@ const CreateCV = (params) => {
                             }
                         </Button>
                     </div>
+
+                    {loadShow &&
+                        <div className='load-popup'>
+                            <div className='load-container'>
+                                <div className='load-bar'></div>
+                            </div>
+                            <h4>Generating link for CV... Redirecting after completion.</h4>
+                        </div> 
+                    }
                 </form>
             </Container>
         </ThemeProvider>
