@@ -90,7 +90,7 @@ export const ProjectInputs = [
     {
         id: 9,
         name: "activities",
-        type: "text",
+        type: "textarea",
         placeholder: "e.g. Project management, Analysis,...",
         label: "Activities*",
         errorMessage: "Please provide valid Activities!",
@@ -101,7 +101,7 @@ export const ProjectInputs = [
     {
         id: 10,
         name: "environment",
-        type: "text",
+        type: "textarea",
         placeholder: "e.g. The Project environ...",
         label: "Environment*",
         errorMessage: "Please provide a valid Environment!",
