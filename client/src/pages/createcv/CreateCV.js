@@ -141,6 +141,19 @@ const CreateCV = (params) => {
         if (userId) {
             if (receivedData.current === false) {
                 window.scrollTo(0, 0);
+
+                careerDataService.getAll({ owner: userId })
+                    .then(response => {
+                        let temp = response.data;
+                        temp.sort( (a, b) => {
+                            let da = new Date(a.startDate);
+                            let db = new Date(b.startDate);
+                            return db - da; //da-db would ab ascending
+                        });
+                        setAllCareerObjects(temp);
+                    })
+                    .catch(e => console.warn(e.message));
+                
                 projectDataService.getAll()
                 .then(response => {
                     setProjects(response.data.response);
@@ -151,32 +164,18 @@ const CreateCV = (params) => {
                     .then(response => setAllSkillObjects(response.data.response))
                     .catch(e => console.error(e.message));
     
-                //console.log(userId);
                 educationDataService.getAll({ owner: userId })
                     .then(response => {
-                        //console.log(response.data.response);
                         let temp = response.data.response;
                         temp.sort( (a, b) => {
                             let da = new Date(a.startDate);
                             let db = new Date(b.startDate);
                             return db - da; //da-db would ab ascending
                         });
-                        setAllEduObjects(response.data.response);
+                        setAllEduObjects(temp);
                     })
                     .catch(e => console.error(e.message));
-                
-                careerDataService.getAll({ owner: userId })
-                    .then(response => {
-                        let temp = response.data.response;
-                        temp.sort( (a, b) => {
-                            let da = new Date(a.startDate);
-                            let db = new Date(b.startDate);
-                            return db - da; //da-db would ab ascending
-                        });
-                        setAllCareerObjects(response.data)
-                    })
-                    .catch(e => console.warn(e.message));
-    
+
                 if (id) {
                     cvDataService.get(id)
                         .then(res => {
@@ -190,20 +189,10 @@ const CreateCV = (params) => {
                         })
                         .catch(error => console.warn(error));
                 }
-                const tmpSet = [];
-                for(let c of allCareerObjects){
-                    for(let id of career){
-                        if(id === c._id) tmpSet.push(c);
-                        console.log("MATCH");
-                    }            
-                }
-                setAllCareerObjects(tmpSet);
-                // console.log(allCareerObjects);
             };
             receivedData.current = true;
         }
-
-    }, [userId]);
+    }, [userId, allCareerObjects, id]);
 
     const mapCv = (res) => {
         setCvName(res.data.response.cvName);
@@ -267,16 +256,9 @@ const CreateCV = (params) => {
             beraterQualifikation: beraterQualifikation,
             kurzprofil: kurzprofil
         };
-
-        const edu = allEduObjects;
-        edu.map(e => ({...e, dragId: uuidv4()}));
-
-        const car = response.data.user.career;
         
         setOwnerId(uid);
         setuserInfo([data]);
-        //setEducation(edu);
-        //setCareer(car);
         setShownSkills(response.data.user.skills);
     }
 
@@ -337,11 +319,11 @@ const CreateCV = (params) => {
 
             if (params.title === 'Edit') result._id = id;
 
-            //console.log(result);
+            console.log(result);
             //downloadCV(result);
-            // saveCV(result);
+            saveCV(result);
             // console.log(result);
-            // window.location.href = "/";
+            //window.location.href = "/";
         };
     };
 
@@ -404,7 +386,6 @@ const CreateCV = (params) => {
         } else if (category === "career") {
             setPopupCategory("career");
         } else if (category === "projects") {
-            console.warn(projects);
             setPopupCategory("projects");
         }
         setPopupShow(true);
@@ -483,7 +464,6 @@ const CreateCV = (params) => {
             x.subject = allEduObjects[projectIdx].fieldOfStudy;
             x.startDate = allEduObjects[projectIdx].startDate.slice(0,10);
             x.endDate = allEduObjects[projectIdx].endDate.slice(0,10);
-            console.log(x);
 
             values.push(x);
 
