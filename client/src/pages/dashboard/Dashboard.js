@@ -89,15 +89,21 @@ const Dashboard = () => {
                     <>
                     <div key={index} className='careerItem' data={index}>
                         <div className='headWrapper'>
-                            <h2>{item.cvName}</h2>
+                            <h2>{item.cvName}</h2>+
                             <div className='interaction'>
+                                {true ?( <>
                                 <div data={index} onClick={ updateCv }>
                                     <FontAwesomeIcon className='editIcon' icon={faPen} />
                                 </div>
                                 <div data={index} onClick={ deleteCv }>
                                     <FontAwesomeIcon className='editIcon' icon={faTrash} />
                                 </div>
+                                </>) : (<>
+                                
+                                </>)
+                                }
                             </div>
+
                         </div>
                         
                         <div className='companyWrapper'>
