@@ -1,0 +1,70 @@
+body {
+    font-family: 'Segoe UI';
+}
+
+h2 {
+    margin: 20px 0;
+}
+
+.form {
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+
+#cancel-button {
+    float: right;
+    background-color: white;
+}
+
+#submit-button {
+    width: 30%;
+}
+
+.icon {
+    padding: 10px;
+}
+
+.list {
+    list-style: none;
+}
+
+.education-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.education-icons {
+    position: relative;
+    top: 30px;
+}
+
+.dateInputLabel {
+    color: grey;
+}
+
+.dateInput {
+    height: 56px;
+    border: 1px solid #cbcbcb;
+    width: 100%;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 0 12px;
+    font-size: 16px;
+}
+
+.listItem {
+    padding: 10px;
+    transition: 1s;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: 300ms;
+    position: relative;
+    left: 0;
+}
+
+.listItem:hover {
+    background-color: #3dc0f1;
+    color: white;
+    left: 10px;
+}

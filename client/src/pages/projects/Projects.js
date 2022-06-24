@@ -13,7 +13,7 @@ const Projects = () => {
     UserService.getLoggedInUID().then(data => setCurrentUserID(data));
 
     const [projects, setProjects] = useState([]);
-    const [showAll, setShowAll] = useState(false)
+    const [showAll, setShowAll] = useState(false);
     const [searchFilter, setSearchFilter] = useState("");
 
 
