@@ -11,8 +11,8 @@ const projectSchema = mongoose.Schema({
     description: { type: String, required: [true, "Please provide a Project Description"] },
     activities: [{ type: String }],
     environment: { type: String, trim: true},
-    location: { type: String, required: [true, "Please provide a Project Location"], trim: true },
-    teamSize: { type: String, required: [true, "Please provide a Project Team Size"] },
+    location: { type: String, trim: true },
+    teamSize: { type: String },
     assignedUser: { type: mongoose.Types.ObjectId, ref:"User", require: [true, "Please provide a assigned User"] }
 }, {
     timestamps: true

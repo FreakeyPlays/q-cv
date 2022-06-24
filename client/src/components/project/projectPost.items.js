@@ -85,9 +85,12 @@ const ProjectPostItems = [
         title: "Location",
         key: "location",
         classNames: "projectLocation column",
-        required: true,
+        required: false,
         parse(item){
             return item[this.key];
+        },
+        isStored(item){
+            return item[this.key].length > 0 ? true : false;
         }
     },
     {
@@ -95,9 +98,12 @@ const ProjectPostItems = [
         title: "Team Size",
         key: "teamSize",
         classNames: "projectTeamSize column",
-        required: true,
+        required: false,
         parse(item){
             return item[this.key];
+        },
+        isStored(item){
+            return item[this.key].length > 0 ? true : false;
         }
     },
     {

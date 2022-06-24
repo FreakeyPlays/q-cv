@@ -94,7 +94,7 @@ export const ProjectInputs = [
         placeholder: "e.g. Project management, Analysis,...",
         label: "Activities*",
         errorMessage: "Please provide valid Activities!",
-        pattern: "^(?:[a-zA-Z0-9 ]+,)*[a-zA-Z0-9 ]+$",
+        pattern: '(?:^|,)(?=[^"]|(")?)"?((?(1)[^"]*|[^,"]*))"?(?=,|$)',
         required: false,
         customClass: "formActivities"
     },
@@ -114,10 +114,10 @@ export const ProjectInputs = [
         name: "location",
         type: "text",
         placeholder: "e.g. Stuttgart",
-        label: "Location",
+        label: "Location*",
         errorMessage: "Please provide a valid Location!",
         pattern: "^.{1,}$",
-        required: true,
+        required: false,
         customClass: "formLocation"
     },
     {
@@ -125,10 +125,10 @@ export const ProjectInputs = [
         name: "teamSize",
         type: "text",
         placeholder: "e.g. About 20 Advisor",
-        label: "Team Size",
+        label: "Team Size*",
         errorMessage: "Please provide a valid Team Size!",
         pattern: "^.{1,}$",
-        required: true,
+        required: false,
         customClass: "formTeamSize"
     }
 ]
