@@ -222,6 +222,7 @@ const CreateCV = (params) => {
         };
 
         let proj = res.data.response.projects
+        console.log(proj);
         for (let p of proj) {
             p.startDate = (p.startDate).substring(0, 10);
             p.endDate = (p.endDate).substring(0, 10);

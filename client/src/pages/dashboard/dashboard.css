@@ -52,6 +52,11 @@ h2{
     align-items: center;
 }
 
+.headWrapper svg:hover {
+    color: #3dc0f1;
+    cursor: pointer;
+}
+
 .companyWrapper{
     display: grid;
     grid-template-columns: repeat(6, minmax(100px, 1fr));
