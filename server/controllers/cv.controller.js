@@ -30,9 +30,8 @@ const getCVById = asyncHandler( async(req, res) =>{
 // @route PUT /api/Cvs/:id
 // @access Private
 const updateCV = asyncHandler( async(req, res) =>{
-    const CV = await cvSchema.findById(req.params.id);
-    CheckForError(CV, res);
-    const updatedCV = await cvSchema.findByIdAndUpdate(req.params.id, req.body, {new: true,});
+    const updatedCV = await cvSchema.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    CheckForError(updatedCV, res);
     apiResponse(res, true, 200, "Updated Skill", updatedCV);
 });
 
@@ -48,6 +47,7 @@ const setCv = asyncHandler( async(req, res) =>{
     }
 
     const entry = await cvSchema.create({
+        ownerId: req.body.ownerId,
         cvName: req.body.cvName,
         date: req.body.date,
         userData: req.body.userData,
@@ -66,7 +66,7 @@ const setCv = asyncHandler( async(req, res) =>{
 const deleteCV = asyncHandler(async(req, res) => {
     const CV = await cvSchema.findById(req.params.id);
     CheckForError(CV, res);
-    await skillSet.remove();
+    await CV.remove();
     apiResponse(res, true, 200, "Deleted CV", CV);
 });
 

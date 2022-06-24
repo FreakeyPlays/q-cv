@@ -1,0 +1,54 @@
+export const CVInputs = {
+    education: [
+        {
+            name: "institution",
+            label: "Institution",
+        },
+        {
+            name: "studyType",
+            label: "Study Type"
+        },
+        {
+            name: "subject",
+            label: "Subject"
+        },
+        {
+            name: "grade",
+            label: "Grade"
+        }
+    ],
+    project: [
+        {
+            name: "title",
+            label: "Title"
+        },
+        {
+            name: "customer",
+            label: "Customer"
+        },
+        {
+            name: "industry",
+            label: "Industry"
+        },
+        {
+            name: "country",
+            label: "Country"
+        },
+        {
+            name: "position",
+            label: "Position"
+        },
+        {
+            name: "activities",
+            label: "Activities"
+        },
+        {
+            name: "location",
+            label: "Location"
+        },
+        {
+            name: "environment",
+            label: "Environment"
+        }
+    ]
+}
