@@ -11,6 +11,7 @@ import ITSkills from "./pages/itskills/ITSkills";
 import Projects from "./pages/projects/Projects";
 import AdminUserData from "./pages/userdata/AdminUserData";
 import UserService from "./services/keycloakUser.service";
+import CreateCV from "./pages/createcv/CreateCV.js";
 
 
 import "./App.css"

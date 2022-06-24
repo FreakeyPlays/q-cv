@@ -10,8 +10,6 @@ import educationRouter from "./routes/education.router.js";
 import careerRouter from "./routes/career.router.js";
 import userRouter from "./routes/user.router.js";
 import cvRouter from "./routes/cv.router.js";
-import educationRouter from "./routes/education.router.js";
-import careerRouter from "./routes/career.router.js";
 import keycloakRouter from "./routes/keycloak.router.js";
 
 dotenv.config();

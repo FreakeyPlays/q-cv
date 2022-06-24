@@ -48,22 +48,6 @@ const Career = () => {
         jobDescription: ""
     });
 
-    const filterForUserSets = () => {
-        const tmpSet = [];
-        for(let gc of globalCareerSet){
-            for(let id of userCareerIdList){
-                if(id === gc._id) tmpSet.push(gc);
-            }            
-        }
-        //sorting career cards based on startDate (descending)
-        tmpSet.sort( (a, b) => {
-            let da = new Date(a.startDate);
-            let db = new Date(b.startDate);
-            return db - da; //da-db would ab ascending
-        });
-        setCareerSet(tmpSet);
-    }
-
     useEffect( ()=>{
         if(!receivedData.current && userId){
             userDataService.getUser(userId)
@@ -80,7 +64,21 @@ const Career = () => {
 
     useEffect( () => {
         if(!userCarrerIsSet.current && globalCareerSet.length !== 0 &&  userCareerIdList.length !== 0 ){
-            filterForUserSets();
+
+            const tmpSet = [];
+            for(let gc of globalCareerSet){
+                for(let id of userCareerIdList){
+                    if(id === gc._id) tmpSet.push(gc);
+                }            
+            }
+            //sorting career cards based on startDate (descending)
+            tmpSet.sort( (a, b) => {
+                let da = new Date(a.startDate);
+                let db = new Date(b.startDate);
+                return db - da; //da-db would ab ascending
+            });
+            setCareerSet(tmpSet);
+            
             userCarrerIsSet.current = true;
         }
     }, [globalCareerSet, userCareerIdList]);
