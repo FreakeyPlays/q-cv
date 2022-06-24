@@ -56,7 +56,6 @@ const getCareers = asyncHandler( async(req, res) =>{
 // @route GET /api/education/
 // @access Private
 const getAllCareers = asyncHandler( async (req, res) => {
-    console.log(req);
     const owner = req.params.id;
 
     if(!owner){

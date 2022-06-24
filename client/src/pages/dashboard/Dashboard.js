@@ -2,7 +2,7 @@ import Titlebar from "../../components/titlebar/Titlebar";
 import React, { useState, useEffect, useRef } from 'react';
 import { cvDataService } from '../../services/cv.service.js';
 import UserService from "../../services/keycloakUser.service.js";
-import { faPen, faTrash} from '@fortawesome/free-solid-svg-icons'
+import {  faDownload, faPen, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { extractCareer, extractEducation, extractSkills, extractProjects } from "./dashboard.extract.functions.js";
 import "./dashboard.css";
@@ -72,6 +72,14 @@ const Dashboard = () => {
         navigate("/create-cv/"+id);
     }
 
+    const belongsOrAdmin = (id) =>{
+        if(UserService.getIsAdmin() || id === userId )return true;
+        return false;
+    }
+
+    const onDownload = (url) => {
+        window.open(url, '_blank').focus();
+    }
     return(
         <>
             <Titlebar 
@@ -89,7 +97,10 @@ const Dashboard = () => {
                             <div className='headWrapper'>
                                 <h2>{item.cvName}</h2>
                                 <div className='interaction'>
-                                {true ?( <>
+                                <div data={index} onClick={ () => onDownload("https://quanto-solutions.de/") }>
+                                    <FontAwesomeIcon className='editIcon' icon={faDownload} />
+                                </div>
+                                {belongsOrAdmin(item.ownerId) ?( <>
                                         <div data={index} onClick={ updateCv }>
                                             <FontAwesomeIcon className='editIcon' icon={faPen} />
                                         </div>
@@ -98,7 +109,7 @@ const Dashboard = () => {
                                         </div>
                                     </>
                                     ) : (<>
-                                    
+
                                     </>)
                                     }
                                 </div>
