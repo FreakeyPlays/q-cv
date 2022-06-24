@@ -35,7 +35,7 @@ const  userInput = [
     {
         id: 5,
         name: "kurzprofil",
-        type: "text",
+        type: "textarea",
         label: "Kurzprofil",
         required: true,
     },
