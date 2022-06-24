@@ -28,7 +28,6 @@ const ITSkills = () => {
             skillDataService.updateSkill(updateTargetId,{
                 "name":newUpdateSkillName
             }).then((res)=>{
-                console.log(res.params);
                 window.location.reload(false);
                 receivedData.current = false;
             })
@@ -75,7 +74,6 @@ const ITSkills = () => {
                             <div className='interaction'>
                             <div data={index} onClick={ (e) =>  {
                                         setUpdateTargetId(skill[e.currentTarget.getAttribute("data")]._id);
-                                        console.log("Item with id has been clicked: " + updateTargetId);
                                         setUpdatePopup(true);
                                         setOldUneditedName(skill[e.currentTarget.getAttribute("data")].name);
                                     }
