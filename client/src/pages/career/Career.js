@@ -126,7 +126,7 @@ const Career = () => {
             data[i.name] = i.value;
         }
         data["assignedUser"] = userId;
-        console.log(data);
+
         careerDataService.newCareerItem(data)
         .then(res => {
             userDataService.setCareer({_id:userId, careerID: res.data._id}).then().catch(e => console.error(e.message));

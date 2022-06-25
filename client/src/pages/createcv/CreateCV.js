@@ -222,7 +222,6 @@ const CreateCV = (params) => {
         };
 
         let proj = res.data.response.projects
-        console.log(proj);
         for (let p of proj) {
             p.startDate = (p.startDate).substring(0, 10);
             p.endDate = (p.endDate).substring(0, 10);
@@ -341,11 +340,9 @@ const CreateCV = (params) => {
 
             if (params.title === 'Edit') result._id = id;
 
-            console.log(result);
             setLoadShow(true);
             downloadCV(result);
             //saveCV(result);
-            // console.log(result);
         };
     };
 
@@ -355,7 +352,7 @@ const CreateCV = (params) => {
 
         promise
             .then(response => {
-                // console.log(response);
+
             })
             .catch(error => {
                 console.warn(error);
@@ -465,7 +462,6 @@ const CreateCV = (params) => {
             };
             setShownProjects(values);
         } else if (category === "career") {
-            console.log(allCareerObjects[projectIdx]);
             values = [...career];
             let x = allCareerObjects[projectIdx];
             x.city = allCareerObjects[projectIdx].location;
@@ -481,7 +477,6 @@ const CreateCV = (params) => {
             };
             setCareer(values);
         } else if (category === "education") {
-            console.log(allEduObjects[projectIdx]);
             values = [...education];
             let x = {};
             x.dragId = uuidv4();

@@ -22,8 +22,7 @@ const setProject = asyncHandler( async (req, res) => {
 
     if( !title || !customer || !industry || 
         !country || !position || !startDate || 
-        !endDate || !description || !location ||
-        !teamSize || !assignedUser){
+        !endDate || !description || !assignedUser){
         
         apiResponse(res, false, 400, "A required parameter is missing or incorrect");
         throw new Error("A required parameter is missing or incorrect");
@@ -38,11 +37,11 @@ const setProject = asyncHandler( async (req, res) => {
         startDate,
         endDate,
         description,
-        location,
-        teamSize,
-        assignedUser,
+        location: location ? location : "",
+        teamSize: teamSize ? teamSize : "",
         environment: environment ? environment : "",
-        activities: activities ? activities : []
+        activities: activities ? activities : [],
+        assignedUser
     })
 
     apiResponse(res, true, 201, "Project created", entry);

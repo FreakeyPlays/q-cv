@@ -7,14 +7,6 @@ export const CVInputs = {
         {
             name: "studyType",
             label: "Study Type"
-        },
-        {
-            name: "subject",
-            label: "Subject"
-        },
-        {
-            name: "grade",
-            label: "Grade"
         }
     ],
     project: [
