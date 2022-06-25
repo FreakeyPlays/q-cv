@@ -222,6 +222,7 @@ const CreateCV = (params) => {
         };
 
         let proj = res.data.response.projects
+        console.log(proj);
         for (let p of proj) {
             p.startDate = (p.startDate).substring(0, 10);
             p.endDate = (p.endDate).substring(0, 10);
@@ -399,7 +400,6 @@ const CreateCV = (params) => {
     };
     
     const handleAddField = (event, index, category) => {
-        let newFields = {};
         if (category === "education") {
             setPopupCategory("education");
         } else if (category === "career") {
@@ -454,6 +454,7 @@ const CreateCV = (params) => {
             project.dragId = uuidv4();
             project.startDate = (project.startDate).slice(0,10);
             project.endDate = (project.endDate).slice(0,10);
+            project.activites = (project.activities);
     
             if (shownProjectIdx === -1) { // from button
                 values.push(project);
