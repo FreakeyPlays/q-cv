@@ -988,10 +988,13 @@ const CreateCV = (params) => {
 
                     {loadShow &&
                         <div className='load-popup'>
-                            <div className='load-container'>
-                                <div className='load-bar'></div>
+                            <div class="lds-ring">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
                             </div>
-                            <h4>Generating link for CV... Redirecting after completion.</h4>
+                            <h4>Generating CV</h4>
                         </div> 
                     }
                 </form>

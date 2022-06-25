@@ -77,20 +77,19 @@ svg:hover {
 .load-popup {
     margin: 0 auto;
     position: fixed;
-    top: 35%;
-    left: 35%;
-    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
     height: 150px;
     background-color: #E8E8E8;
     border-radius: 10px;
-    z-index: 1;
+    z-index: 11;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
-}
-
-.load-popup h4 {
-    position: relative;
-    top: 60px;
-    left: 87px;
 }
 
 .load-container {
@@ -103,16 +102,43 @@ svg:hover {
     border-radius: 20px;
 }
 
-.load-bar {
-    position: absolute;
-    height: 100%;
-    background-color: #3dc0f1;
-    border-radius: 20px;
-    animation: progress-animation 8s forwards;
-    animation-timing-function: linear;
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
 }
 
-@keyframes progress-animation {
-    0% { width: 0% }
-    100% { width: 100% }
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #cef;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #3dc0f1 transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
