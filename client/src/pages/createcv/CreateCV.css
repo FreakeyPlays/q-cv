@@ -1,0 +1,144 @@
+body {
+    font-family: 'Segoe UI';
+}
+
+h2 {
+    margin: 20px 0;
+}
+
+.form {
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+
+#cancel-button {
+    float: right;
+    background-color: white;
+}
+
+#submit-button {
+    width: 30%;
+}
+
+.icon {
+    padding: 10px;
+}
+
+.list {
+    list-style: none;
+}
+
+.education-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.education-icons {
+    position: relative;
+    top: 30px;
+}
+
+.dateInputLabel {
+    color: grey;
+}
+
+.dateInput {
+    height: 56px;
+    border: 1px solid #cbcbcb;
+    width: 100%;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 0 12px;
+    font-size: 16px;
+}
+
+.listItem {
+    padding: 10px;
+    transition: 1s;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: 300ms;
+    position: relative;
+    left: 0;
+}
+
+.listItem:hover {
+    background-color: #3dc0f1;
+    color: white;
+    left: 10px;
+}
+
+svg:hover {
+    color: #3dc0f1;
+    cursor: pointer;
+}
+
+.load-popup {
+    margin: 0 auto;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 150px;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+    z-index: 11;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.load-container {
+    height: 25px;
+    width: 80%;
+    left: 55px;
+    top: 50px;
+    background-color: #333;
+    position: relative;
+    border-radius: 20px;
+}
+
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #cef;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #3dc0f1 transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

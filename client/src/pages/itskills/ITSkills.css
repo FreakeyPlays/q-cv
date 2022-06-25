@@ -1,0 +1,111 @@
+.addSkillIcon{
+    background-color: #3dc0f1;
+    width: 1.4em;
+    height: 1.4em;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.skillPlusIcon{
+    margin: auto;
+    color: white;
+}
+
+.popupAlertOnPush{
+    text-decoration-color: greenyellow;
+}
+
+.skillItem{
+    display: inline-block;
+    border-bottom-right-radius: .6em;
+    border-bottom-left-radius: .6em;
+    
+    width: 95%;
+    border-bottom: 1px solid #E8E8E8;
+    padding: .6em;
+    display: flex;
+    margin-top: .5em;
+    justify-content: space-between ;
+}
+
+.listTitle{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+    width: 100%;
+    color: #333;
+}
+
+.allItems,
+.userItems{
+    background-color: #efefef;
+    padding: 16px;
+    height: 45%;
+    min-height: 32vh;
+    max-height: 32vh;
+    border: 1px solid rgba(51,51,51,.3);
+    width: 80%;
+    max-width: 960px;
+    margin:auto;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-radius: 16px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.userItems{
+    margin-bottom: 16px;
+}
+.pageContent{
+    padding-top:128px;
+}
+
+.allItems::-webkit-scrollbar,
+.userItems::-webkit-scrollbar{
+    width: 8px;
+    height: 95%;
+}
+
+.userItems::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.userItems::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    box-shadow: inset 0 0 3px #333; 
+}
+
+.allItems::-webkit-scrollbar-button:start:decrement,
+.userItems::-webkit-scrollbar-button:start:decrement,
+.allItems::-webkit-scrollbar-button:end:increment,
+.userItems::-webkit-scrollbar-button:end:increment{
+    height: 2%;
+}
+
+.allItems::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.allItems::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 3px #333; 
+}
+
+.skillItem:first-child{
+    margin-top: 0;
+}
+
+.skillIcon{
+    color: #333;
+    display: flex;
+}
+
+.interaction{
+    display: flex;
+    justify-content: space-between ;
+}

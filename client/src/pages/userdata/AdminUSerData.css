@@ -1,0 +1,74 @@
+.content{
+    height: 100%;
+}
+
+.main{
+    height: 100%;
+
+}
+
+.userList{
+    width: 90%;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding-top: 128px;
+}
+
+/* User cards style section */
+.userBox{
+    display:flex;
+    flex-direction: row;
+    margin-top: 10px;
+    height: 150px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-top-left-radius: .6em;
+    border-top-right-radius: .6em;
+    border-bottom-right-radius: .6em;
+    border-bottom-left-radius: .6em;
+}
+.cardHeader{
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #E8E8E8;
+    border-bottom-right-radius: .6em;
+    border-bottom-left-radius: .6em
+}
+.buttonWrapper{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.icon{
+    display: flex;
+    align-items: flex-end;
+    margin: 5px;
+    color: #333;
+}
+.cardBody{
+    width: 100%;
+}
+
+/* Create User Style section */
+.creatContent{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    margin-left: 300px;
+}
+.createExtra{
+    display: flex;
+    flex-direction: column;
+}
+.adminCheck{
+    margin-left: 10px;
+}
+
+/* Extra stuff */
+.submitButton{
+    color: #333;
+    margin: 10px;
+}
