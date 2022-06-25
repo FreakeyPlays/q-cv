@@ -15,6 +15,7 @@ import { skillDataService } from '../../services/skills.services.js';
 import { careerDataService } from '../../services/career.service.js';
 import { educationDataService} from '../../services/education.service.js';
 import { cvDataService } from '../../services/cv.service.js';
+import UserService from "../../services/keycloakUser.service.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTrash, faX } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useRef, useState } from 'react';
@@ -92,6 +93,13 @@ const CreateCV = (params) => {
     const [popupShow, setPopupShow] = useState(false);
     // State for popup category
     const [popupCategory, setPopupCategory] = useState("");
+    // State for loading bar Popup
+    const [loadShow, setLoadShow] = useState(false);
+
+    const[userId, setUserId] = useState('');
+    UserService.getLoggedInUID()
+    .then( res => setUserId( res ) )
+    .catch( e => console.error(e.message) );
 
     const [cvName, setCvName] = useState("");
 
@@ -103,24 +111,8 @@ const CreateCV = (params) => {
         beraterQualifikation: "",
         kurzprofil: ""
     }]);
-    const [education, setEducation] = useState([{
-        dragId: uuidv4(),
-        institution: "",
-        studyType: "",
-        subject: "",
-        startDate: "",
-        endDate: "",
-        grade: ""
-    }]);
-    const [career, setCareer] = useState([{
-        dragId: uuidv4(),
-        company: "",
-        city: "",
-        country: "",
-        position: "",
-        startDate: "",
-        endDate: ""
-    }]);
+    const [education, setEducation] = useState([]);
+    const [career, setCareer] = useState([]);
     const [ownerId, setOwnerId] = useState("");    
 
     // State for selected projects
@@ -148,43 +140,69 @@ const CreateCV = (params) => {
 
     // Loads in user and project data
     useEffect(() => {
-        if (receivedData.current === false) {
-            window.scrollTo(0, 0);
-            projectDataService.getAll()
-            .then(response => {
-                setProjects(response.data.response);
-            })
-            .catch(e => console.warn(e.message));
-
-            skillDataService.getAll()
-                .then(response => setAllSkillObjects(response.data.response))
-                .catch(e => console.error(e.message));
-
-            educationDataService.getAll()
-                .then(response => setAllCareerObjects(response.data.response))
-                .catch(e => console.error(e.message));
-            
-            careerDataService.getAll()
-                .then(response => {
-                    setAllCareerObjects(response.data)
-                })
-                .catch(e => console.warn(e.message));
-            if (id) {
-                cvDataService.get(id)
-                    .then(res => {
-                        mapCv(res);
+        if (userId) {
+            if (receivedData.current === false) {
+                window.scrollTo(0, 0);
+                
+                projectDataService.getAllById({ owner: userId })
+                    .then(response => {
+                        let temp = response.data.response;
+                        temp.sort( (a, b) => {
+                            let da = new Date(a.startDate);
+                            let db = new Date(b.startDate);
+                            return db - da; //da-db would ab ascending
+                        });
+                        setProjects(temp);
                     })
-                    .catch( error => console.warn( error ) );
-            } else {
-                userDataService.getUser("62a7a6589203b0b919fa1c73")
-                    .then(res => {
-                        mapUser(res);
+                    .catch(e => console.warn(e.message));
+    
+                skillDataService.getAll()
+                    .then(response => setAllSkillObjects(response.data.response))
+                    .catch(e => console.error(e.message));
+    
+                educationDataService.getAll({ owner: userId })
+                    .then(response => {
+                        let temp = response.data.response;
+                        temp.sort( (a, b) => {
+                            let da = new Date(a.startDate);
+                            let db = new Date(b.startDate);
+                            return db - da; //da-db would ab ascending
+                        });
+                        setAllEduObjects(temp);
                     })
-                    .catch(error => console.warn(error));
-            }
-        };
-        receivedData.current = true;
-    });
+                    .catch(e => console.error(e.message));
+
+                careerDataService.getAllById({ owner: userId })
+                    .then(response => {
+                        let temp = response.data.response;
+                        temp.sort( (a, b) => {
+                            let da = new Date(a.startDate);
+                            let db = new Date(b.startDate);
+                            return db - da; //da-db would ab ascending
+                        });
+                        setAllCareerObjects(temp);
+                    })
+                    .catch(e => {
+                        console.warn(e.message)
+                    });
+
+                if (id) {
+                    cvDataService.get(id)
+                        .then(res => {
+                            mapCv(res);
+                        })
+                        .catch( error => console.warn( error ) );
+                } else {
+                    userDataService.getUser(userId)
+                        .then(res => {
+                            mapUser(res);
+                        })
+                        .catch(error => console.warn(error));
+                }
+            };
+            receivedData.current = true;
+        }
+    }, [userId, allCareerObjects, id]);
 
     const mapCv = (res) => {
         setCvName(res.data.response.cvName);
@@ -204,6 +222,7 @@ const CreateCV = (params) => {
         };
 
         let proj = res.data.response.projects
+        console.log(proj);
         for (let p of proj) {
             p.startDate = (p.startDate).substring(0, 10);
             p.endDate = (p.endDate).substring(0, 10);
@@ -248,16 +267,9 @@ const CreateCV = (params) => {
             beraterQualifikation: beraterQualifikation,
             kurzprofil: kurzprofil
         };
-
-        const edu = response.data.user.education;
-        edu.map(e => ({...e, dragId: uuidv4()}));
-
-        const car = response.data.user.career;
         
         setOwnerId(uid);
         setuserInfo([data]);
-        setEducation(edu);
-        setCareer(car);
         setShownSkills(response.data.user.skills);
     }
 
@@ -295,6 +307,13 @@ const CreateCV = (params) => {
 
             let mappedEducation = education.map(({dragId, ...keepAttrs}) => keepAttrs);
 
+            mappedEducation.forEach(edu => {
+                if (edu.institution === "") edu.institution = "(Institution)";
+                if (edu.studyType === "") edu.studyType = "(Study type)";
+                if (edu.subject === "") edu.subject = "(Subject)";
+                if (edu.grade === "") edu.grade = "(Grade)";
+            });
+
             projects.forEach(project => {
                 var activityString = project.activites;
                 delete project.dragId;
@@ -303,6 +322,10 @@ const CreateCV = (params) => {
             });
 
             career.forEach(car => {
+                if (car.company === "") car.company = "(Company)";
+                if (car.position === "") car.position = "(Position)";
+                if (car.city === "") car.city = "(City)";
+                if (car.country === "") car.country = "(Country)";
                 delete car.dragId;
             });
 
@@ -318,21 +341,19 @@ const CreateCV = (params) => {
 
             if (params.title === 'Edit') result._id = id;
 
-            // downloadCV(result);
-            // saveCV(result);
-            // console.log(result);
-            // window.location.href = "/";
+            setLoadShow(true);
+            downloadCV(result);
+            //saveCV(result);
         };
     };
 
-    // Saving CV to MongoDB
+    //Saving CV to MongoDB
     const saveCV = (result) => {
-    //check fo updateID != "" => put request, not post
         let promise = params.function(result);
 
         promise
             .then(response => {
-                // console.log(response);
+
             })
             .catch(error => {
                 console.warn(error);
@@ -343,8 +364,9 @@ const CreateCV = (params) => {
     const downloadCV = (result) => {
         axios.post("https://prod-115.westus.logic.azure.com:443/workflows/f595e6ffa2d7449fb93eb92b11a4468e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=d2PEMA_gwcLyPdh7meXdRiUVtouL6qyNSGXKMIPDHxc", result)
         .then(response => {
-            alert("Generating CV...");
-
+            result.sharepointLink = response.data;
+            saveCV(result);
+            window.location.href = "/";
         })
         .catch(error => console.warn(error));
     };
@@ -378,13 +400,11 @@ const CreateCV = (params) => {
     };
     
     const handleAddField = (event, index, category) => {
-        let newFields = {};
         if (category === "education") {
             setPopupCategory("education");
         } else if (category === "career") {
             setPopupCategory("career");
         } else if (category === "projects") {
-            console.warn(projects);
             setPopupCategory("projects");
         }
         setPopupShow(true);
@@ -434,6 +454,7 @@ const CreateCV = (params) => {
             project.dragId = uuidv4();
             project.startDate = (project.startDate).slice(0,10);
             project.endDate = (project.endDate).slice(0,10);
+            project.activites = (project.activities);
     
             if (shownProjectIdx === -1) { // from button
                 values.push(project);
@@ -444,6 +465,8 @@ const CreateCV = (params) => {
         } else if (category === "career") {
             values = [...career];
             let x = allCareerObjects[projectIdx];
+            x.city = allCareerObjects[projectIdx].location;
+            x.country = "(Country)"
             x.dragId = uuidv4();
             x.startDate = (x.startDate).slice(0,10);
             x.endDate = (x.endDate).slice(0,10);
@@ -456,16 +479,18 @@ const CreateCV = (params) => {
             setCareer(values);
         } else if (category === "education") {
             values = [...education];
-            let x = allEduObjects[projectIdx];
+            let x = {};
             x.dragId = uuidv4();
-            x.startDate = (x.startDate).slice(0,10);
-            x.endDate = (x.endDate).slice(0,10);
+            x.institution = allEduObjects[projectIdx].title;
+            x.studyType = allEduObjects[projectIdx].degree;
+            x.subject = allEduObjects[projectIdx].fieldOfStudy;
+            x.grade = "(Grade)";
+            x.subject = "(Subject)";
+            x.startDate = allEduObjects[projectIdx].startDate.slice(0,10);
+            x.endDate = allEduObjects[projectIdx].endDate.slice(0,10);
 
-            if (shownProjectIdx === -1) { // from button
-                values.push(x);
-            } else {
-                values.splice(shownProjectIdx+1, 0, x);
-            };
+            values.push(x);
+
             setEducation(values);
         }
 
@@ -883,8 +908,9 @@ const CreateCV = (params) => {
                     </DragDropContext>
 
                     <Popup trigger={popupShow} setTrigger={setPopupShow}>
-                        {(popupCategory) === "projects" && <h2>Existing Projects</h2>}
-                        {(popupCategory) === "career" && <h2>Existing Careers</h2>}
+                        {(popupCategory) === "projects" && <h2>My Projects</h2>}
+                        {(popupCategory) === "career" && <h2>My Careers</h2>}
+                        {(popupCategory) === "education" && <h2>My Education</h2>}
                         {
                             (popupCategory === "projects") &&
                             projects.map((item, index) => {
@@ -900,7 +926,7 @@ const CreateCV = (params) => {
                             allCareerObjects.map((item, index) => {
                                 return (
                                     <div className='listItem' key={index} onClick={(event) => popupSubmit(event, index, -1, "career")}>
-                                        <h5>{item.company}</h5>
+                                        <h5>{item.title}</h5>
                                     </div>
                                 )
                             })
@@ -909,8 +935,8 @@ const CreateCV = (params) => {
                             (popupCategory === "education") &&
                             allEduObjects.map((item, index) => {
                                 return (
-                                    <div className='listItem' key={index} onClick={(event) => popupShow(event, index, -1, "education")}>
-                                        <h5>{item.institution}</h5>
+                                    <div className='listItem' key={index} onClick={(event) => popupSubmit(event, index, -1, "education")}>
+                                        <h5>{item.title}</h5>
                                     </div>
                                 )
                             })
@@ -960,6 +986,18 @@ const CreateCV = (params) => {
                             }
                         </Button>
                     </div>
+
+                    {loadShow &&
+                        <div className='load-popup'>
+                            <div class="lds-ring">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <h4>Generating CV</h4>
+                        </div> 
+                    }
                 </form>
             </Container>
         </ThemeProvider>

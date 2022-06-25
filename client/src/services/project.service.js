@@ -10,6 +10,10 @@ export const projectDataService = {
         return axios.get(basePath);
     },
 
+    getAllById(data) {
+        return axios.get(basePath + '/all/' + data.owner);
+    },
+
     get(id){
         return axios.get(basePath + `/${id}`);
     },

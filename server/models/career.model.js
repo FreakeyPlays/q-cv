@@ -7,7 +7,8 @@ const careerSchema = mongoose.Schema({
     position: {type: String},
     startDate: { type: Date, required: [true, "Please provide a Project Starting Date"] },
     endDate: { type: Date},
-    jobDescription: {type:String}
+    jobDescription: {type:String},
+    assignedUser: { type: mongoose.Types.ObjectId, ref:"User", require: [true, "Please provide a assigned User"] }
 }, {
     timestamps: true
 });

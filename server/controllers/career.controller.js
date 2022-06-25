@@ -1,5 +1,6 @@
 import Career from '../models/career.model.js'; 
 import asyncHandler from 'express-async-handler';
+import { apiResponse } from "./response.js";
 
 // @desc set careerItem
 // @route SET /api/careers
@@ -12,8 +13,9 @@ const setCareer = asyncHandler( async(req, res) =>{
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
     const jobDescription = req.body.jobDescription;
+    const assignedUser = req.body.assignedUser;
 
-    if(!title || !company || !startDate) {
+    if(!title || !company || !startDate || !assignedUser) {
         res.status(400).json({
             ok: false,
             status: 400,
@@ -29,7 +31,8 @@ const setCareer = asyncHandler( async(req, res) =>{
         position,
         startDate,
         endDate,
-        jobDescription
+        jobDescription,
+        assignedUser
     })
 
     res.json({
@@ -48,6 +51,27 @@ const getCareers = asyncHandler( async(req, res) =>{
     const careerSet = await Career.find();
     res.status(200).json(careerSet);
 });
+
+// @desc Get all educations
+// @route GET /api/education/
+// @access Private
+const getAllCareers = asyncHandler( async (req, res) => {
+    const owner = req.params.id;
+
+    if(!owner){
+        apiResponse(res, false, 400, "Missing owner ID");
+        throw new Error("Missing owner ID");
+    }
+
+    const career = await Career.find({ assignedUser: owner });
+
+    if(career === undefined){
+        apiResponse(res, false, 404, "No Careers found");
+        throw new Error("No Careers found");
+    }
+
+    apiResponse(res, true, 200, "Returned all Careers of Owner", career);
+})
 
 // @desc get careerItem
 // @route GET /api/careers/:id
@@ -101,6 +125,7 @@ const deleteCareer = asyncHandler(async(req, res) => {
 export {
     setCareer,
     getCareers,
+    getAllCareers,
     getCareerById,
     updateCareer,
     deleteCareer

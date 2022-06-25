@@ -5,8 +5,12 @@ const PORT = process.env.REACT_APP_API_PORT;
 const basePath = "http://" + ADDRESS + ":" + PORT + "/api/careers";
 
 export const careerDataService = {
-    getAll(){
-        return axios.get(basePath);
+    getAll(data){
+        return axios.get(basePath, { params: data });
+    },
+
+    getAllById(data){
+        return axios.get(basePath + '/all/' + data.owner);
     },
 
     newCareerItem(data){
