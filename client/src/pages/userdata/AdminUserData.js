@@ -96,9 +96,9 @@ const AdminUserData = () =>{
         userDataService.updateUser(cach)
             .then(() => {
                 //keycloak password reset 
-                UserService.resetKeycloakPassword(selectedKeyID,{password: newPwd}).then(()=> window.location.reload(false)).catch((e) => {console.warn(e);alert("pwdTEst");})
+                UserService.resetKeycloakPassword(selectedKeyID,{password: newPwd}).then(()=> window.location.reload(false)).catch((e) => console.warn(e))
             })
-            .catch((e) => {console.warn(e); alert("pwd")});
+            .catch((e) => console.warn(e));
         setPwd("");
     }
 
@@ -130,7 +130,7 @@ const AdminUserData = () =>{
                             keycloakID: res.data.response.kc_uid
                         }).then(() => window.location.reload(false)).catch((e) => console.warn(e));
                     })
-                    .catch((e)=>{alert("ichstinke"); console.warn(e) });
+                    .catch((e)=>console.warn(e));
             } )
             .catch((e) => console.warn(e));
 
